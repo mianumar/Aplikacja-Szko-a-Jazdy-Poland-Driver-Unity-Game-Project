@@ -10,13 +10,10 @@ namespace GameUtils
     {
         public static void RequestDownload(MonoBehaviour currentBehaviour ,string url, Action<Texture2D> onComplete)
         {
-            Debug.Log("RequestDownload");
             currentBehaviour.StartCoroutine(DownloadProfileImg(url, onComplete));
         }
         public static IEnumerator DownloadProfileImg(string url, Action<Texture2D> onComplete)
         {
-            Debug.Log("DownloadProfileImg");
-
             UnityWebRequest unityWebRequest = UnityWebRequestTexture.GetTexture(url);
             yield return unityWebRequest.SendWebRequest();
 
