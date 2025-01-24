@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: 7ea7f6369e3a2ef42afef8d9ceb2fad9
+guid: 5222d1977a39ed942b8fda75c5aed172
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5568363945446843084
-    second: Illustration Container_0
+      213: -2412140070489419699
+    second: "Szko\u0142a Jazdy_0"
   - first:
-      213: -198786062660869078
-    second: Illustration Container_1
+      213: -2071827242568198280
+    second: "Szko\u0142a Jazdy_1"
+  - first:
+      213: -3564615519806065771
+    second: "Szko\u0142a Jazdy_2"
+  - first:
+      213: -569296060380393222
+    second: "Szko\u0142a Jazdy_3"
+  - first:
+      213: 6973601087573892880
+    second: "Szko\u0142a Jazdy_4"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,13 +138,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Illustration Container_0
+      name: "Szko\u0142a Jazdy_0"
       rect:
         serializedVersion: 2
         x: 1
         y: 0
-        width: 553
-        height: 465
+        width: 230
+        height: 174
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 43d5c8b7e7239b2b0800000000000000
-      internalID: -5568363945446843084
+      spriteID: d401efdc26b568ed0800000000000000
+      internalID: -2412140070489419699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Illustration Container_1
+      name: "Szko\u0142a Jazdy_1"
       rect:
         serializedVersion: 2
-        x: 557
+        x: 230
         y: 0
-        width: 149
-        height: 185
+        width: 538
+        height: 177
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +175,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a24ecc41125cd3df0800000000000000
-      internalID: -198786062660869078
+      spriteID: 877deb299146f33e0800000000000000
+      internalID: -2071827242568198280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Szko\u0142a Jazdy_2"
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 0
+        width: 336
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5937d152211f78ec0800000000000000
+      internalID: -3564615519806065771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Szko\u0142a Jazdy_3"
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 0
+        width: 137
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af05ff4df347918f0800000000000000
+      internalID: -569296060380393222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Szko\u0142a Jazdy_4"
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 0
+        width: 142
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01f9e1ecd3537c060800000000000000
+      internalID: 6973601087573892880
       vertices: []
       indices: 
       edges: []
@@ -186,8 +261,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Illustration Container_0: -5568363945446843084
-      Illustration Container_1: -198786062660869078
+      "Szko\u0142a Jazdy_0": -2412140070489419699
+      "Szko\u0142a Jazdy_1": -2071827242568198280
+      "Szko\u0142a Jazdy_2": -3564615519806065771
+      "Szko\u0142a Jazdy_3": -569296060380393222
+      "Szko\u0142a Jazdy_4": 6973601087573892880
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
