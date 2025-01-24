@@ -1,0 +1,40 @@
+{"QADatabase":{
+  "QADataList": [
+    {
+      "QID": 0,
+      "Question": "Question String",
+      "Options": [
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4"
+      ],
+      "CorrectAns": "Option 1"
+    },
+    {
+      "QID": 1,
+      "Question": "Question String",
+      "Options": [
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4"
+      ],
+      "CorrectAns": "Option 1"
+    },
+    {
+      "QID": 2,
+      "Question": "Question String",
+      "Options": [
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4"
+      ],
+      "CorrectAns": "Option 1"
+    }
+  ],
+  "MaxTotalPoints" : 74,
+  "MinPointsToPass" : 68
+}
+}
