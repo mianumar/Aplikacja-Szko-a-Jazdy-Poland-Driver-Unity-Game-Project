@@ -3,6 +3,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine;
+using Newtonsoft.Json;
 
 
 public class DatabaseHandler : MonoBehaviour
@@ -55,6 +56,8 @@ public class DatabaseHandler : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+
+        GetAllQADatabase();
     }
 
     public async void SaveUser(UserDataModel userData)
@@ -64,7 +67,26 @@ public class DatabaseHandler : MonoBehaviour
         await dbRef.Child("Users").Child(userData.UserId).SetRawJsonValueAsync(dataInJSON);
     }
 
+    public async void GetAllQADatabase()
+    {
+        await dbRef.Child("QADatabase").GetValueAsync().ContinueWithOnMainThread((task) =>
+        {
+            if (task.IsFaulted)
+            {
+
+            }
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                string jsnoData = snapshot.GetRawJsonValue();
+                Debug.Log(jsnoData);
+               QADatabaseModel modelData = JsonConvert.DeserializeObject<QADatabaseModel>(jsnoData);
+
+                Debug.Log("Converted Data :: " + modelData.QADataList[0]);
+            }
+        });
 
 
+    }
 
 }

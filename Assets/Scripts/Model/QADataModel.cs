@@ -6,6 +6,10 @@ public class QADataModel
     public string Question { get; set; }
     public List<string> Options { get; set; }
     public string CorrectAns { get; set; }
+
+    public string ImageUrl { get; set; }
+
+    public string VideoUrl { get; set; }
 }
 
 public class QADatabaseModel
