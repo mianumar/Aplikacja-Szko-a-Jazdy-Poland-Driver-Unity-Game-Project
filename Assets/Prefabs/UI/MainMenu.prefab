@@ -669,7 +669,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 124.75
+  m_fontSize: 129.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1145,9 +1145,9 @@ GameObject:
   - component: {fileID: 8946606502846505602}
   - component: {fileID: 3566665668610310101}
   - component: {fileID: 7769219165904583137}
-  - component: {fileID: 6840571688834497578}
+  - component: {fileID: 449899795681336116}
   m_Layer: 5
-  m_Name: First screen
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1220,8 +1220,8 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &6840571688834497578
+  m_PixelsPerUnitMultiplier: 0.01
+--- !u!114 &449899795681336116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7203559322060446486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 226e3110457ba004389b71fc61c1ba9d, type: 3}
+  m_Script: {fileID: 11500000, guid: dda917979f07d4b4fbc67a0cb26ceaef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8573097368313094857

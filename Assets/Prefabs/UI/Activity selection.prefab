@@ -1022,9 +1022,9 @@ GameObject:
   - component: {fileID: 6101975822455909504}
   - component: {fileID: 7075301285231423458}
   - component: {fileID: 7570198632371846017}
-  - component: {fileID: 5752543104542261022}
+  - component: {fileID: 7434580398113950797}
   m_Layer: 5
-  m_Name: Graj
+  m_Name: Activity selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5752543104542261022
+--- !u!114 &7434580398113950797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6876449103954893012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 226e3110457ba004389b71fc61c1ba9d, type: 3}
+  m_Script: {fileID: 11500000, guid: d2a86aecfc8f3db4a8949f698d110c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7821573392076623926
