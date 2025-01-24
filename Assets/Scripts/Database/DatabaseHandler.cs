@@ -1,8 +1,12 @@
 using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
-using Firebase.Extensions;
+using System.Threading.Tasks;
 using UnityEngine;
+using Newtonsoft.Json;
+using Firebase.Extensions;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 
 public class DatabaseHandler : MonoBehaviour
@@ -20,7 +24,7 @@ public class DatabaseHandler : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this; 
+            instance = this;
         }
 
         FirebaseApp.Create();
@@ -29,7 +33,7 @@ public class DatabaseHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     /// <summary>
@@ -37,7 +41,8 @@ public class DatabaseHandler : MonoBehaviour
     /// </summary>
     private async void InitializeFirebase()
     {
-        await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+        await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
             var dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available)
             {
@@ -55,16 +60,99 @@ public class DatabaseHandler : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+
+        GameManager.FirebaseInitEvent?.Invoke();
     }
 
     public async void SaveUser(UserDataModel userData)
     {
         string dataInJSON = JsonUtility.ToJson(userData);
-        Debug.Log("Save User :: JSON DATA :: "+dataInJSON);
+        Debug.Log("Save User :: JSON DATA :: " + dataInJSON);
         await dbRef.Child("Users").Child(userData.UserId).SetRawJsonValueAsync(dataInJSON);
     }
 
+    public async Task<List<UserDataModel>> GetAllUsers()
+    {
+        List<UserDataModel> UsersList = new List<UserDataModel>();
+        await dbRef.Child("Users").GetValueAsync().ContinueWithOnMainThread(task =>
+        {
 
+            if (task.IsFaulted)
+            {
+                // Handle the error...
+                Debug.LogError("Get User: User not found " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                var users = snapshot.Children;
+                // Debug.LogError("All users: " + snapshot.GetRawJsonValue());
+                foreach (var user in users)
+                {
+                    UserDataModel currentUser = JsonConvert.DeserializeObject<UserDataModel>(user.GetRawJsonValue());
+                    UsersList.Add(currentUser);
+                }
+                // Debug.LogError("UserCount: " + allUsers.Count);
+            }
+        });
+
+        return UsersList;
+    }
+
+    public async Task<QADatabaseModel> GetAllQAData()
+    {
+        QADatabaseModel databaseModel = null;
+        await dbRef.Child("QADatabase").GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+
+            }
+            if (task.IsCanceled)
+            {
+
+            }
+            if (task.IsCompleted)
+            {
+                DataSnapshot result = task.Result;
+
+                string jsonData = result.GetRawJsonValue();
+
+                databaseModel = JsonConvert.DeserializeObject<QADatabaseModel>(jsonData);
+
+            }
+        });
+
+        return databaseModel;
+    }
+
+    public async Task<GameSettings> GetUserGameSettings(string userID)
+    {
+        GameSettings gameSettings = null;
+        await dbRef.Child("Users").Child(userID).Child("UserGameSettings").GetValueAsync().
+            ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                {
+
+                }
+                if (task.IsCanceled)
+                {
+
+                }
+                if (task.IsCompleted)
+                {
+                    DataSnapshot result = task.Result;
+
+                    string jsonData = result.GetRawJsonValue();
+
+                    gameSettings = JsonConvert.DeserializeObject<GameSettings>(jsonData);
+
+                }
+            });
+
+        return gameSettings;
+    }
 
 
 }

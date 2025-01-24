@@ -2,6 +2,7 @@ using Firebase.Extensions;
 using Firebase;
 using UnityEngine;
 using Firebase.Auth;
+using System;
 
 public class LoginManager : MonoBehaviour
 {
@@ -32,22 +33,29 @@ public class LoginManager : MonoBehaviour
         {
             if (task.IsFaulted)
             {
-
+                FirebaseException firebaseException = task.Exception.GetBaseException() as FirebaseException;
+                Debug.LogError("LoginAsGuest :: ErrorCode :: " + (AuthError)firebaseException.ErrorCode);
+                string expMessage = task.Exception.InnerExceptions[0].Message;
+                Debug.LogError("LoginAsGuest encountered an error: " + expMessage);
             }
             if (task.IsCanceled)
             {
-
+                Debug.LogError("LoginAsGuest request is cancled: ");
             }
             if (task.IsCompleted)
             {
                 AuthResult result = task.Result;
                 loggedUser = result.User;
 
-                Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+                Debug.LogFormat("Firebase Guest user created successfully: {0} ({1})",
                            loggedUser.DisplayName, loggedUser.UserId);
             }
 
         });
+        if (loggedUser == null)
+        {
+            GameManager.OnLoginDoneEvent?.Invoke();
+        }
     }
 
     /// <summary>
@@ -61,10 +69,14 @@ public class LoginManager : MonoBehaviour
         {
             if (task.IsFaulted)
             {
-
+                FirebaseException firebaseException = task.Exception.GetBaseException() as FirebaseException;
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync :: ErrorCode :: " + (AuthError)firebaseException.ErrorCode);
+                string expMessage = task.Exception.InnerExceptions[0].Message;
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + expMessage);
             }
             if (task.IsCanceled)
             {
+                Debug.LogError("CreateUserWithEmailAndPassword request is cancled: ");
 
             }
             if (task.IsCompleted)
@@ -76,6 +88,10 @@ public class LoginManager : MonoBehaviour
                            loggedUser.DisplayName, loggedUser.UserId);
             }
         });
+        if (loggedUser == null)
+        {
+            GameManager.OnLoginDoneEvent?.Invoke();
+        }
     }
 
     /// <summary>
@@ -89,10 +105,14 @@ public class LoginManager : MonoBehaviour
         {
             if (task.IsFaulted)
             {
-
+                FirebaseException firebaseException = task.Exception.GetBaseException() as FirebaseException;
+                Debug.LogError("LoginUserWithEmailAndPassword :: ErrorCode :: " + (AuthError)firebaseException.ErrorCode);
+                string expMessage = task.Exception.InnerExceptions[0].Message;
+                Debug.LogError("LoginUserWithEmailAndPassword encountered an error: " + expMessage);
             }
             if (task.IsCanceled)
             {
+                Debug.LogError("LoginUserWithEmailAndPassword request is cancled: ");
 
             }
             if (task.IsCompleted)
@@ -100,11 +120,17 @@ public class LoginManager : MonoBehaviour
                 AuthResult result = task.Result;
                 loggedUser = result.User;
 
-                Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+                Debug.LogFormat("Firebase user Login with Email successfully: {0} ({1})",
                            loggedUser.DisplayName, loggedUser.UserId);
             }
         });
+        if (loggedUser == null)
+        {
+            GameManager.OnLoginDoneEvent?.Invoke();
+        }
     }
+
+    
 
     private void OnDisable()
     {
