@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pop-up Background_0: -7644960303018615728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

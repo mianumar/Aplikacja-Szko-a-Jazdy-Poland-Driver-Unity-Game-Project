@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Checkmark Container (1)_0: 7540019024600770455
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

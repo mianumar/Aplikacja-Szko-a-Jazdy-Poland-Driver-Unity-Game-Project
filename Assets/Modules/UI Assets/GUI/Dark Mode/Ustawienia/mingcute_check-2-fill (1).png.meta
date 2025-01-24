@@ -198,7 +198,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mingcute_check-2-fill (1)_0: -5012156109580933363
+      mingcute_check-2-fill (1)_1: 7676840536249034605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
