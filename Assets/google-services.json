@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "262831685207",
+    "firebase_url": "https://aplikacjaszkolajazdypytania-default-rtdb.firebaseio.com",
+    "project_id": "aplikacjaszkolajazdypytania",
+    "storage_bucket": "aplikacjaszkolajazdypytania.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262831685207:android:9958d802d807e89ac7ad12",
+        "android_client_info": {
+          "package_name": "com.RippleStudio.PytaniaNaPrawoJazdy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyem-csFLr1-wHlXDUb3a9DBciT6IhRVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

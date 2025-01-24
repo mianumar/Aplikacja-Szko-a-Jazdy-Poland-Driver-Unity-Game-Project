@@ -23,8 +23,8 @@ public class DatabaseHandler : MonoBehaviour
             instance = this; 
         }
 
-        //FirebaseApp.Create();
-        //InitializeFirebase();
+        FirebaseApp.Create();
+        InitializeFirebase();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
