@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e80a533868c65c24fbd0afd42eef2d74
+guid: 4f04f9fd6ce32704ab4197cb707d5a06
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7644960303018615728
-    second: Pop-up Background_0
+      213: -2400731737065766305
+    second: BG pop up_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -110,19 +110,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pop-up Background_0
+      name: BG pop up_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1276
-        height: 1064
+        width: 1372
+        height: 1448
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05cdc90fb15a7e590800000000000000
-      internalID: -7644960303018615728
+      spriteID: f52403b6433eeaed0800000000000000
+      internalID: -2400731737065766305
       vertices: []
       indices: 
       edges: []
@@ -174,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Pop-up Background_0: -7644960303018615728
+      BG pop up_0: -2400731737065766305
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
