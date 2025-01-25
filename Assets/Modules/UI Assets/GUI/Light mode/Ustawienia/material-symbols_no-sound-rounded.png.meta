@@ -210,7 +210,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      material-symbols_no-sound-rounded_0: -1414365362694990046
+      material-symbols_no-sound-rounded_1: -2544911576468312142
+      material-symbols_no-sound-rounded_2: -3788343486956513169
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
