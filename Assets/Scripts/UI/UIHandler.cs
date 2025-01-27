@@ -3,14 +3,16 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
+    public static UIHandler Instance;
+
     [SerializeField] private SplashScreenView splashScreenView;
-    [SerializeField] private MainMenuView mainMenuView;
-    [SerializeField] private ActivitySelectionView activitySelectionView;
-    [SerializeField] private GameRulesPage gameRulesPage;
-    [SerializeField] private SettingsPanelView settingsPanelView;
-    [SerializeField] private QAPanelView qaPanelView;
-    [SerializeField] private SummaryScreenView summaryScreenView;
-    [SerializeField] private ExitPopup exitPopup;
+    [SerializeField] public MainMenuView mainMenuView;
+    [SerializeField] public ActivitySelectionView activitySelectionView;
+    [SerializeField] public GameRulesPage gameRulesPage;
+    [SerializeField] public SettingsPanelView settingsPanelView;
+    [SerializeField] public QAPanelView qaPanelView;
+    [SerializeField] public SummaryScreenView summaryScreenView;
+    [SerializeField] public ExitPopup exitPopup;
     public RawImage testDownloader;
     public Text testText;
     string url = "https://photographylife.com/wp-content/uploads/2014/09/Nikon-D750-Image-Samples-2.jpg";
@@ -22,21 +24,29 @@ public class UIHandler : MonoBehaviour
     {
         splashScreenView.RenderView();
         splashScreenImage = splashScreenView.GetComponentInChildren<Image>(); // Find child Image component
-        GameUtils.ImageDownloader.RequestDownload(this, url, (tex2D) =>
-        {
-            testDownloader.texture = tex2D;
-        });
+        //GameUtils.ImageDownloader.RequestDownload(this, url, (tex2D) =>
+        //{
+        //    testDownloader.texture = tex2D;
+        //});
 
-        GameUtils.GameTimer.CoutDownTimer(this, 10f, CountDownCallback);
+        //GameUtils.GameTimer.CoutDownTimer(this, 10f, CountDownCallback);
 
         Invoke("ShowMainMenu", 2f);
 
     }
 
-    public void CountDownCallback(float remainingTime)
+    private void Awake()
     {
-        testText.text = "Remaining Time = " + remainingTime;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
     }
+
+    //public void CountDownCallback(float remainingTime)
+    //{
+    //    testText.text = "Remaining Time = " + remainingTime;
+    //}
 
     void ShowMainMenu()
     {

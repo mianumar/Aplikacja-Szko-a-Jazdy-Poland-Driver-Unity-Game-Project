@@ -2,6 +2,7 @@ using Firebase.Auth;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
 
         UserDataModel userDataModel = new UserDataModel();
         userDataModel.UserId = loggedUser.UserId;
+        userDataModel.UserName = string.IsNullOrEmpty(loggedUser.DisplayName) ? "Random Guest" : loggedUser.DisplayName;
 
         userGameSettings = await DatabaseHandler.Instance.GetUserGameSettings(loggedUser.UserId);
 
