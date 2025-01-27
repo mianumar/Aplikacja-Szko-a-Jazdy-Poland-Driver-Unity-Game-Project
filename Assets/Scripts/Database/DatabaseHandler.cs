@@ -20,6 +20,9 @@ public class DatabaseHandler : MonoBehaviour
 
     public FirebaseAuth Auth => auth;
 
+    public delegate void FirebaseInitEventHandler();
+    public static event FirebaseInitEventHandler FirebaseInitEvent;
+
     private void Awake()
     {
         if (instance == null)
@@ -61,12 +64,12 @@ public class DatabaseHandler : MonoBehaviour
             }
         });
 
-        GameManager.FirebaseInitEvent?.Invoke();
+        FirebaseInitEvent?.Invoke();
     }
 
-    public async void SaveUser(UserDataModel userData)
+    public async Task SaveUser(UserDataModel userData)
     {
-        string dataInJSON = JsonUtility.ToJson(userData);
+        string dataInJSON = JsonConvert.SerializeObject(userData);
         Debug.Log("Save User :: JSON DATA :: " + dataInJSON);
         await dbRef.Child("Users").Child(userData.UserId).SetRawJsonValueAsync(dataInJSON);
     }
@@ -145,8 +148,10 @@ public class DatabaseHandler : MonoBehaviour
                     DataSnapshot result = task.Result;
 
                     string jsonData = result.GetRawJsonValue();
-
-                    gameSettings = JsonConvert.DeserializeObject<GameSettings>(jsonData);
+                    if (!string.IsNullOrEmpty(jsonData))
+                    {
+                        gameSettings = JsonConvert.DeserializeObject<GameSettings>(jsonData);
+                    }
 
                 }
             });

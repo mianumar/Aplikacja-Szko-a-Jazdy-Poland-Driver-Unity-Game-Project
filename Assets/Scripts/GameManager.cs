@@ -1,4 +1,6 @@
+using Firebase.Auth;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,8 +23,7 @@ public class GameManager : MonoBehaviour
     private GameSettings userGameSettings;
 
     // Events
-    public static UnityEvent OnLoginDoneEvent;
-    public static UnityEvent FirebaseInitEvent;
+    public static UnityAction<FirebaseUser> OnLoginDoneAction;
 
     //Public Variables
     public ScreenType currentScreen = ScreenType.NONE;
@@ -36,27 +37,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        OnLoginDoneEvent?.AddListener(OnLoginDone);
-        FirebaseInitEvent.AddListener(OnFirebaseInitialized);
-    }
-
-
-    /// <summary>
-    /// On Login done callback
-    /// </summary>
-    private void OnLoginDone()
-    {
-
+        OnLoginDoneAction += OnLoginDone;
+        DatabaseHandler.FirebaseInitEvent += OnFirebaseInitEvent;
     }
 
     /// <summary>
     /// On Firebase Initialized
     /// </summary>
-    private void OnFirebaseInitialized()
+    private void OnFirebaseInitEvent()
     {
+        Debug.Log("Game Manager :: Firebase Initialization Done Callback");
         InitializedGame();
+    }
+
+    /// <summary>
+    /// On Login done callback
+    /// </summary>
+    private async void OnLoginDone(FirebaseUser loggedUser)
+    {
+        Debug.Log("Game Manager :: Login Done Callback");
+
+        UserDataModel userDataModel = new UserDataModel();
+        userDataModel.UserId = loggedUser.UserId;
+
+        userGameSettings = await DatabaseHandler.Instance.GetUserGameSettings(loggedUser.UserId);
+
+        if (userGameSettings != null)
+        {
+            userDataModel.UserGameSettings = userGameSettings;
+        }
+        else
+        {
+            userDataModel.UserGameSettings = new GameSettings();
+        }
+
+        userDataModel.UserSummaryData = new SummaryData();
+
+        await DatabaseHandler.Instance.SaveUser(userDataModel);
     }
 
 
@@ -65,6 +84,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public async void InitializedGame()
     {
+       
         QADatabaseModel qaData = await DatabaseHandler.Instance.GetAllQAData();
 
         questionList = qaData.QADataList;
@@ -73,9 +93,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        OnLoginDoneEvent?.RemoveListener(OnLoginDone);
-        FirebaseInitEvent.RemoveListener(OnFirebaseInitialized);
-
+        OnLoginDoneAction -= OnLoginDone;
+        DatabaseHandler.FirebaseInitEvent -= OnFirebaseInitEvent;
     }
 
 }

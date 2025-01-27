@@ -3,6 +3,7 @@ using Firebase;
 using UnityEngine;
 using Firebase.Auth;
 using System;
+using System.Collections;
 
 public class LoginManager : MonoBehaviour
 {
@@ -12,8 +13,16 @@ public class LoginManager : MonoBehaviour
 
     private void Start()
     {
-        auth = DatabaseHandler.Instance.Auth;
+        DatabaseHandler.FirebaseInitEvent += OnFirebaseInitialized;
+    }
 
+    /// <summary>
+    /// Invoke on firebase initialized.
+    /// </summary>
+    private void OnFirebaseInitialized()
+    {
+        Debug.Log("Login Manager :: Firebase Initialization Done Callback");
+        auth = DatabaseHandler.Instance.Auth;
         auth.StateChanged += Auth_StateChanged;
     }
 
@@ -21,6 +30,17 @@ public class LoginManager : MonoBehaviour
     {
         Debug.Log("Sender :: "+sender.ToString());
         Debug.Log("Event Args :: "+e.ToString());
+
+        if (auth.CurrentUser != null)
+        {
+            // User is signed In 
+            loggedUser = auth.CurrentUser;
+            GameManager.OnLoginDoneAction?.Invoke(loggedUser);
+        }
+        else
+        {
+            LoginAsGuest();
+        }
     }
 
 
@@ -52,9 +72,9 @@ public class LoginManager : MonoBehaviour
             }
 
         });
-        if (loggedUser == null)
+        if (loggedUser != null)
         {
-            GameManager.OnLoginDoneEvent?.Invoke();
+            GameManager.OnLoginDoneAction?.Invoke(loggedUser);
         }
     }
 
@@ -88,9 +108,9 @@ public class LoginManager : MonoBehaviour
                            loggedUser.DisplayName, loggedUser.UserId);
             }
         });
-        if (loggedUser == null)
+        if (loggedUser != null)
         {
-            GameManager.OnLoginDoneEvent?.Invoke();
+            GameManager.OnLoginDoneAction?.Invoke(loggedUser);
         }
     }
 
@@ -124,17 +144,29 @@ public class LoginManager : MonoBehaviour
                            loggedUser.DisplayName, loggedUser.UserId);
             }
         });
-        if (loggedUser == null)
+        if (loggedUser != null)
         {
-            GameManager.OnLoginDoneEvent?.Invoke();
+            GameManager.OnLoginDoneAction?.Invoke(loggedUser);
         }
     }
 
-    
+    public void LogOut()
+    {
+        auth.SignOut();
+        auth = null;
+    }
 
     private void OnDisable()
     {
-        auth.StateChanged -= Auth_StateChanged;
-        auth = null;
+        DatabaseHandler.FirebaseInitEvent -= OnFirebaseInitialized;
+    }
+
+    private void OnDestroy()
+    {
+        if (auth != null)
+        {
+            auth.StateChanged -= Auth_StateChanged;
+            auth = null;
+        }
     }
 }
