@@ -14,6 +14,8 @@ public class ButtonPressEffect : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private Vector3 pressedPosition;
     private Vector3 originalPosition;
     public float pressAmount = 0.05f; // How much the button shrinks and moves down
+    public float shrinkFactor = 0.9f; // Shrink height factor
+
 
     void Awake()
     {
@@ -30,7 +32,7 @@ public class ButtonPressEffect : MonoBehaviour, IPointerDownHandler, IPointerUpH
     void Start()
     {
         originalScale = transform.localScale;
-        pressedScale = originalScale * 0.95f; // Slightly shrink button
+        pressedScale = new Vector3(originalScale.x, originalScale.y * shrinkFactor, originalScale.z); // Shrink only height (Y-axis)
         originalPosition = transform.position;
         pressedPosition = originalPosition + new Vector3(0, -pressAmount, 0); // Move down slightly
     }
