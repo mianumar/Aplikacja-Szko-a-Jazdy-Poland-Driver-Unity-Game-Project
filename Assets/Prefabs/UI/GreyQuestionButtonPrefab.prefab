@@ -139,7 +139,7 @@ MonoBehaviour:
   normalSprite: {fileID: -8319356071924080726, guid: 295a1f3485f97ae4eb1c55d146656fb8, type: 3}
   pressedSprite: {fileID: -9006837595976158770, guid: 06a91b18d42813841ad4beb65de89fe9, type: 3}
   pressAmount: 0.05
-  shrinkFactor: 0.9
+  shrinkFactor: 0.96
 --- !u!1 &5143709435275841982
 GameObject:
   m_ObjectHideFlags: 0
