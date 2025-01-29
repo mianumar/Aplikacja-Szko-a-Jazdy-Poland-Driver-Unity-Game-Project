@@ -569,6 +569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Activity selection
       objectReference: {fileID: 0}
+    - target: {fileID: 6876449103954893012, guid: d581522960542564ab9d08b69351ac95, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -659,6 +663,18 @@ PrefabInstance:
     - target: {fileID: 427106113512556081, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 427106113512556081, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000045776367
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073579229796253182, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.0042725
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073579229796253182, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 3975329967462056993, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
       propertyPath: m_AnchorMax.x
