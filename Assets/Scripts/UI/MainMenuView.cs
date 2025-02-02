@@ -35,9 +35,18 @@ public class MainMenuView : MonoBehaviour
     /// <summary>
     /// Action on setting button clicked
     /// </summary>
-    private void OnSettingsClicked()
+    private async void OnSettingsClicked()
     {
-        UIHandler.Instance.settingsPanelView.RenderView();
+        GameSettings settings = null;
+        if (GameManager.Instance.UserDataModel != null)
+        {
+            settings = GameManager.Instance.UserDataModel.UserGameSettings;
+        }
+        else
+        {
+            settings = await DatabaseHandler.Instance.GetUserGameSettings(GameManager.Instance.UserID);
+        }
+        UIHandler.Instance.settingsPanelView.RenderView(settings);
         Disable();
     }
 
@@ -55,7 +64,7 @@ public class MainMenuView : MonoBehaviour
     {
         Debug.Log("RenderView MainMenu Close");
         animator.SetBool("close", true);
-       // StartCoroutine(waitfor(0.30f));
+        // StartCoroutine(waitfor(0.30f));
         //Debug.Log("RenderView Splash Close");
         gameObject.SetActive(false);
     }

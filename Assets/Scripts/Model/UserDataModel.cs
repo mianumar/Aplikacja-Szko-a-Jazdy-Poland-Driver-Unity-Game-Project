@@ -10,7 +10,6 @@ public class UserDataModel
 
     public SummaryData UserSummaryData { get; set; }
 
-
 }
 
 public class GameSettings
@@ -34,6 +33,20 @@ public class SummaryData
     public float PercentAchieved { get; set; }
 
     public List<QuestionAttempted> QuestionAttempedList { get; set; }
+
+    public SummaryData(int totalCorrectAns, int totalWrongAns, int totalSkipedAns, float totalDurations,
+        int pointsAchieved, float percentAchieved, List<QuestionAttempted> questionAttempedList)
+    {
+        TotalCorrectAns = totalCorrectAns;
+        TotalWrongAns = totalWrongAns;
+        TotalSkipedAns = totalSkipedAns;
+        TotalDurations = totalDurations;
+        PointsAchieved = pointsAchieved;
+        PercentAchieved = percentAchieved;
+        QuestionAttempedList = questionAttempedList;
+    }
+
+    public SummaryData() { }
 }
 
 public class QuestionAttempted
@@ -41,5 +54,11 @@ public class QuestionAttempted
     public int QusetionNo { get; set; }
     public bool IsSkipped { get; set; }
     public bool IsCorrectAnswer { get; set; }
+
+    public QuestionAttempted(int QuestionNo , bool IsSkipped , bool IsCorrectAnswer) { 
+        this.QusetionNo = QuestionNo;
+        this.IsSkipped = IsSkipped;
+        this.IsCorrectAnswer = IsCorrectAnswer;
+    }
     
 }

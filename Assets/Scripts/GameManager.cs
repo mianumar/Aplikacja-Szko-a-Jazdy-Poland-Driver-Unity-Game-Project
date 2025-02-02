@@ -1,8 +1,8 @@
 using Firebase.Auth;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using Random = UnityEngine.Random;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
 
     private List<QADataModel> questionList;
 
-    private GameSettings userGameSettings;
+    //Properties
+    public string UserID => userDataModel.UserId;
+    public UserDataModel UserDataModel => userDataModel;
 
     // Events
     public static UnityAction<FirebaseUser> OnLoginDoneAction;
@@ -29,6 +31,10 @@ public class GameManager : MonoBehaviour
     //Public Variables
     public ScreenType currentScreen = ScreenType.NONE;
 
+    public int MaxTotalPoints;
+    public int MinPointsToPass;
+
+    private UserDataModel userDataModel;
 
     void Awake()
     {
@@ -59,25 +65,25 @@ public class GameManager : MonoBehaviour
     private async void OnLoginDone(FirebaseUser loggedUser)
     {
         Debug.Log("Game Manager :: Login Done Callback");
+       
+        userDataModel= await DatabaseHandler.Instance.GetUserData(loggedUser.UserId);
 
-        UserDataModel userDataModel = new UserDataModel();
-        userDataModel.UserId = loggedUser.UserId;
-        userDataModel.UserName = string.IsNullOrEmpty(loggedUser.DisplayName) ? "Random Guest" : loggedUser.DisplayName;
-
-        userGameSettings = await DatabaseHandler.Instance.GetUserGameSettings(loggedUser.UserId);
-
-        if (userGameSettings != null)
+        // Save User Data if Not Found
+        if (userDataModel == null)
         {
-            userDataModel.UserGameSettings = userGameSettings;
+            userDataModel = new UserDataModel();
+            userDataModel.UserId = loggedUser.UserId;
+            userDataModel.UserName = string.IsNullOrEmpty(loggedUser.DisplayName) ? "Guest " + Random.Range(2000, 9999) : loggedUser.DisplayName;
+            userDataModel.UserGameSettings = new GameSettings();
+            userDataModel.UserSummaryData = new SummaryData();
+
+            DatabaseHandler.Instance.SaveUser(userDataModel);
         }
         else
         {
-            userDataModel.UserGameSettings = new GameSettings();
+
         }
-
-        userDataModel.UserSummaryData = new SummaryData();
-
-        await DatabaseHandler.Instance.SaveUser(userDataModel);
+        
     }
 
 
@@ -90,7 +96,14 @@ public class GameManager : MonoBehaviour
         QADatabaseModel qaData = await DatabaseHandler.Instance.GetAllQAData();
 
         questionList = qaData.QADataList;
+        MaxTotalPoints = qaData.MaxTotalPoints;
+        MinPointsToPass = qaData.MinPointsToPass;
 
+    }
+
+    public List<QADataModel> GetAllQuestionAns()
+    {
+        return questionList;
     }
 
     private void OnDisable()

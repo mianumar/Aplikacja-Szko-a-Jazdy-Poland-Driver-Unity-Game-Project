@@ -3,6 +3,10 @@
     {
       "QID": 0,
       "Question": "Question String",
+      "QuestionType" :"BASIC",
+      "ReadingTime":15,
+      "AnsTime" :10,
+      "Points" : 10,
       "Options": [
         "Option 1",
         "Option 2",
@@ -14,6 +18,10 @@
     {
       "QID": 1,
       "Question": "Question String",
+      "QuestionType" :"BASIC",
+      "ReadingTime":15,
+      "AnsTime" :10,
+      "Points" : 10,
       "Options": [
         "Option 1",
         "Option 2",
@@ -25,6 +33,10 @@
     {
       "QID": 2,
       "Question": "Question String",
+      "QuestionType" :"BASIC",
+      "ReadingTime":15,
+      "AnsTime" :10,
+      "Points" : 10,
       "Options": [
         "Option 1",
         "Option 2",
