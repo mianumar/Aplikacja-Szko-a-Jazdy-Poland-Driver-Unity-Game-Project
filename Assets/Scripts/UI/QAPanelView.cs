@@ -32,26 +32,18 @@ public class QAPanelView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textTimeReamingAns;
 
 
-
-    private int MaxTotalPoints;
-    private int MinTotalPoints;
-    private int TotalQusetionsCount;
-
     private List<QADataModel> qADataModels;
+    private int currentQesIndex = 0;
     public void RenderView()
     {
         var instance = GameManager.Instance;
         if (instance != null)
         {
-            MaxTotalPoints = instance.MaxTotalPoints;
-            MinTotalPoints = instance.MinPointsToPass;
             qADataModels = instance.GetAllQuestionAns();
-
-            TotalQusetionsCount = qADataModels.Count;
         }
 
-        AddListeners(); 
-
+        AddListeners();
+        SetDefaultData();
         gameObject.SetActive(true);
     }
 
@@ -75,35 +67,38 @@ public class QAPanelView : MonoBehaviour
 
     }
 
+    private void SetDefaultData()
+    {
+        textCurrentQuestion.text = (currentQesIndex+1).ToString();
+    }
+
     private void OnNextButtonClicked()
     {
-        throw new NotImplementedException();
+       
     }
 
     private void OnStartButtonClicked()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void OnNoButtonClicked()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void OnYesButtonClicked()
     {
-        throw new NotImplementedException();
+        
     }
 
     private void OnCloseClicked()
     {
-        Disable();
+        UIHandler.Instance.exitPopup.RenderView();
+        //Disable();
     }
 
-    private void SetDefaultData()
-    {
-
-    }
+   
 
     public void Disable()
     {
