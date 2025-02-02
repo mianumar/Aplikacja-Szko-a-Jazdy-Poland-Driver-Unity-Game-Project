@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class QAPanelView : MonoBehaviour
 {
@@ -39,7 +40,6 @@ public class QAPanelView : MonoBehaviour
     private List<QADataModel> qADataModels;
     public void RenderView()
     {
-
         var instance = GameManager.Instance;
         if (instance != null)
         {
@@ -49,7 +49,60 @@ public class QAPanelView : MonoBehaviour
 
             TotalQusetionsCount = qADataModels.Count;
         }
+
+        AddListeners(); 
+
         gameObject.SetActive(true);
+    }
+
+    private void AddListeners()
+    {
+        buttonClose.onClick.RemoveAllListeners();
+        buttonClose.onClick.AddListener(OnCloseClicked);
+
+        buttonYes.onClick.RemoveAllListeners();
+        buttonYes.onClick.AddListener(OnYesButtonClicked);
+
+        buttonNo.onClick.RemoveAllListeners();
+        buttonNo.onClick.AddListener(OnNoButtonClicked);
+
+        buttonStart.onClick.RemoveAllListeners();
+        buttonStart.onClick.AddListener(OnStartButtonClicked);
+
+        buttonNext.onClick.RemoveAllListeners();
+        buttonNext.onClick.AddListener(OnNextButtonClicked);
+
+
+    }
+
+    private void OnNextButtonClicked()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnStartButtonClicked()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnNoButtonClicked()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnYesButtonClicked()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnCloseClicked()
+    {
+        Disable();
+    }
+
+    private void SetDefaultData()
+    {
+
     }
 
     public void Disable()
