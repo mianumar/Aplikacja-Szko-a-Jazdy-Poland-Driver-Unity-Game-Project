@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Video;
+using static Unity.VisualScripting.Member;
 
 public enum ScreenType
 {
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
     public string UserID => userDataModel.UserId;
     public UserDataModel UserDataModel => userDataModel;
 
+    public VideoPlayer videoPlayer;
+
     // Events
     public static UnityAction<FirebaseUser> OnLoginDoneAction;
 
@@ -36,6 +40,10 @@ public class GameManager : MonoBehaviour
 
     private UserDataModel userDataModel;
 
+    private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4"; 
+    
+
+    private string filePath = string.Empty;
     void Awake()
     {
         if (Instance == null)
@@ -48,6 +56,35 @@ public class GameManager : MonoBehaviour
     {
         OnLoginDoneAction += OnLoginDone;
         DatabaseHandler.FirebaseInitEvent += OnFirebaseInitEvent;
+        filePath = Application.dataPath + "/Resources/Videos/testvideo.mp4";
+        Debug.Log("File Path : "+filePath);
+        GameUtils.VideoDownloader.RequestDownload(this, url, filePath , (flag) =>
+        {
+            if (flag)
+            {
+                var videoClip = Resources.Load<VideoClip>("/Videos/testvideo.mp4");
+                videoPlayer.url = url;
+                // Debug.Log("Clip length :: "+videoPlayer.clip.length);
+                if (!videoPlayer.isPrepared)
+                {
+                    videoPlayer.prepareCompleted += OnVideoPrepared; // Subscribe to the event
+                    videoPlayer.Prepare(); // Prepare the video asynchronously
+                    Debug.Log("Preparing video to get length...");
+                }
+                else
+                {
+                    Debug.Log("Clip length :: " + videoPlayer.clip.length);
+                    videoPlayer.Play();
+                }
+            }
+        });
+    }
+
+    private void OnVideoPrepared(VideoPlayer source)
+    {
+        videoPlayer.prepareCompleted -= OnVideoPrepared;
+        Debug.Log("Clip length :: "+source.length);
+        videoPlayer.Play();
     }
 
     /// <summary>

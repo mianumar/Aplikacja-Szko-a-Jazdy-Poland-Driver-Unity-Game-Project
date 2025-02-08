@@ -43,7 +43,7 @@ public class QAPanelView : MonoBehaviour
         }
 
         AddListeners();
-        SetDefaultData();
+        RenderQuestionPanelView();
         gameObject.SetActive(true);
     }
 
@@ -67,9 +67,25 @@ public class QAPanelView : MonoBehaviour
 
     }
 
-    private void SetDefaultData()
+    private void RenderQuestionPanelView()
     {
         textCurrentQuestion.text = (currentQesIndex+1).ToString();
+        if (qADataModels != null && qADataModels.Count > 0)
+        {
+            QADataModel qaData = qADataModels[currentQesIndex];
+            if (qaData != null)
+            {
+                GameUtils.GameTimer.CoutDownTimer(this , qaData.ReadingTime, (timeRemain) =>
+                {
+                    Debug.Log("Time Remain "+timeRemain);
+                });
+            }
+        }
+    }
+
+    private void RenderAnsPanelView()
+    {
+
     }
 
     private void OnNextButtonClicked()
