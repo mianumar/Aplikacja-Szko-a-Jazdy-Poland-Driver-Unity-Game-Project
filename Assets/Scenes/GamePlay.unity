@@ -1038,6 +1038,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7929eac2eab744a43ba5668d16baebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  url: https://admin.aplikacjaszkolajazdy.pl/api/
+  getAllSimpleQuestions: getAllSimple.php
 --- !u!4 &1668356925
 Transform:
   m_ObjectHideFlags: 0
