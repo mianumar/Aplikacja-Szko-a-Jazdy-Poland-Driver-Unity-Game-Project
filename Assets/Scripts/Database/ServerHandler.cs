@@ -12,7 +12,12 @@ public class ServerHandler : MonoBehaviour
 
 
 
+    public string getAllMcqs = "getAllMcqs.php";
     public string getAllSimpleQuestions = "getAllSimple.php";
+    public string getCount = "getCount.php";
+    public string getMcqs = "getMcqs.php";
+    public string getMcqsCount = "getMcqsCount.php";
+    public string getSimpleCount = "getSimpleCount.php";
 
 
     //public Text userIDText;
