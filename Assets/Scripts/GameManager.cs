@@ -56,9 +56,14 @@ public class GameManager : MonoBehaviour
     {
         OnLoginDoneAction += OnLoginDone;
         DatabaseHandler.FirebaseInitEvent += OnFirebaseInitEvent;
+       
+    }
+
+    public void SetupVideoPlayer()
+    {
         filePath = Application.dataPath + "/Resources/Videos/testvideo.mp4";
-        Debug.Log("File Path : "+filePath);
-        GameUtils.VideoDownloader.RequestDownload(this, url, filePath , (flag) =>
+        Debug.Log("File Path : " + filePath);
+        GameUtils.VideoDownloader.RequestDownload(this, url, filePath, (flag) =>
         {
             if (flag)
             {
@@ -130,11 +135,11 @@ public class GameManager : MonoBehaviour
     public async void InitializedGame()
     {
        
-        QADatabaseModel qaData = await DatabaseHandler.Instance.GetAllQAData();
+        //QADatabaseModel qaData = await DatabaseHandler.Instance.GetAllQAData();
 
-        questionList = qaData.QADataList;
-        MaxTotalPoints = qaData.MaxTotalPoints;
-        MinPointsToPass = qaData.MinPointsToPass;
+        //questionList = qaData.QADataList;
+        //MaxTotalPoints = qaData.MaxTotalPoints;
+        //MinPointsToPass = qaData.MinPointsToPass;
 
     }
 

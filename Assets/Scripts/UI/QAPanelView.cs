@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
+using System.Linq;
 
 public class QAPanelView : MonoBehaviour
 {
@@ -34,17 +34,46 @@ public class QAPanelView : MonoBehaviour
 
     private List<QADataModel> qADataModels;
     private int currentQesIndex = 0;
-    public void RenderView()
+
+    private int totalSimpleQuestionCount;
+    private int totalSpecialQuestionCount;
+
+    private List<int> randomSimpleQstnIndexList = new List<int>();
+    private List<int> randomSpecialQstnIndexList = new List<int>();
+
+    public async void RenderView()
     {
         var instance = GameManager.Instance;
         if (instance != null)
         {
-            qADataModels = instance.GetAllQuestionAns();
+            // qADataModels = instance.GetAllQuestionAns();
         }
-
+        randomSimpleQstnIndexList.Clear();
+        randomSpecialQstnIndexList.Clear();
         AddListeners();
-        RenderQuestionPanelView();
-        gameObject.SetActive(true);
+        await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+                totalSimpleQuestionCount = task.Result;
+
+                randomSimpleQstnIndexList = GetRandomIndex(1, totalSimpleQuestionCount);
+
+
+            }
+        });
+        await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWith(task =>
+        {
+            if (task.IsCompleted)
+            {
+
+                totalSpecialQuestionCount = task.Result;
+                randomSpecialQstnIndexList = GetRandomIndex(1, totalSpecialQuestionCount);
+                gameObject.SetActive(true);
+            }
+        });
+
+
     }
 
     private void AddListeners()
@@ -67,21 +96,40 @@ public class QAPanelView : MonoBehaviour
 
     }
 
-    private void RenderQuestionPanelView()
+    private List<int> GetRandomIndex(int min, int max)
     {
-        textCurrentQuestion.text = (currentQesIndex+1).ToString();
-        if (qADataModels != null && qADataModels.Count > 0)
+        System.Random random = new System.Random();
+        return Enumerable.Range(min, max-1).OrderBy(x => random.Next()).Take(32).ToList();
+
+        //foreach (int num in uniqueNumbers)
+        //{
+        //    Debug.Log(num);
+        //}
+
+    }
+
+    private async void RenderQuestionPanelView(int index)
+    {
+        ServerHandler.SimpleQuestionDataModel simpleQuestionData = null;
+        await ServerHandler.instance.GetRandomSimpleQuestion(index).ContinueWith(task =>
         {
-            QADataModel qaData = qADataModels[currentQesIndex];
-            if (qaData != null)
+            if (task.IsCompleted)
             {
-                GameUtils.GameTimer.CoutDownTimer(this , qaData.ReadingTime, (timeRemain) =>
-                {
-                    Debug.Log("Time Remain "+timeRemain);
-                });
+                simpleQuestionData = task.Result as ServerHandler.SimpleQuestionDataModel;
             }
+        });
+        textCurrentQuestion.text = (currentQesIndex + 1).ToString();
+        if (simpleQuestionData != null)
+        {
+
+            //GameUtils.GameTimer.CoutDownTimer(this, qaData.ReadingTime, (timeRemain) =>
+            //{
+            //    Debug.Log("Time Remain " + timeRemain);
+            //});
+
         }
     }
+
 
     private void RenderAnsPanelView()
     {
@@ -90,22 +138,22 @@ public class QAPanelView : MonoBehaviour
 
     private void OnNextButtonClicked()
     {
-       
+
     }
 
     private void OnStartButtonClicked()
     {
-        
+
     }
 
     private void OnNoButtonClicked()
     {
-        
+
     }
 
     private void OnYesButtonClicked()
     {
-        
+
     }
 
     private void OnCloseClicked()
@@ -114,7 +162,7 @@ public class QAPanelView : MonoBehaviour
         //Disable();
     }
 
-   
+
 
     public void Disable()
     {
