@@ -2287,7 +2287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6707072291791760650, guid: d00e123abe6a6d1458fecca759405bb4, type: 3}
       propertyPath: m_Name
-      value: ResultSummary
+      value: SummaryExamScreen
       objectReference: {fileID: 0}
     - target: {fileID: 6707072291791760650, guid: d00e123abe6a6d1458fecca759405bb4, type: 3}
       propertyPath: m_IsActive
