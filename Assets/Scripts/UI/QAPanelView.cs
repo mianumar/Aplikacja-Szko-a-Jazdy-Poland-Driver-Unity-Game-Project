@@ -40,19 +40,13 @@ public class QAPanelView : MonoBehaviour
     private int BASIC_READ_TIME = 15;
     private int BASIC_ANSWER_TIME = 10;
     private int SPECIAL_ANSWER_TIME = 50;
-
     public void RenderView()
     {
         ResetData();
-        var instance = GameManager.Instance;
-        if (instance != null)
-        {
-            // qADataModels = instance.GetAllQuestionAns();
-        }
-
+       
         AddListeners();
 
-        SimpleQuestionDataModel _dataModel = instance.GetSimpleQuestionFromList(currentQesIndex);
+        SimpleQuestionDataModel _dataModel = GameManager.Instance.GetSimpleQuestionFromList(currentQesIndex);
 
 
         gameObject.SetActive(true);
@@ -113,20 +107,41 @@ public class QAPanelView : MonoBehaviour
         }
     }
 
+    private void RenderSpecialQuestionPanelView(SpecializedQuestionModel specializedQuestion)
+    {
+
+    }
+
 
     private void RenderAnsPanelView()
     {
-
+        timeToAnsPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Display Next Question
+    /// </summary>
     private void OnNextButtonClicked()
     {
+        if (currentQesIndex < 20)
+        {
+            SimpleQuestionDataModel _dataModel = GameManager.Instance.GetSimpleQuestionFromList(currentQesIndex);
+            RenderQuestionPanelView(_dataModel);
+        }else if(currentQesIndex < 32)
+        {
+            SpecializedQuestionModel _dataModel = GameManager.Instance.GetSpecialQuestionFromList(currentQesIndex-20);
+            RenderSpecialQuestionPanelView(_dataModel);
+        }
 
     }
 
+    /// <summary>
+    /// Time to answer panel render
+    /// </summary>
     private void OnStartButtonClicked()
     {
-
+        timeToReadQuestionPanel.SetActive(false);
+        RenderAnsPanelView();
     }
 
     private void OnNoButtonClicked()

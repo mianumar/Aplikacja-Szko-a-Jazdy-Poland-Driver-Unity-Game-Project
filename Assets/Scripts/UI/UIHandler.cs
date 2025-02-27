@@ -11,11 +11,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] public GameRulesPage gameRulesPage;
     [SerializeField] public SettingsPanelView settingsPanelView;
     [SerializeField] public QAPanelView qaPanelView;
-    [SerializeField] public SummaryScreenView summaryScreenView;
+    [SerializeField] public SummeryResultsView summaryScreenView;
     [SerializeField] public ExitPopup exitPopup;
-    public RawImage testDownloader;
-    public Text testText;
-    string url = "https://photographylife.com/wp-content/uploads/2014/09/Nikon-D750-Image-Samples-2.jpg";
 
     private Image splashScreenImage; // Reference to the child splash image
 
@@ -43,11 +40,7 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    //public void CountDownCallback(float remainingTime)
-    //{
-    //    testText.text = "Remaining Time = " + remainingTime;
-    //}
-
+    
     void ShowMainMenu()
     {
 /*        // Ensure splashScreenView has an Image component

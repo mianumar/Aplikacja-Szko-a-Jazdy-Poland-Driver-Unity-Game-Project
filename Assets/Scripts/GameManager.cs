@@ -51,8 +51,8 @@ public class GameManager : MonoBehaviour
 
     private string filePath = string.Empty;
 
-    private int MAX_BASIC_QUESTION_COUNT = 20;
-    private int MAX_SPECIAL_QUESTION_COUNT = 12;
+    public const int MAX_BASIC_QUESTION_COUNT = 20;
+    public const int MAX_SPECIAL_QUESTION_COUNT = 12;
 
     private int totalSimpleQuestionCount;
     private int totalSpecialQuestionCount;
@@ -264,7 +264,7 @@ public class GameManager : MonoBehaviour
         else if (extention.Equals(".wmv"))
         {
             count += 1;
-            Debug.LogError("Total Video File "+count);
+            Debug.LogError("Total Video File " + count);
             string filePath = string.Concat(VIDEO_FILE_DIR, data.id, extention);
             GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
             {
@@ -282,7 +282,7 @@ public class GameManager : MonoBehaviour
             });
         }
 
-        if(_simpleIndex == randomSimpleQstnList.Count)
+        if (_simpleIndex == randomSimpleQstnList.Count)
         {
             AssetDatabase.Refresh();
         }
@@ -297,11 +297,18 @@ public class GameManager : MonoBehaviour
 
     }
 
-  public SimpleQuestionDataModel GetSimpleQuestionFromList(int index)
+    public SimpleQuestionDataModel GetSimpleQuestionFromList(int index)
     {
-        if(index < 0 && index >= randomSimpleQstnList.Count)
+        if (index < 0 && index >= randomSimpleQstnList.Count)
             return null;
         return randomSimpleQstnList[index];
+    }
+
+    public SpecializedQuestionModel GetSpecialQuestionFromList(int index)
+    {
+        if (index < 0 && index >= randomSimpleQstnList.Count)
+            return null;
+        return randomSpecialQstnList[index];
     }
 
     private void OnDisable()
