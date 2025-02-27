@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Firebase.Extensions;
+using System;
 
 public class QAPanelView : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class QAPanelView : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI textTimer;
     [SerializeField] private TextMeshProUGUI textCurrentQuestion;
-    [SerializeField] private TextMeshProUGUI testDescription;
+    [SerializeField] private TextMeshProUGUI textDescription;
     [SerializeField] private TextMeshProUGUI textQuestion;
 
     [SerializeField] private TextMeshProUGUI textReamingTimeToRead;
@@ -32,47 +34,42 @@ public class QAPanelView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textTimeReamingAns;
 
 
-    private List<QADataModel> qADataModels;
     private int currentQesIndex = 0;
 
-    private int totalSimpleQuestionCount;
-    private int totalSpecialQuestionCount;
 
-    private List<int> randomSimpleQstnIndexList = new List<int>();
-    private List<int> randomSpecialQstnIndexList = new List<int>();
+    private int BASIC_READ_TIME = 15;
+    private int BASIC_ANSWER_TIME = 10;
+    private int SPECIAL_ANSWER_TIME = 50;
 
-    public async void RenderView()
+    public void RenderView()
     {
+        ResetData();
         var instance = GameManager.Instance;
         if (instance != null)
         {
             // qADataModels = instance.GetAllQuestionAns();
         }
-        randomSimpleQstnIndexList.Clear();
-        randomSpecialQstnIndexList.Clear();
+
         AddListeners();
-        await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWith(task =>
+
+        SimpleQuestionDataModel _dataModel = instance.GetSimpleQuestionFromList(currentQesIndex);
+
+
+        gameObject.SetActive(true);
+        RenderQuestionPanelView(_dataModel);
+
+        StartGameTimer();
+    }
+
+    public void StartGameTimer()
+    {
+        GameUtils.GameTimer.GameClockTimer(this, 0f, (currentTime) =>
         {
-            if (task.IsCompleted)
-            {
-                totalSimpleQuestionCount = task.Result;
-
-                randomSimpleQstnIndexList = GetRandomIndex(1, totalSimpleQuestionCount);
-
-
-            }
+           // Debug.Log("Time Remain " + currentTime);
+            int sec = (int)currentTime % 60;
+            int mint = (int)currentTime / 60;
+            textTimer.text = mint + ":" + sec.ToString("00");
         });
-        await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-
-                totalSpecialQuestionCount = task.Result;
-                randomSpecialQstnIndexList = GetRandomIndex(1, totalSpecialQuestionCount);
-                gameObject.SetActive(true);
-            }
-        });
-
 
     }
 
@@ -96,36 +93,22 @@ public class QAPanelView : MonoBehaviour
 
     }
 
-    private List<int> GetRandomIndex(int min, int max)
+    private void RenderQuestionPanelView(SimpleQuestionDataModel simpleQuestionData)
     {
-        System.Random random = new System.Random();
-        return Enumerable.Range(min, max-1).OrderBy(x => random.Next()).Take(32).ToList();
-
-        //foreach (int num in uniqueNumbers)
-        //{
-        //    Debug.Log(num);
-        //}
-
-    }
-
-    private async void RenderQuestionPanelView(int index)
-    {
-        ServerHandler.SimpleQuestionDataModel simpleQuestionData = null;
-        await ServerHandler.instance.GetRandomSimpleQuestion(index).ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                simpleQuestionData = task.Result as ServerHandler.SimpleQuestionDataModel;
-            }
-        });
-        textCurrentQuestion.text = (currentQesIndex + 1).ToString();
         if (simpleQuestionData != null)
         {
+            currentQesIndex += 1;
+            textCurrentQuestion.text = currentQesIndex.ToString();
+            sliderRemainingQuestionsToAns.value = (currentQesIndex / 32) * 100;
 
-            //GameUtils.GameTimer.CoutDownTimer(this, qaData.ReadingTime, (timeRemain) =>
-            //{
-            //    Debug.Log("Time Remain " + timeRemain);
-            //});
+            textDescription.text = simpleQuestionData.question;
+
+            GameUtils.GameTimer.CoutDownTimer(this, BASIC_READ_TIME, (timeRemain) =>
+            {
+                Debug.Log("Time Remain " + timeRemain);
+                textReamingTimeToRead.text = timeRemain.ToString();
+                remainQuestionSlider.fillAmount = timeRemain / (BASIC_READ_TIME*1.0f);
+            });
 
         }
     }
@@ -162,7 +145,13 @@ public class QAPanelView : MonoBehaviour
         //Disable();
     }
 
-
+    private void ResetData()
+    {
+        currentQesIndex = 0;
+        textTimer.text = "0:00";
+        remainQuestionSlider.fillAmount = 1;
+        textReamingTimeToRead.text = BASIC_READ_TIME.ToString();
+    }
 
     public void Disable()
     {

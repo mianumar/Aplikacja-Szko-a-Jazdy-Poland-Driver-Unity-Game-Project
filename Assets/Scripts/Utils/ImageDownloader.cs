@@ -8,11 +8,15 @@ namespace GameUtils
 {
     public class ImageDownloader
     {
+        static Coroutine imageDownloaderRoutine = null; 
         public static void RequestDownload(MonoBehaviour currentBehaviour ,string url, Action<Texture2D> onComplete)
         {
-            currentBehaviour.StartCoroutine(DownloadProfileImg(url, onComplete));
+            if(imageDownloaderRoutine != null)
+                currentBehaviour.StopCoroutine(imageDownloaderRoutine);
+
+            imageDownloaderRoutine = currentBehaviour.StartCoroutine(DownloadProfileImg(url, onComplete));
         }
-        public static IEnumerator DownloadProfileImg(string url, Action<Texture2D> onComplete)
+        private static IEnumerator DownloadProfileImg(string url, Action<Texture2D> onComplete)
         {
             UnityWebRequest unityWebRequest = UnityWebRequestTexture.GetTexture(url);
             yield return unityWebRequest.SendWebRequest();

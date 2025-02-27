@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -7,9 +8,14 @@ namespace GameUtils
 {
     public class VideoDownloader
     {
+        static Coroutine videoDownloaderRoutine = null;
         public static void RequestDownload(MonoBehaviour monoBehaviour, string url , string savePath , Action<bool> result)
         {
-            monoBehaviour.StartCoroutine(DownloadVideo(url,savePath , result));
+            if (videoDownloaderRoutine != null)
+            {
+                monoBehaviour.StopCoroutine(videoDownloaderRoutine);
+            }
+            videoDownloaderRoutine = monoBehaviour.StartCoroutine(DownloadVideo(url,savePath , result));
         }
 
         private static IEnumerator DownloadVideo(string url, string savePath, Action<bool> result)
@@ -31,7 +37,6 @@ namespace GameUtils
             {
                 Debug.Log("Video Download Successfully");
                 result(true);
-                
             }
         }
     }

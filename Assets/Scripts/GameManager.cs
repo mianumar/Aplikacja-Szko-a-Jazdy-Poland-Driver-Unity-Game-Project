@@ -7,6 +7,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;
 using static Unity.VisualScripting.Member;
+using Firebase.Extensions;
+using System.Linq;
+using System.Diagnostics.Eventing.Reader;
+using System.IO;
+using UnityEditor;
 
 public enum ScreenType
 {
@@ -40,10 +45,26 @@ public class GameManager : MonoBehaviour
 
     private UserDataModel userDataModel;
 
-    private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4"; 
-    
+    private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4";
+
+    private string VIDEO_FILE_DIR = Application.dataPath + "/Resources/Videos/";
 
     private string filePath = string.Empty;
+
+    private int MAX_BASIC_QUESTION_COUNT = 20;
+    private int MAX_SPECIAL_QUESTION_COUNT = 12;
+
+    private int totalSimpleQuestionCount;
+    private int totalSpecialQuestionCount;
+
+    private List<SimpleQuestionDataModel> randomSimpleQstnList = new List<SimpleQuestionDataModel>();
+    private List<SpecializedQuestionModel> randomSpecialQstnList = new List<SpecializedQuestionModel>();
+
+    private List<int> randomSimpleIndexces = new List<int>();
+    private List<int> randomSpecialIndexces = new List<int>();
+
+    private int currectSimpleIndex = 0;
+    private int currectSpecialIndex = 0;
     void Awake()
     {
         if (Instance == null)
@@ -56,7 +77,14 @@ public class GameManager : MonoBehaviour
     {
         OnLoginDoneAction += OnLoginDone;
         DatabaseHandler.FirebaseInitEvent += OnFirebaseInitEvent;
-       
+
+        DirectoryInfo dir = new DirectoryInfo(VIDEO_FILE_DIR);
+
+        foreach (FileInfo file in dir.GetFiles())
+        {
+            file.Delete();
+        }
+        AssetDatabase.Refresh();
     }
 
     public void SetupVideoPlayer()
@@ -88,7 +116,7 @@ public class GameManager : MonoBehaviour
     private void OnVideoPrepared(VideoPlayer source)
     {
         videoPlayer.prepareCompleted -= OnVideoPrepared;
-        Debug.Log("Clip length :: "+source.length);
+        Debug.Log("Clip length :: " + source.length);
         videoPlayer.Play();
     }
 
@@ -98,7 +126,7 @@ public class GameManager : MonoBehaviour
     private void OnFirebaseInitEvent()
     {
         Debug.Log("Game Manager :: Firebase Initialization Done Callback");
-        InitializedGame();
+
     }
 
     /// <summary>
@@ -107,8 +135,8 @@ public class GameManager : MonoBehaviour
     private async void OnLoginDone(FirebaseUser loggedUser)
     {
         Debug.Log("Game Manager :: Login Done Callback");
-       
-        userDataModel= await DatabaseHandler.Instance.GetUserData(loggedUser.UserId);
+
+        userDataModel = await DatabaseHandler.Instance.GetUserData(loggedUser.UserId);
 
         // Save User Data if Not Found
         if (userDataModel == null)
@@ -125,7 +153,7 @@ public class GameManager : MonoBehaviour
         {
 
         }
-        
+        InitializedGame();
     }
 
 
@@ -134,18 +162,146 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public async void InitializedGame()
     {
-       
-        //QADatabaseModel qaData = await DatabaseHandler.Instance.GetAllQAData();
+        randomSimpleQstnList.Clear();
+        randomSpecialQstnList.Clear();
+        await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
 
-        //questionList = qaData.QADataList;
-        //MaxTotalPoints = qaData.MaxTotalPoints;
-        //MinPointsToPass = qaData.MinPointsToPass;
+                totalSpecialQuestionCount = task.Result;
+                randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
+                if (randomSpecialIndexces.Count > 0)
+                {
+                    GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
+                }
+
+            }
+        });
+        await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                totalSimpleQuestionCount = task.Result;
+
+                randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
+                if (randomSimpleIndexces.Count > 0)
+                {
+                    GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
+                }
+
+
+            }
+        });
 
     }
 
-    public List<QADataModel> GetAllQuestionAns()
+    private void GetSimpleQuestionsData(int index)
     {
-        return questionList;
+        ServerHandler.instance.GetRandomSimpleQuestion(index).ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                randomSimpleQstnList.Add(task.Result);
+                currectSimpleIndex++;
+                if (currectSimpleIndex < randomSimpleIndexces.Count)
+                {
+                    GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
+                }
+                else
+                {
+                    Debug.Log("All Simple Questions Downloaded successfully");
+                    DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
+                }
+            }
+        });
+    }
+
+    private void GetSpecialQuestionsData(int index)
+    {
+        ServerHandler.instance.GetRandomSpecilizedQuestion(index).ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                randomSpecialQstnList.Add(task.Result);
+                currectSpecialIndex++;
+                if (currectSpecialIndex < randomSpecialIndexces.Count)
+                {
+                    GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
+                }
+                else
+                {
+                    Debug.Log("All Special Questions Downloaded successfully");
+
+                }
+            }
+        });
+    }
+
+    int _simpleIndex = 0;
+    int count = 0;
+    private void DownloadingMediaForSimpleQstn(SimpleQuestionDataModel data)
+    {
+        Debug.Log("DownloadingMediaForSimpleQstn");
+        string extention = GameConstants.GetFileExtensionFromUrl(data.media_link);
+        if (string.IsNullOrEmpty(extention))
+            return;
+        if (extention.Equals(".jpg"))
+        {
+            GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
+            {
+                _simpleIndex++;
+                if (_simpleIndex < randomSimpleQstnList.Count)
+                {
+                    DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
+                }
+                else
+                {
+                    Debug.LogError("All Media Downloaded :: Image");
+                }
+            });
+        }
+        else if (extention.Equals(".wmv"))
+        {
+            count += 1;
+            Debug.LogError("Total Video File "+count);
+            string filePath = string.Concat(VIDEO_FILE_DIR, data.id, extention);
+            GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
+            {
+                _simpleIndex++;
+                if (_simpleIndex < randomSimpleQstnList.Count)
+                {
+                    DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
+                }
+                else
+                {
+                    Debug.LogError("All Media Downloaded :: Video");
+
+
+                }
+            });
+        }
+
+        if(_simpleIndex == randomSimpleQstnList.Count)
+        {
+            AssetDatabase.Refresh();
+        }
+
+    }
+
+
+    private List<int> GetRandomIndex(int min, int max, int count)
+    {
+        System.Random random = new System.Random();
+        return Enumerable.Range(min, max - 1).OrderBy(x => random.Next()).Take(count).ToList();
+
+    }
+
+  public SimpleQuestionDataModel GetSimpleQuestionFromList(int index)
+    {
+        if(index < 0 && index >= randomSimpleQstnList.Count)
+            return null;
+        return randomSimpleQstnList[index];
     }
 
     private void OnDisable()

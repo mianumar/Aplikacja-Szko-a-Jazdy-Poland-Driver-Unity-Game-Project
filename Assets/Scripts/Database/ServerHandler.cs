@@ -124,7 +124,7 @@ public class ServerHandler : MonoBehaviour
         string url = Path.Combine(BASE_URL, getSimpleQuestion);
         url = url + API_TOKEN + "&id=" + id;
 
-        Debug.Log("GetRandomSimpleQuestion :: url :: == " + url);
+       // Debug.Log("GetRandomSimpleQuestion :: url :: == " + url);
         using UnityWebRequest request = UnityWebRequest.Get(url);
         await request.SendWebRequest();
 
@@ -135,7 +135,7 @@ public class ServerHandler : MonoBehaviour
         else
         {
             string jsonResponse = request.downloadHandler.text;
-            Debug.Log("Response: " + jsonResponse);
+           // Debug.Log("Response: " + jsonResponse);
             SimpleQuestionResponseModel result = JsonConvert.DeserializeObject<SimpleQuestionResponseModel>(jsonResponse);
             question = result.data;
         }
@@ -154,7 +154,7 @@ public class ServerHandler : MonoBehaviour
         string url = Path.Combine(BASE_URL, getSpecializedQuestion);
         url = url + API_TOKEN + "&id=" + id;
 
-        Debug.Log("GetRandomSpecilizedQuestion :: url :: == " + url);
+       // Debug.Log("GetRandomSpecilizedQuestion :: url :: == " + url);
         using UnityWebRequest request = UnityWebRequest.Get(url);
         await request.SendWebRequest();
 
@@ -165,7 +165,7 @@ public class ServerHandler : MonoBehaviour
         else
         {
             string jsonResponse = request.downloadHandler.text;
-            Debug.Log("Response: " + jsonResponse);
+          //  Debug.Log("Response: " + jsonResponse);
             SpecializedQuestionResponseModel result = JsonConvert.DeserializeObject<SpecializedQuestionResponseModel>(jsonResponse);
             question = result.data;
         }
@@ -210,6 +210,7 @@ public class ServerHandler : MonoBehaviour
     {
         int dataCount = 0;
         string url = Path.Combine(BASE_URL, getSpecializedCount);
+        url = url + API_TOKEN;
 
         Debug.Log("GetSpecilizedQuestionsCount :: url :: == " + url);
         using UnityWebRequest request = UnityWebRequest.Get(url);
@@ -239,6 +240,7 @@ public class ServerHandler : MonoBehaviour
     {
         int dataCount = 0;
         string url = Path.Combine(BASE_URL, getSimpleCount);
+        url = url +API_TOKEN;
 
         Debug.Log("GetSimpleQuestionsCount :: url :: == " + url);
         using UnityWebRequest request = UnityWebRequest.Get(url);
@@ -265,94 +267,94 @@ public class ServerHandler : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    [System.Serializable]
-    public class SimpleQuestionDataModel
+   
+    void OnApplicationQuit()
     {
-        public int id;
-        public string question;
-        public string answer;
-        public string media;
-        public string media_link;
-        public string categories;
-    }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [System.Serializable]
-    public class SimpleQuestionListDataModel
-    {
-        public string status;
-        public List<SimpleQuestionDataModel> data;
-        public string message; // Only used if an error occurs
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [System.Serializable]
-    public class SimpleQuestionResponseModel
-    {
-        public string status { get; set; }
-        public SimpleQuestionDataModel data { get; set; }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-
-    [System.Serializable]
-    public class DataCountModel
-    {
-        public string status;
-        public string data;
+        int id = PlayerPrefs.GetInt("DBUserID");
+        //StartCoroutine(UpdateLastPlayDate(id, OnLastPlayDateUpdated));
+        Debug.Log("Application is quitting.");
 
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [System.Serializable]
-    public class SpecializedQuestionModel
-    {
-        public int id { get; set; }
-        public int question_number { get; set; }
-        public string question { get; set; }
-        public string option_a { get; set; }
-        public string option_b { get; set; }
-        public string option_c { get; set; }
-        public string answer { get; set; }
-        public string media { get; set; }
-        public string media_link { get; set; }
-        public string categories { get; set; }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    [System.Serializable]
-    public class SpecializedQuestionResponseModel
-    {
-        public string status { get; set; }
-        public SpecializedQuestionModel data { get; set; }
-    }
+}
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [System.Serializable]
-    public class SpecializedQuestionListDataModel
-    {
-        public string status { get; set; }
-        public List<SpecializedQuestionModel> data { get; set; }
+[System.Serializable]
+public class SimpleQuestionDataModel
+{
+    public int id;
+    public string question;
+    public string answer;
+    public string media;
+    public string media_link;
+    public string categories;
+}
 
-        void OnApplicationQuit()
-        {
+/// <summary>
+/// 
+/// </summary>
+[System.Serializable]
+public class SimpleQuestionListDataModel
+{
+    public string status;
+    public List<SimpleQuestionDataModel> data;
+    public string message; // Only used if an error occurs
+}
 
-            int id = PlayerPrefs.GetInt("DBUserID");
-            //StartCoroutine(UpdateLastPlayDate(id, OnLastPlayDateUpdated));
-            Debug.Log("Application is quitting.");
+/// <summary>
+/// 
+/// </summary>
+[System.Serializable]
+public class SimpleQuestionResponseModel
+{
+    public string status { get; set; }
+    public SimpleQuestionDataModel data { get; set; }
+}
+/// <summary>
+/// 
+/// </summary>
 
-        }
+[System.Serializable]
+public class DataCountModel
+{
+    public string status;
+    public string data;
 
+}
 
-    }
+/// <summary>
+/// 
+/// </summary>
+[System.Serializable]
+public class SpecializedQuestionModel
+{
+    public int id { get; set; }
+    public int question_number { get; set; }
+    public string question { get; set; }
+    public string option_a { get; set; }
+    public string option_b { get; set; }
+    public string option_c { get; set; }
+    public string answer { get; set; }
+    public string media { get; set; }
+    public string media_link { get; set; }
+    public string categories { get; set; }
+}
+/// <summary>
+/// 
+/// </summary>
+[System.Serializable]
+public class SpecializedQuestionResponseModel
+{
+    public string status { get; set; }
+    public SpecializedQuestionModel data { get; set; }
+}
+
+/// <summary>
+/// 
+/// </summary>
+[System.Serializable]
+public class SpecializedQuestionListDataModel
+{
+    public string status { get; set; }
+    public List<SpecializedQuestionModel> data { get; set; }
 }
