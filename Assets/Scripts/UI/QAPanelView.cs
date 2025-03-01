@@ -5,6 +5,7 @@ using TMPro;
 using System.Linq;
 using Firebase.Extensions;
 using System;
+using UnityEngine.Video;
 
 public class QAPanelView : MonoBehaviour
 {
@@ -105,6 +106,11 @@ public class QAPanelView : MonoBehaviour
             });
 
         }
+    }
+
+    private void DisplayVideoFileForQuestion(string fileName)
+    {
+        var videoClip = Resources.Load<VideoClip>("/Videos/SIMPLE/"+fileName+".wmv");
     }
 
     private void RenderSpecialQuestionPanelView(SpecializedQuestionModel specializedQuestion)

@@ -47,7 +47,8 @@ public class GameManager : MonoBehaviour
 
     private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4";
 
-    private string VIDEO_FILE_DIR = Application.dataPath + "/Resources/Videos/";
+    private string VIDEO_FILE_DIR_SIMPLE = Application.dataPath + "/Resources/Videos/SIMPLE/";
+    private string VIDEO_FILE_DIR_SPECIAL = Application.dataPath + "/Resources/Videos/SPECIAL/";
 
     private string filePath = string.Empty;
 
@@ -63,6 +64,9 @@ public class GameManager : MonoBehaviour
     private List<int> randomSimpleIndexces = new List<int>();
     private List<int> randomSpecialIndexces = new List<int>();
 
+    public List<Sprite> SimpleQuestionSprites = new List<Sprite>();
+    public List<Sprite> SpecialQuestionSprites = new List<Sprite>();
+
     private int currectSimpleIndex = 0;
     private int currectSpecialIndex = 0;
     void Awake()
@@ -77,12 +81,29 @@ public class GameManager : MonoBehaviour
     {
         OnLoginDoneAction += OnLoginDone;
         DatabaseHandler.FirebaseInitEvent += OnFirebaseInitEvent;
+        DeleteAllFiles();   
+       
+    }
 
-        DirectoryInfo dir = new DirectoryInfo(VIDEO_FILE_DIR);
+    private void DeleteAllFiles()
+    {
+        DirectoryInfo dirSimple = new DirectoryInfo(VIDEO_FILE_DIR_SIMPLE);
+        DirectoryInfo dirSpecial = new DirectoryInfo(VIDEO_FILE_DIR_SPECIAL);
 
-        foreach (FileInfo file in dir.GetFiles())
+        if (dirSimple.Exists)
         {
-            file.Delete();
+
+            foreach (FileInfo file in dirSimple.GetFiles())
+            {
+                file.Delete();
+            }
+        }
+        if (dirSpecial.Exists)
+        {
+            foreach (FileInfo file in dirSpecial.GetFiles())
+            {
+                file.Delete();
+            }
         }
         AssetDatabase.Refresh();
     }
@@ -250,9 +271,12 @@ public class GameManager : MonoBehaviour
         {
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
             {
+                Sprite sp = SaveImageFile(tex);
+                SimpleQuestionSprites.Add(sp);
                 _simpleIndex++;
                 if (_simpleIndex < randomSimpleQstnList.Count)
                 {
+                    AssetDatabase.Refresh();
                     DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
                 }
                 else
@@ -265,12 +289,13 @@ public class GameManager : MonoBehaviour
         {
             count += 1;
             Debug.LogError("Total Video File " + count);
-            string filePath = string.Concat(VIDEO_FILE_DIR, data.id, extention);
+            string filePath = string.Concat(VIDEO_FILE_DIR_SIMPLE, data.id, extention);
             GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
             {
                 _simpleIndex++;
                 if (_simpleIndex < randomSimpleQstnList.Count)
                 {
+                    AssetDatabase.Refresh();
                     DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
                 }
                 else
@@ -309,6 +334,11 @@ public class GameManager : MonoBehaviour
         if (index < 0 && index >= randomSimpleQstnList.Count)
             return null;
         return randomSpecialQstnList[index];
+    }
+
+    private Sprite SaveImageFile(Texture2D texture)
+    {
+        return Sprite.Create(texture, new Rect(0,0,texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
 
     private void OnDisable()
