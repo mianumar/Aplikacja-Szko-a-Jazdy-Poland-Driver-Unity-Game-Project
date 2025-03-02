@@ -31,6 +31,11 @@ namespace GameUtils
             }
         }
 
+        public static void StopCoundownTimer(MonoBehaviour currentBehavior)
+        {
+            currentBehavior.StopCoroutine(countdowntimerRoutine);
+        }
+
         /// <summary>
         /// Start game timer 
         /// </summary>

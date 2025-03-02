@@ -42,6 +42,7 @@ public class QAPanelView : MonoBehaviour
 
 
     public VideoPlayer videoPlayer;
+    public Slider videoDurationBar;
 
 
 
@@ -55,16 +56,16 @@ public class QAPanelView : MonoBehaviour
     public Color timeEndColor;
     public Color timeStartColor;
 
-    private SimpleQuestionDataModel _dataModel = null;
-    private SpecializedQuestionModel _dataModelSpecial = null;
+    public SimpleQuestionDataModel _dataModel = null;
+    public SpecializedQuestionModel _dataModelSpecial = null;
     public void RenderView()
     {
         ResetData();
-       
+
         AddListeners();
 
         _dataModel = GameManager.Instance.GetSimpleQuestionFromList(currentQesIndex);
-       
+
         gameObject.SetActive(true);
         RenderQuestionPanelView(_dataModel);
 
@@ -75,7 +76,7 @@ public class QAPanelView : MonoBehaviour
     {
         GameUtils.GameTimer.GameClockTimer(this, 0f, (currentTime) =>
         {
-           // Debug.Log("Time Remain " + currentTime);
+            // Debug.Log("Time Remain " + currentTime);
             int sec = (int)currentTime % 60;
             int mint = (int)currentTime / 60;
             textTimer.text = mint + ":" + sec.ToString("00");
@@ -116,14 +117,14 @@ public class QAPanelView : MonoBehaviour
             GameUtils.GameTimer.CoutDownTimer(this, BASIC_READ_TIME, (timeRemain) =>
             {
                 Debug.Log("Time Remain " + timeRemain);
-                textReamingTimeToRead.text = timeRemain.ToString();
-                remainTimetoReadQuestionSlider.fillAmount = timeRemain / (BASIC_READ_TIME*1.0f);
-                remainTimetoReadQuestionSlider.color = timeRemain < (BASIC_READ_TIME *0.25f) ? timeEndColor : timeStartColor;
-                if(timeRemain <= 0)
+                textReamingTimeToRead.text = timeRemain + "s";
+                remainTimetoReadQuestionSlider.fillAmount = timeRemain / (BASIC_READ_TIME * 1.0f);
+                remainTimetoReadQuestionSlider.color = timeRemain < (BASIC_READ_TIME * 0.25f) ? timeEndColor : timeStartColor;
+                if (timeRemain <= 0)
                 {
                     Debug.LogError("Reading Timer End :: START ANSWER ");
                     OnStartButtonClicked();
-                    
+
                 }
             });
 
@@ -132,24 +133,46 @@ public class QAPanelView : MonoBehaviour
 
     private void DisplayVideoFileForQuestion(string fileName)
     {
-        videoPlayerPanel.gameObject.SetActive(true);
-        var videoClip = Resources.Load<VideoClip>("/Videos/SIMPLE/" + fileName+".mp4");
-        if(videoClip != null)
-        {
-           videoPlayer.clip = videoClip;    
-        }
+        // videoPlayerPanel.gameObject.SetActive(true);
+       // var videoClip = Resources.Load<VideoClip>("/Videos/SIMPLE/" + fileName + ".mp4");
+        videoPlayer.url = _dataModel.media_link;
+        videoPlayer.loopPointReached += OnVideoEnd;
+
         if (!videoPlayer.isPrepared)
         {
             videoPlayer.prepareCompleted += OnVideoPrepared; // Subscribe to the event
             videoPlayer.Prepare(); // Prepare the video asynchronously
+
             Debug.Log("Preparing video to get length...");
         }
         else
         {
             videoPlayerPanel.SetActive(true);
             Debug.Log("Clip length :: " + videoPlayer.clip.length);
+           // UpdateVideoplayBar(videoPlayer.clip.length);
             videoPlayer.Play();
         }
+    }
+
+    private void UpdateVideoplayBar(double length)
+    {
+        float len = (float)length;
+        while (length >= 0)
+        {
+            len -= Time.deltaTime;
+            videoDurationBar.value = len;
+        }
+    }
+
+
+    private void OnVideoEnd(VideoPlayer source)
+    {
+        videoPlayer.loopPointReached -= OnVideoEnd;
+
+        Debug.Log("Video Ended");
+
+        RenderAnsPanelView();
+
     }
 
     private void OnVideoPrepared(VideoPlayer source)
@@ -158,6 +181,8 @@ public class QAPanelView : MonoBehaviour
         Debug.Log("Clip length :: " + source.length);
         videoPlayerPanel.SetActive(true);
         videoPlayer.Play();
+       // UpdateVideoplayBar(source.length);
+
     }
 
     private void RenderSpecialQuestionPanelView(SpecializedQuestionModel specializedQuestion)
@@ -168,17 +193,20 @@ public class QAPanelView : MonoBehaviour
 
     private void RenderAnsPanelView()
     {
+        buttonNo.interactable = true;
+        buttonYes.interactable = true;
+        videoPlayerPanel.SetActive(false);
         timeToAnsPanel.SetActive(true);
         GameUtils.GameTimer.CoutDownTimer(this, BASIC_ANSWER_TIME, (timeRemain) =>
         {
             Debug.Log("Time Remain " + timeRemain);
-            textTimeReamingAns.text = timeRemain.ToString();
+            textTimeReamingAns.text = timeRemain + "s";
             remainTimeToAnsSlider.fillAmount = timeRemain / (BASIC_ANSWER_TIME * 1.0f);
             remainTimeToAnsSlider.color = timeRemain < (BASIC_ANSWER_TIME * 0.25f) ? timeEndColor : timeStartColor;
             if (timeRemain <= 0)
             {
                 Debug.LogError("Reading Timer End :: NEXT QUESTION");
-               OnNextButtonClicked();
+                OnNextButtonClicked();
             }
         });
     }
@@ -191,13 +219,17 @@ public class QAPanelView : MonoBehaviour
         buttonStart.gameObject.SetActive(true);
         videoPlayerPanel.SetActive(false);
         timeToReadQuestionPanel.SetActive(true);
+        timeToAnsPanel.SetActive(false);
+        buttonNo.interactable = false;
+        buttonYes.interactable = false;
         if (currentQesIndex < 20)
         {
             _dataModel = GameManager.Instance.GetSimpleQuestionFromList(currentQesIndex);
             RenderQuestionPanelView(_dataModel);
-        }else if(currentQesIndex < 32)
+        }
+        else if (currentQesIndex < 32)
         {
-            _dataModelSpecial = GameManager.Instance.GetSpecialQuestionFromList(currentQesIndex-20);
+            _dataModelSpecial = GameManager.Instance.GetSpecialQuestionFromList(currentQesIndex - 20);
             RenderSpecialQuestionPanelView(_dataModelSpecial);
         }
 
@@ -210,7 +242,7 @@ public class QAPanelView : MonoBehaviour
     {
         buttonStart.gameObject.SetActive(false);
         timeToReadQuestionPanel.SetActive(false);
-
+        GameUtils.GameTimer.StopCoundownTimer(this);
         if (GameConstants.GetFileExtensionFromUrl(_dataModel.media_link).Equals(".mp4"))
         {
             DisplayVideoFileForQuestion(_dataModel.id.ToString());
@@ -218,22 +250,22 @@ public class QAPanelView : MonoBehaviour
         else
         {
             Debug.LogError("Display Images for this Question");
-            questionImage.sprite = questionImageTimeToAns.sprite = GameManager.Instance.GetQuestionSprite(_dataModel.id);
+            questionImageTimeToAns.sprite = GameManager.Instance.GetQuestionSprite(_dataModel.id);
             RenderAnsPanelView();
 
         }
 
-        
+
     }
 
     private void OnNoButtonClicked()
     {
-
+        OnNextButtonClicked();
     }
 
     private void OnYesButtonClicked()
     {
-
+        OnNextButtonClicked();
     }
 
     private void OnCloseClicked()

@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
                 file.Delete();
             }
         }
-        AssetDatabase.Refresh();
+       // AssetDatabase.Refresh();
     }
 
     public void SetupVideoPlayer()
@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
                 _simpleIndex++;
                 if (_simpleIndex < randomSimpleQstnList.Count)
                 {
-                    AssetDatabase.Refresh();
+                    //AssetDatabase.Refresh();
                     DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
                 }
                 else
@@ -288,28 +288,28 @@ public class GameManager : MonoBehaviour
         else if (extention.Equals(".mp4"))
         {
             count += 1;
-            Debug.LogError("Total Video File " + count);
-            string filePath = string.Concat(VIDEO_FILE_DIR_SIMPLE, data.id, extention);
-            GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
-            {
-                _simpleIndex++;
-                if (_simpleIndex < randomSimpleQstnList.Count)
-                {
-                    AssetDatabase.Refresh();
-                    DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
-                }
-                else
-                {
-                    Debug.LogError("All Media Downloaded :: Video");
+            //Debug.LogError("Total Video File " + count);
+            //string filePath = string.Concat(VIDEO_FILE_DIR_SIMPLE, data.id, extention);
+            //GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
+            //{
+            //    _simpleIndex++;
+            //    if (_simpleIndex < randomSimpleQstnList.Count)
+            //    {
+            //        AssetDatabase.Refresh();
+            //        DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
+            //    }
+            //    else
+            //    {
+            //        Debug.LogError("All Media Downloaded :: Video");
 
 
-                }
-            });
+            //    }
+            //});
         }
 
         if (_simpleIndex == randomSimpleQstnList.Count)
         {
-            AssetDatabase.Refresh();
+           // AssetDatabase.Refresh();
         }
 
     }

@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &177986062 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7848487122256956738, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-  m_PrefabInstance: {fileID: 832087998004649994}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &183845275 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 780728341872962474, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
@@ -513,7 +508,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 0
+  m_DataSource: 1
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -2059,10 +2054,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuestionAnswerPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 271281285768299212, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 780728341872962474, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2147,14 +2138,6 @@ PrefabInstance:
       propertyPath: videoPlayer
       value: 
       objectReference: {fileID: 981817120}
-    - target: {fileID: 2683454127619041045, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: videoPlayerPanel
-      value: 
-      objectReference: {fileID: 177986062}
-    - target: {fileID: 2971566665294604443, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

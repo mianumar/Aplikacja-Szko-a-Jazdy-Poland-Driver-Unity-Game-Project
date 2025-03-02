@@ -107,7 +107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &780728341872962474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -206,9 +206,18 @@ MonoBehaviour:
   remainTimeToAnsSlider: {fileID: 1608820160092845702}
   textTimeReamingAns: {fileID: 4544487167598522457}
   questionImageTimeToAns: {fileID: 8872664210711836754}
+  videoPlayerPanel: {fileID: 7848487122256956738}
   videoPlayer: {fileID: 0}
+  videoDurationBar: {fileID: 1066406185809341623}
   timeEndColor: {r: 0.9647059, g: 0.49411765, b: 0.18039216, a: 1}
   timeStartColor: {r: 0.16862746, g: 0.68235296, b: 0.93333334, a: 1}
+  _dataModel:
+    id: 0
+    question: 
+    answer: 
+    media: 
+    media_link: 
+    categories: 
 --- !u!1 &300504089183108120
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +251,7 @@ RectTransform:
   m_Father: {fileID: 7739565995232555095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -668,7 +677,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.13207549, g: 0.12235672, b: 0.12235672, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2133,7 +2142,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 77.6
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3230,8 +3239,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4010264793429174187}
   - {fileID: 3451228198564064070}
+  - {fileID: 4010264793429174187}
   m_Father: {fileID: 6576273446566869097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.011694037}
@@ -3254,7 +3263,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6864885366160248553}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
