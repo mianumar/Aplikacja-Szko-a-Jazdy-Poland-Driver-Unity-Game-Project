@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour
     private List<int> randomSimpleIndexces = new List<int>();
     private List<int> randomSpecialIndexces = new List<int>();
 
-    public List<Sprite> SimpleQuestionSprites = new List<Sprite>();
-    public List<Sprite> SpecialQuestionSprites = new List<Sprite>();
+    public Dictionary<int, Sprite> SimpleQuestionSprites = new Dictionary<int, Sprite>();
+    public Dictionary<int, Sprite> SpecialQuestionSprites = new Dictionary<int, Sprite>();
 
     private int currectSimpleIndex = 0;
     private int currectSpecialIndex = 0;
@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour
     {
         OnLoginDoneAction += OnLoginDone;
         DatabaseHandler.FirebaseInitEvent += OnFirebaseInitEvent;
-        DeleteAllFiles();   
-       
+        DeleteAllFiles();
+        InitializedGame();
     }
 
     private void DeleteAllFiles()
@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviour
         {
 
         }
-        InitializedGame();
+       // InitializedGame();
     }
 
 
@@ -272,7 +272,7 @@ public class GameManager : MonoBehaviour
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
             {
                 Sprite sp = SaveImageFile(tex);
-                SimpleQuestionSprites.Add(sp);
+                SimpleQuestionSprites.Add(data.id,sp);
                 _simpleIndex++;
                 if (_simpleIndex < randomSimpleQstnList.Count)
                 {
@@ -285,7 +285,7 @@ public class GameManager : MonoBehaviour
                 }
             });
         }
-        else if (extention.Equals(".wmv"))
+        else if (extention.Equals(".mp4"))
         {
             count += 1;
             Debug.LogError("Total Video File " + count);
@@ -334,6 +334,13 @@ public class GameManager : MonoBehaviour
         if (index < 0 && index >= randomSimpleQstnList.Count)
             return null;
         return randomSpecialQstnList[index];
+    }
+
+    public Sprite GetQuestionSprite(int id)
+    {
+        if(SimpleQuestionSprites.ContainsKey(id))
+            return SimpleQuestionSprites[id];
+        return null;
     }
 
     private Sprite SaveImageFile(Texture2D texture)

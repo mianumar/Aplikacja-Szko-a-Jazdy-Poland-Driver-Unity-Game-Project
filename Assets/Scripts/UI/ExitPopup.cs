@@ -18,13 +18,13 @@ public class ExitPopup : MonoBehaviour
 
     private void OnClickYes()
     {
+        UIHandler.Instance.qaPanelView.Disable();
         UIHandler.Instance.activitySelectionView.RenderView();
         gameObject.SetActive(false);
     }
 
     public void OnClickNo()
     {
-        UIHandler.Instance.qaPanelView.Disable();
         gameObject.SetActive(false);
     }
 

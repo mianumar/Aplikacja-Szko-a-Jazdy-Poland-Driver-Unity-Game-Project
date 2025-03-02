@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &177986062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7848487122256956738, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
+  m_PrefabInstance: {fileID: 832087998004649994}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &183845275 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 780728341872962474, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
@@ -489,7 +494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!328 &981817120
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -508,7 +513,7 @@ VideoPlayer:
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
   m_AspectRatio: 2
-  m_DataSource: 1
+  m_DataSource: 0
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
@@ -516,7 +521,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4
+  m_Url: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -767,8 +772,6 @@ MonoBehaviour:
   qaPanelView: {fileID: 832087998004649995}
   summaryScreenView: {fileID: 3763548298623008428}
   exitPopup: {fileID: 289722057}
-  testDownloader: {fileID: 1354377855}
-  testText: {fileID: 1892965828}
 --- !u!4 &1251304455
 Transform:
   m_ObjectHideFlags: 0
@@ -2140,6 +2143,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2683454127619041045, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
+      propertyPath: videoPlayer
+      value: 
+      objectReference: {fileID: 981817120}
+    - target: {fileID: 2683454127619041045, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
+      propertyPath: videoPlayerPanel
+      value: 
+      objectReference: {fileID: 177986062}
     - target: {fileID: 2971566665294604443, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
