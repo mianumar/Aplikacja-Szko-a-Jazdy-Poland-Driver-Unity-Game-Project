@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
 
     private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4";
 
-    private string VIDEO_FILE_DIR_SIMPLE = Application.dataPath + "/Resources/Videos/SIMPLE/";
-    private string VIDEO_FILE_DIR_SPECIAL = Application.dataPath + "/Resources/Videos/SPECIAL/";
+    public string VIDEO_FILE_DIR_SIMPLE;
+    public string VIDEO_FILE_DIR_SPECIAL;
 
     private string filePath = string.Empty;
 
@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
 
     private int currectSimpleIndex = 0;
     private int currectSpecialIndex = 0;
+
+    public bool IsAllMediaDownloaded = false;
     void Awake()
     {
         if (Instance == null)
@@ -79,10 +81,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        VIDEO_FILE_DIR_SIMPLE = Application.persistentDataPath + "/Videos/SIMPLE/";
+        VIDEO_FILE_DIR_SPECIAL = Application.persistentDataPath + "/Videos/SPECIAL/";
         OnLoginDoneAction += OnLoginDone;
         DatabaseHandler.FirebaseInitEvent += OnFirebaseInitEvent;
         DeleteAllFiles();
         InitializedGame();
+        //SetupVideoPlayer("test");
     }
 
     private void DeleteAllFiles()
@@ -105,33 +110,29 @@ public class GameManager : MonoBehaviour
                 file.Delete();
             }
         }
-       // AssetDatabase.Refresh();
+        // AssetDatabase.Refresh();
     }
 
-    public void SetupVideoPlayer()
+    public void SetupVideoPlayer(string filename)
     {
-        filePath = Application.dataPath + "/Resources/Videos/testvideo.mp4";
-        Debug.Log("File Path : " + filePath);
-        GameUtils.VideoDownloader.RequestDownload(this, url, filePath, (flag) =>
+        // filePath = Application.dataPath + "/Resources/Videos/testvideo.mp4";
+        var videofile = Resources.Load("Videos/" + filename);
+        VideoClip videoClip = Resources.Load("Videos/test.mp4") as VideoClip;
+        videoPlayer.url = url;
+        // Debug.Log("Clip length :: "+videoPlayer.clip.length);
+        if (!videoPlayer.isPrepared)
         {
-            if (flag)
-            {
-                var videoClip = Resources.Load<VideoClip>("/Videos/testvideo.mp4");
-                videoPlayer.url = url;
-                // Debug.Log("Clip length :: "+videoPlayer.clip.length);
-                if (!videoPlayer.isPrepared)
-                {
-                    videoPlayer.prepareCompleted += OnVideoPrepared; // Subscribe to the event
-                    videoPlayer.Prepare(); // Prepare the video asynchronously
-                    Debug.Log("Preparing video to get length...");
-                }
-                else
-                {
-                    Debug.Log("Clip length :: " + videoPlayer.clip.length);
-                    videoPlayer.Play();
-                }
-            }
-        });
+            videoPlayer.prepareCompleted += OnVideoPrepared; // Subscribe to the event
+            videoPlayer.Prepare(); // Prepare the video asynchronously
+            Debug.Log("Preparing video to get length...");
+        }
+        else
+        {
+            Debug.Log("Clip length :: " + videoPlayer.clip.length);
+            videoPlayer.Play();
+        }
+
+
     }
 
     private void OnVideoPrepared(VideoPlayer source)
@@ -174,7 +175,7 @@ public class GameManager : MonoBehaviour
         {
 
         }
-       // InitializedGame();
+        // InitializedGame();
     }
 
 
@@ -183,6 +184,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public async void InitializedGame()
     {
+        IsAllMediaDownloaded = false;
         randomSimpleQstnList.Clear();
         randomSpecialQstnList.Clear();
         await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
@@ -272,7 +274,7 @@ public class GameManager : MonoBehaviour
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
             {
                 Sprite sp = SaveImageFile(tex);
-                SimpleQuestionSprites.Add(data.id,sp);
+                SimpleQuestionSprites.Add(data.id, sp);
                 _simpleIndex++;
                 if (_simpleIndex < randomSimpleQstnList.Count)
                 {
@@ -288,28 +290,29 @@ public class GameManager : MonoBehaviour
         else if (extention.Equals(".mp4"))
         {
             count += 1;
-            //Debug.LogError("Total Video File " + count);
-            //string filePath = string.Concat(VIDEO_FILE_DIR_SIMPLE, data.id, extention);
-            //GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
-            //{
-            //    _simpleIndex++;
-            //    if (_simpleIndex < randomSimpleQstnList.Count)
-            //    {
-            //        AssetDatabase.Refresh();
-            //        DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
-            //    }
-            //    else
-            //    {
-            //        Debug.LogError("All Media Downloaded :: Video");
+            Debug.LogError("Total Video File " + count);
+            string filePath = string.Concat(VIDEO_FILE_DIR_SIMPLE, data.id, extention);
+            GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
+            {
+                _simpleIndex++;
+                if (_simpleIndex < randomSimpleQstnList.Count)
+                {
+                    // AssetDatabase.Refresh();
+                    DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
+                }
+                else
+                {
+                    Debug.LogError("All Media Downloaded :: Video");
 
 
-            //    }
-            //});
+                }
+            });
         }
 
         if (_simpleIndex == randomSimpleQstnList.Count)
         {
-           // AssetDatabase.Refresh();
+            Debug.Log("ALL MEDIA DOWNLOADED SUCCESSFULLY..");
+            IsAllMediaDownloaded = true;
         }
 
     }
@@ -338,14 +341,14 @@ public class GameManager : MonoBehaviour
 
     public Sprite GetQuestionSprite(int id)
     {
-        if(SimpleQuestionSprites.ContainsKey(id))
+        if (SimpleQuestionSprites.ContainsKey(id))
             return SimpleQuestionSprites[id];
         return null;
     }
 
     private Sprite SaveImageFile(Texture2D texture)
     {
-        return Sprite.Create(texture, new Rect(0,0,texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
 
     private void OnDisable()
