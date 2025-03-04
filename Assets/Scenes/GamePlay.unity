@@ -2749,6 +2749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AfterExamAnswersSummary
       objectReference: {fileID: 0}
+    - target: {fileID: 2869389982203887638, guid: dbdb413701793a640a9dd713942febab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -1849,7 +1849,7 @@ GameObject:
   - component: {fileID: 2576982517147227267}
   - component: {fileID: 1252294676130511381}
   - component: {fileID: 4979326062060473671}
-  - component: {fileID: 7230347051674749784}
+  - component: {fileID: 3770817179611265314}
   m_Layer: 5
   m_Name: AfterExamAnswersSummary 1
   m_TagString: Untagged
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7230347051674749784
+--- !u!114 &3770817179611265314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1927,7 +1927,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2869389982203887638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78556441640bec4aa34307c0852fb80, type: 3}
+  m_Script: {fileID: 11500000, guid: d98dfb1c28e86134eb30cda0bf8fa1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonClose: {fileID: 7757027681888652889}
@@ -1949,8 +1949,8 @@ MonoBehaviour:
   attempTotelText: {fileID: 0}
   resultObtainText: {fileID: 0}
   viewAnswerButton: {fileID: 0}
-  imageLoss: {fileID: 21300000, guid: 095010b27fd49f64f9daecec4f0cb8e9, type: 3}
-  imageWon: {fileID: 4601277649227766433, guid: b76ec43367b00404199687b69ce40bc0, type: 3}
+  imageLoss: {fileID: 0}
+  imageWon: {fileID: 0}
 --- !u!1 &2915231049248126347
 GameObject:
   m_ObjectHideFlags: 0
