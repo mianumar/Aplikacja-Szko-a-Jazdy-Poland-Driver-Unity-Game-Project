@@ -222,8 +222,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Baza Pyta\u0144"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
+  m_sharedMaterial: {fileID: 6857529492854027109, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -471,8 +471,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Egzamin
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
+  m_sharedMaterial: {fileID: 6857529492854027109, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -827,6 +827,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424226a55df8b31439d8ae4e3a13357f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressAmount: 0.05
+  shrinkFactor: 0.9
 --- !u!1 &6748142432804796995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1290,8 +1292,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wybierz
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+  m_sharedMaterial: {fileID: 4357626893823774847, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1522,6 +1524,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4357626893823774847, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8083371122654121273, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_Name
       value: BlueButtonPrefab
@@ -1633,6 +1647,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1531054717098720280, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4357626893823774847, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8083371122654121273, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
