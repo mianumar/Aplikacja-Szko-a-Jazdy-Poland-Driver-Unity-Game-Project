@@ -316,8 +316,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Masz czas, \u017Ceby przeczyta\u0107 pytanie"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
+  m_sharedMaterial: {fileID: 6857529492854027109, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -452,8 +452,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 02:51
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
+  m_sharedMaterial: {fileID: 6857529492854027109, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -588,8 +588,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 18s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
+  m_sharedMaterial: {fileID: 6857529492854027109, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -844,8 +844,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CZAS TESTU
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+  m_sharedMaterial: {fileID: 4357626893823774847, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1283,8 +1283,8 @@ MonoBehaviour:
     si\u0119 poza obszarem zabudowanym, a jego d\u0142ugo\u015B\u0107 wynosi 600
     m?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
+  m_sharedMaterial: {fileID: 6857529492854027109, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1839,6 +1839,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3710ecf0a392546469e6d716845d25ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonClose: {fileID: 0}
+  buttonYes: {fileID: 0}
+  buttonNo: {fileID: 0}
+  buttonStart: {fileID: 0}
+  buttonNext: {fileID: 0}
+  textTimer: {fileID: 0}
+  textCurrentQuestion: {fileID: 0}
+  textDescription: {fileID: 0}
+  textReamingTimeToRead: {fileID: 0}
+  remainTimetoReadQuestionSlider: {fileID: 0}
+  sliderRemainingQuestionsToAns: {fileID: 0}
+  timeToReadQuestionPanel: {fileID: 0}
+  timeToReadTextObject: {fileID: 0}
+  noImagePanel: {fileID: 0}
+  timeToAnsPanel: {fileID: 0}
+  timeToAnsTextObject: {fileID: 0}
+  remainTimeToAnsSlider: {fileID: 0}
+  textTimeReamingAns: {fileID: 0}
+  textTimeToAns: {fileID: 0}
+  bgImageTimeToAns: {fileID: 0}
+  videoPlayerPanel: {fileID: 0}
+  videoPlayer: {fileID: 0}
+  videoDurationBar: {fileID: 0}
+  timeEndColor: {r: 0, g: 0, b: 0, a: 0}
+  timeStartColor: {r: 0, g: 0, b: 0, a: 0}
+  defaultTextColor: {r: 0, g: 0, b: 0, a: 0}
+  noImageTextColor: {r: 0, g: 0, b: 0, a: 0}
+  _dataModel:
+    id: 0
+    question: 
+    answer: 
+    media: 
+    media_link: 
+    categories: 
+  IsMediaDone: 0
 --- !u!1 &7801098247321902309
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,6 +2131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7407030440286647735}
     m_Modifications:
+    - target: {fileID: 297087738037023128, guid: 97e8559d9e47d90449d507107a2bffc5, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7192272921030475887, guid: 97e8559d9e47d90449d507107a2bffc5, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -2198,6 +2237,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7407030440286647735}
     m_Modifications:
+    - target: {fileID: 910003457933069020, guid: 0df478406e4be914fb274332c0b576ed, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+    - target: {fileID: 910003457933069020, guid: 0df478406e4be914fb274332c0b576ed, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4357626893823774847, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+    - target: {fileID: 910003457933069020, guid: 0df478406e4be914fb274332c0b576ed, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4442590236345437037, guid: 0df478406e4be914fb274332c0b576ed, type: 3}
       propertyPath: m_Name
       value: ButtonStartSmall

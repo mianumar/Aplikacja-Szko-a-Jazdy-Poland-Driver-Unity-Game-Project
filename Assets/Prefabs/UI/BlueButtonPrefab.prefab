@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Rozpocznij
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
-  m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
+  m_sharedMaterial: {fileID: 4357626893823774847, guid: d1bea2aeeeb55c94eb2c894fef830bec, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -273,3 +273,4 @@ MonoBehaviour:
   normalSprite: {fileID: 21300000, guid: 559007c578f81e44d932c9d538f1b102, type: 3}
   pressedSprite: {fileID: 21300000, guid: c41c6d9f03c1a4b41b39741b3d27d843, type: 3}
   pressAmount: 0.05
+  shrinkFactor: 0.9
