@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public int MinPointsToPass;
 
     private UserDataModel userDataModel;
-    private UserSummaryData _userSummaryData = new UserSummaryData();
+    private SummaryData _userSummaryData = new SummaryData();
 
 
     private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4";
@@ -212,8 +212,6 @@ public class GameManager : MonoBehaviour
                 {
                     GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
                 }
-
-
             }
         });
 
@@ -412,18 +410,23 @@ public class GameManager : MonoBehaviour
     {
         if(resultType == ResultType.CORRECT)
         {
-            _userSummaryData.totalPoints += points;
-            _userSummaryData.correctAns += 1;
+            _userSummaryData.PointsAchieved += points;
+            _userSummaryData.TotalCorrectAns += 1;
         }else if(resultType == ResultType.WRONG)
         {
-            _userSummaryData.wrongAns += 1;
+            _userSummaryData.TotalWrongAns += 1;
         }else if(resultType == ResultType.SKIPPED)
         {
-            _userSummaryData.qsntSkipped += 1;
+            _userSummaryData.TotalSkipedAns += 1;
         }
     }
 
-    public UserSummaryData GetUserSummaryData()
+    public void UpdateGameTimerInSummaryData(float totalGameTime)
+    {
+        _userSummaryData.TotalDurations = totalGameTime;
+    }
+
+    public SummaryData GetUserSummaryData()
     {
         return _userSummaryData;    
     }

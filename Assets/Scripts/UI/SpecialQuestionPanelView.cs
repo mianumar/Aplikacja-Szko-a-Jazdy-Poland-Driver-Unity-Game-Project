@@ -75,6 +75,17 @@ public class SpecialQuestionPanelView : MonoBehaviour
 
     public void DisableView()
     {
-        gameObject.SetActive(false);
+        if (gameObject.activeInHierarchy)
+        {
+            GameUtils.GameTimer.StopCoundownTimer(this);
+        }
+
+       gameObject.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        GameUtils.GameTimer.StopCoundownTimer(this);
+    }
+
 }
