@@ -1851,7 +1851,7 @@ GameObject:
   - component: {fileID: 4979326062060473671}
   - component: {fileID: 3770817179611265314}
   m_Layer: 5
-  m_Name: AfterExamAnswersSummary 1
+  m_Name: AfterExamAnswersSummary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1931,26 +1931,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonClose: {fileID: 7757027681888652889}
-  repeatButton: {fileID: 0}
-  relustText: {fileID: 0}
-  timerText: {fileID: 0}
-  middleBarImage: {fileID: 0}
-  middleBarIcon: {fileID: 0}
-  middleBartext: {fileID: 0}
-  leftBarImage: {fileID: 0}
-  leftBarIcon: {fileID: 0}
-  leftBartext: {fileID: 0}
-  rigthBarImage: {fileID: 0}
-  rightBarIcon: {fileID: 0}
-  rightBartext: {fileID: 0}
-  ignoreObtainText: {fileID: 0}
-  ignoreTotelText: {fileID: 0}
-  attempObtainText: {fileID: 0}
-  attempTotelText: {fileID: 0}
-  resultObtainText: {fileID: 0}
-  viewAnswerButton: {fileID: 0}
-  imageLoss: {fileID: 0}
-  imageWon: {fileID: 0}
 --- !u!1 &2915231049248126347
 GameObject:
   m_ObjectHideFlags: 0
@@ -3805,7 +3785,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 489.49573, y: -50}
+  m_AnchoredPosition: {x: 642, y: -50}
   m_SizeDelta: {x: 900, y: 417}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6149322007268426030
