@@ -328,16 +328,16 @@ public class DataCountModel
 [System.Serializable]
 public class SpecializedQuestionModel
 {
-    public int id { get; set; }
-    public int question_number { get; set; }
-    public string question { get; set; }
-    public string option_a { get; set; }
-    public string option_b { get; set; }
-    public string option_c { get; set; }
-    public string answer { get; set; }
-    public string media { get; set; }
-    public string media_link { get; set; }
-    public string categories { get; set; }
+    public int id;
+    public int question_number;
+    public string question;
+    public string option_a;
+    public string option_b;
+    public string option_c;
+    public string answer;
+    public string media;
+    public string media_link;
+    public string categories;
 }
 /// <summary>
 /// 

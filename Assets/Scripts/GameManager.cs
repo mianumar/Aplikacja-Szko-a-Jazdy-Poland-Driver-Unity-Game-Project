@@ -44,13 +44,13 @@ public class GameManager : MonoBehaviour
     public int MinPointsToPass;
 
     private UserDataModel userDataModel;
+    private UserSummaryData _userSummaryData = new UserSummaryData();
+
 
     private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4";
 
     public string VIDEO_FILE_DIR_SIMPLE;
     public string VIDEO_FILE_DIR_SPECIAL;
-
-    private string filePath = string.Empty;
 
     public const int MAX_BASIC_QUESTION_COUNT = 20;
     public const int MAX_SPECIAL_QUESTION_COUNT = 12;
@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     Debug.Log("All Special Questions Downloaded successfully");
-
+                    DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
                 }
             }
         });
@@ -316,7 +316,57 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    int _specialIndex = 0;
+    private void DownloadMediaForSpecialQuestions(SpecializedQuestionModel data)
+    {
+        Debug.Log("DownloadMediaForSpecialQuestions");
+        string extention = GameConstants.GetFileExtensionFromUrl(data.media_link);
+        if (string.IsNullOrEmpty(extention))
+            return;
+        if (extention.Equals(".jpg"))
+        {
+            GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
+            {
+                Sprite sp = SaveImageFile(tex);
+                SpecialQuestionSprites.Add(data.id, sp);
+                _specialIndex++;
+                if (_specialIndex < randomSpecialQstnList.Count)
+                {
+                    //AssetDatabase.Refresh();
+                    DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
+                }
+                else
+                {
+                    Debug.LogError("All Media Downloaded :: Image");
+                }
+            });
+        }
+        else if (extention.Equals(".mp4"))
+        {
+            string filePath = string.Concat(VIDEO_FILE_DIR_SPECIAL, data.id, extention);
+            GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
+            {
+                _specialIndex++;
+                if (_specialIndex < randomSpecialQstnList.Count)
+                {
+                    // AssetDatabase.Refresh();
+                    DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
+                }
+                else
+                {
+                    Debug.LogError("All Media Downloaded :: Video");
 
+
+                }
+            });
+        }
+
+        if (_simpleIndex == randomSpecialQstnList.Count)
+        {
+            Debug.Log("ALL MEDIA DOWNLOADED SUCCESSFULLY..");
+           
+        }
+    }
 
     private List<int> GetRandomIndex(int min, int max, int count)
     {
@@ -346,10 +396,39 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
+    public Sprite GetSpecializedQuestioSprite(int id)
+    {
+        if (SpecialQuestionSprites.ContainsKey(id))
+            return SpecialQuestionSprites[id];
+        return null;
+    }
+
     private Sprite SaveImageFile(Texture2D texture)
     {
         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
+
+    public void UpdateUserSummaryData(int points ,ResultType resultType)
+    {
+        if(resultType == ResultType.CORRECT)
+        {
+            _userSummaryData.totalPoints += points;
+            _userSummaryData.correctAns += 1;
+        }else if(resultType == ResultType.WRONG)
+        {
+            _userSummaryData.wrongAns += 1;
+        }else if(resultType == ResultType.SKIPPED)
+        {
+            _userSummaryData.qsntSkipped += 1;
+        }
+    }
+
+    public UserSummaryData GetUserSummaryData()
+    {
+        return _userSummaryData;    
+    }
+
+    
 
     private void OnDisable()
     {
@@ -357,4 +436,20 @@ public class GameManager : MonoBehaviour
         DatabaseHandler.FirebaseInitEvent -= OnFirebaseInitEvent;
     }
 
+}
+
+[System.Serializable]
+public class UserSummaryData
+{
+    public int qsntSkipped;
+    public int wrongAns;
+    public int correctAns;
+    public int totalPoints;
+}
+
+public enum ResultType
+{
+    CORRECT = 1,
+    WRONG = 2,
+    SKIPPED = 3
 }

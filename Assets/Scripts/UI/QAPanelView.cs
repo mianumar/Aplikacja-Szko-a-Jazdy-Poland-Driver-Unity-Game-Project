@@ -8,9 +8,11 @@ using System;
 using UnityEngine.Video;
 using Unity.VisualScripting;
 using System.Collections;
+using UnityEngine.Rendering;
 
 public class QAPanelView : MonoBehaviour
 {
+    [SerializeField] private SpecialQuestionPanelView specialQuestionPanelView;
     [SerializeField] private Button buttonClose;
     [SerializeField] private Button buttonYes;
     [SerializeField] private Button buttonNo;
@@ -47,13 +49,14 @@ public class QAPanelView : MonoBehaviour
     public Slider videoDurationBar;
 
 
+    [SerializeField] private GameObject optionSimpelObject;
+    [SerializeField] private GameObject optionSpecialObject;
 
     private int currentQesIndex = 0;
 
 
     private int BASIC_READ_TIME = 15;
     private int BASIC_ANSWER_TIME = 10;
-    private int SPECIAL_ANSWER_TIME = 50;
 
     [Header("Timer COLOR")]
 
@@ -67,8 +70,13 @@ public class QAPanelView : MonoBehaviour
     public SimpleQuestionDataModel _dataModel = null;
     public SpecializedQuestionModel _dataModelSpecial = null;
     public bool IsMediaDone = false;
+
+    public static Action<string> ResultAction;
+    public bool Skipped = true;
+
     public void RenderView()
     {
+        ResultAction += OnResultSelected;
         ResetData();
 
         AddListeners();
@@ -79,6 +87,11 @@ public class QAPanelView : MonoBehaviour
         RenderQuestionPanelView(_dataModel);
         StartGameTimer();
 
+    }
+
+    private void OnResultSelected(string selectedResult)
+    {
+       
     }
 
     IEnumerator CheckForMediaDownloaded()
@@ -133,6 +146,15 @@ public class QAPanelView : MonoBehaviour
     {
         if (simpleQuestionData != null)
         {
+            timeToReadQuestionPanel.SetActive(true);
+            buttonStart.gameObject.SetActive(true);
+            videoPlayerPanel.SetActive(false);
+            timeToAnsPanel.SetActive(false);
+            buttonNo.interactable = false;
+            buttonYes.interactable = false;
+
+            optionSimpelObject.SetActive(true);
+            optionSpecialObject.SetActive(false);
             currentQesIndex += 1;
             textCurrentQuestion.text = currentQesIndex.ToString();
             sliderRemainingQuestionsToAns.value = (currentQesIndex / (32*1.0f)) * 100;
@@ -225,7 +247,13 @@ public class QAPanelView : MonoBehaviour
 
     private void RenderSpecialQuestionPanelView(SpecializedQuestionModel specializedQuestion)
     {
-
+        currentQesIndex += 1;
+        textCurrentQuestion.text = currentQesIndex.ToString();
+        sliderRemainingQuestionsToAns.value = (currentQesIndex / (32 * 1.0f)) * 100;
+        optionSimpelObject.SetActive(false);
+        optionSpecialObject.SetActive(true);
+        timeToReadQuestionPanel.SetActive(false);
+        specialQuestionPanelView.RenderView(specializedQuestion);
     }
 
 
@@ -254,13 +282,15 @@ public class QAPanelView : MonoBehaviour
     /// </summary>
     private void OnNextButtonClicked()
     {
+        if (!Skipped)
+        {
+            Skipped = true;
+        }
+        else {
+            GameManager.Instance.UpdateUserSummaryData(0, ResultType.SKIPPED);
+        }
         videoPlayer.Stop();
-        buttonStart.gameObject.SetActive(true);
-        videoPlayerPanel.SetActive(false);
-        timeToReadQuestionPanel.SetActive(true);
-        timeToAnsPanel.SetActive(false);
-        buttonNo.interactable = false;
-        buttonYes.interactable = false;
+       
         if (currentQesIndex < 20)
         {
             _dataModel = GameManager.Instance.GetSimpleQuestionFromList(currentQesIndex);
@@ -282,6 +312,8 @@ public class QAPanelView : MonoBehaviour
         buttonStart.gameObject.SetActive(false);
         timeToReadQuestionPanel.SetActive(false);
         GameUtils.GameTimer.StopCoundownTimer(this);
+        noImagePanel.SetActive(false);
+
         string extention = GameConstants.GetFileExtensionFromUrl(_dataModel.media_link);
         if (extention.Equals(".mp4"))
         {
@@ -289,7 +321,6 @@ public class QAPanelView : MonoBehaviour
         }
         else if (extention.Equals(".jpg"))
         {
-            noImagePanel.SetActive(false);
             textTimeToAns.color = defaultTextColor;
             Debug.LogError("Display Images for this Question");
             bgImageTimeToAns.gameObject.SetActive(true);
@@ -311,11 +342,29 @@ public class QAPanelView : MonoBehaviour
 
     private void OnNoButtonClicked()
     {
+        Skipped = false;
+        if(_dataModel.answer.Equals("0"))
+        {
+            GameManager.Instance.UpdateUserSummaryData(1,ResultType.CORRECT);
+        }
+        else
+        {
+            GameManager.Instance.UpdateUserSummaryData(0, ResultType.WRONG);
+        }
         OnNextButtonClicked();
     }
 
     private void OnYesButtonClicked()
     {
+        Skipped = false;
+        if (_dataModel.answer.Equals("1"))
+        {
+            GameManager.Instance.UpdateUserSummaryData(1, ResultType.CORRECT);
+        }
+        else
+        {
+            GameManager.Instance.UpdateUserSummaryData(0, ResultType.WRONG);
+        }
         OnNextButtonClicked();
     }
 
@@ -336,10 +385,16 @@ public class QAPanelView : MonoBehaviour
         buttonStart.gameObject.SetActive(true);
         timeToReadQuestionPanel.SetActive(true);
         videoPlayerPanel.SetActive(false);
+        optionSimpelObject.SetActive(true);
+        optionSpecialObject.SetActive(false);
+        specialQuestionPanelView.DisableView();
     }
 
     public void Disable()
     {
+        ResultAction -= OnResultSelected;
         gameObject.SetActive(false);
     }
+
+
 }
