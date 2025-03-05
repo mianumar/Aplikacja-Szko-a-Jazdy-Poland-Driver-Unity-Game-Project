@@ -2751,7 +2751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2869389982203887638, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4979326062060473671, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_Color.a
@@ -2759,19 +2759,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 417
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2779,7 +2779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: dbdb413701793a640a9dd713942febab, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
