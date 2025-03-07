@@ -2498,6 +2498,7 @@ MonoBehaviour:
   totalPointText: {fileID: 8773759971255511822}
   totalPointsPercentText: {fileID: 4424314230630338886}
   viewAnswerButton: {fileID: 9112408391207037349}
+  winLossFrameImage: {fileID: 6228670832912098728}
   imageLoss: {fileID: 21300000, guid: 095010b27fd49f64f9daecec4f0cb8e9, type: 3}
   imageWon: {fileID: 21300000, guid: b76ec43367b00404199687b69ce40bc0, type: 3}
   PASS_TEXT: Pozytywny
@@ -3495,7 +3496,7 @@ GameObject:
   - component: {fileID: 7187257680148437213}
   - component: {fileID: 6228670832912098728}
   m_Layer: 5
-  m_Name: Image
+  m_Name: winLossFrameImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3517,7 +3518,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0000023397413, y: -0.032203045}
   m_AnchorMax: {x: 0.99999803, y: 0.817011}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: -0.000011444092, y: 0.000002861023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7187257680148437213

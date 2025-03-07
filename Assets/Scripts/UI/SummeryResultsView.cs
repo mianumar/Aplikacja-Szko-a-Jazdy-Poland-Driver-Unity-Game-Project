@@ -29,6 +29,8 @@ public class SummeryResultsView : MonoBehaviour
 
     [SerializeField] private Button viewAnswerButton;
 
+    [SerializeField] private Image winLossFrameImage;
+
     [SerializeField] private Sprite imageLoss;
     [SerializeField] private Sprite imageWon;
 
@@ -46,9 +48,10 @@ public class SummeryResultsView : MonoBehaviour
     private void SetData()
     {
         SummaryData summaryData = GameManager.Instance.GetUserSummaryData();
-
-        resultText.text = (summaryData.PointsAchieved >= GameConstants.PASS_MARKS) ? PASS_TEXT : FAILED_TEXT;
-
+        bool IsPassed = (summaryData.PointsAchieved >= GameConstants.PASS_MARKS);
+        resultText.text = IsPassed ? PASS_TEXT : FAILED_TEXT;
+        winLossFrameImage.sprite = IsPassed ? imageWon : imageLoss;
+        
         int sec = (int)summaryData.TotalDurations % 60;
         int mint = (int)summaryData.TotalDurations / 60;
         timerText.text = mint + ":" + sec.ToString("00");
