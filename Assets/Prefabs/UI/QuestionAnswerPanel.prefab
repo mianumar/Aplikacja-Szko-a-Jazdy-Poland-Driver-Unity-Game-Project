@@ -5897,7 +5897,7 @@ GameObject:
   - component: {fileID: 3379217127002062953}
   - component: {fileID: 226379519780436800}
   m_Layer: 5
-  m_Name: CrossBtn
+  m_Name: ButtonClose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
