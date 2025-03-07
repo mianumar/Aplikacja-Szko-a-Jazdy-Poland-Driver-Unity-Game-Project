@@ -2110,14 +2110,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuestionAnswerPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 271281285768299212, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 559757887490927351, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 780728341872962474, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2198,38 +2190,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1498015453452327247, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.00024414062
-      objectReference: {fileID: 0}
-    - target: {fileID: 2143594964949454096, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2683454127619041045, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: videoPlayer
       value: 
       objectReference: {fileID: 981817120}
-    - target: {fileID: 2971566665294604443, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099561383324206723, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.004638672
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099561383324206723, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 93.18054
-      objectReference: {fileID: 0}
-    - target: {fileID: 8307249907676403134, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8307249907676403134, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
