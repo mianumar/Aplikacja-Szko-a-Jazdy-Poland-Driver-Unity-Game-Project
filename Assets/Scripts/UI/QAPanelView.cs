@@ -52,7 +52,7 @@ public class QAPanelView : MonoBehaviour
     [SerializeField] private GameObject optionSimpelObject;
     [SerializeField] private GameObject optionSpecialObject;
 
-    private int currentQesIndex = 0;
+    public int currentQesIndex = 0;
 
 
     private int BASIC_READ_TIME = 15;
@@ -154,9 +154,8 @@ public class QAPanelView : MonoBehaviour
 
             optionSimpelObject.SetActive(true);
             optionSpecialObject.SetActive(false);
-            currentQesIndex += 1;
-            textCurrentQuestion.text = currentQesIndex.ToString();
-            sliderRemainingQuestionsToAns.value = (currentQesIndex / (32*1.0f)) * 100;
+            textCurrentQuestion.text = (currentQesIndex+1).ToString();
+            sliderRemainingQuestionsToAns.value = ((currentQesIndex+1) / (32*1.0f)) * 100;
             textDescription.text = simpleQuestionData.question;
 
             GameUtils.GameTimer.CoutDownTimer(this, BASIC_READ_TIME, (timeRemain) =>
@@ -246,13 +245,14 @@ public class QAPanelView : MonoBehaviour
 
     private void RenderSpecialQuestionPanelView(SpecializedQuestionModel specializedQuestion)
     {
-        currentQesIndex += 1;
-        textCurrentQuestion.text = currentQesIndex.ToString();
-        sliderRemainingQuestionsToAns.value = (currentQesIndex / (32 * 1.0f)) * 100;
+        buttonStart.gameObject.SetActive(false);
+
+        textCurrentQuestion.text = (currentQesIndex+1).ToString();
+        sliderRemainingQuestionsToAns.value = ((currentQesIndex+1) / (32 * 1.0f)) * 100;
         optionSimpelObject.SetActive(false);
         optionSpecialObject.SetActive(true);
         timeToReadQuestionPanel.SetActive(false);
-        if (currentQesIndex == GameConstants.MAX_QUESTION_COUNT)
+        if (currentQesIndex == (GameConstants.MAX_QUESTION_COUNT-1))
         {
             buttonNext.gameObject.SetActive(false);
         }
@@ -264,15 +264,15 @@ public class QAPanelView : MonoBehaviour
         if (_dataModelSpecial.answer.Equals(selectedResult))
         {
             int points = GameConstants.GetSpecialQuestionsPoint((currentQesIndex -20));
-            GameManager.Instance.UpdateUserSummaryData(points, ResultType.CORRECT);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(0, ResultType.WRONG);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG);
         }
 
         //Render Summary If all questions done
-        if (currentQesIndex == GameConstants.MAX_QUESTION_COUNT)
+        if (currentQesIndex == (GameConstants.MAX_QUESTION_COUNT-1))
         {
            GameUtils.GameTimer.StopClock(this);
            GameManager.Instance.UpdateGameTimerInSummaryData(totalGameTime);
@@ -311,12 +311,14 @@ public class QAPanelView : MonoBehaviour
     /// </summary>
     private void OnNextButtonClicked()
     {
+        currentQesIndex += 1;
         if (!Skipped)
         {
             Skipped = true;
         }
         else {
-            GameManager.Instance.UpdateUserSummaryData(0, ResultType.SKIPPED);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.SKIPPED);
+          
         }
         videoPlayer.Stop();
        
@@ -380,11 +382,11 @@ public class QAPanelView : MonoBehaviour
         if(_dataModel.answer.Equals("0"))
         {
             int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
-            GameManager.Instance.UpdateUserSummaryData(points,ResultType.CORRECT);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(0, ResultType.WRONG);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,0, ResultType.WRONG);
         }
         OnNextButtonClicked();
     }
@@ -395,11 +397,11 @@ public class QAPanelView : MonoBehaviour
         if (_dataModel.answer.Equals("1"))
         {
             int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
-            GameManager.Instance.UpdateUserSummaryData(points, ResultType.CORRECT);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(0, ResultType.WRONG);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG);
         }
         OnNextButtonClicked();
     }

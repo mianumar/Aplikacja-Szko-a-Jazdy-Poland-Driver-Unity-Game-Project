@@ -55,6 +55,12 @@ public class SummeryResultsView : MonoBehaviour
         int sec = (int)summaryData.TotalDurations % 60;
         int mint = (int)summaryData.TotalDurations / 60;
         timerText.text = mint + ":" + sec.ToString("00");
+
+        correctAnsCountText.text = summaryData.TotalCorrectAns.ToString();
+        correctAnsCountPercentText.text = ((int)((summaryData.TotalCorrectAns / GameConstants.MAX_QUESTION_COUNT) * 100)).ToString();
+
+        totalPointText.text = summaryData.PointsAchieved.ToString();
+        totalPointsPercentText.text = ((int)((summaryData.PointsAchieved/GameConstants.MAX_GAME_POINT)*100)).ToString();
     }
 
     private void AddListeners()
@@ -68,12 +74,14 @@ public class SummeryResultsView : MonoBehaviour
 
     private void OnStartButtonClicked()
     {
+        GameManager.Instance.ResetSummaryData();
         UIHandler.Instance.qaPanelView.RenderView();
         this.Disable();
     }
 
     private void OnCloseButtonClicked()
     {
+        GameManager.Instance.ResetSummaryData();
         UIHandler.Instance.activitySelectionView.RenderView();
         this.Disable();
     }

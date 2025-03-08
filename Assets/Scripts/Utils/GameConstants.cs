@@ -5,6 +5,7 @@ public class GameConstants
 {
     public const int MAX_QUESTION_COUNT = 32;
     public const int PASS_MARKS = 68;
+    public const int MAX_GAME_POINT = 74;
     public static string GetFileExtensionFromUrl(string url)
     {
         url = url.Split('?')[0];

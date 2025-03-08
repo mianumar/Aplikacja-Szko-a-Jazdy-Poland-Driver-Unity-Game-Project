@@ -18,7 +18,7 @@ public class OptionItem : MonoBehaviour
     {
         optionText.text = option;
         contextText.text = context;
-        optionToggle.group = tGroup;
+        optionToggle.isOn = false;
         checkBox.sprite =  defaultSprite;
         gameObject.SetActive(true);
 
@@ -26,11 +26,14 @@ public class OptionItem : MonoBehaviour
         optionToggle.onValueChanged.AddListener(OnOptionSelected);
     }
 
-    private void OnOptionSelected(bool arg0)
+    private void OnOptionSelected(bool flag)
     {
-        checkBox.sprite = arg0 ? selectedSprite : defaultSprite;
+        checkBox.sprite = flag ? selectedSprite : defaultSprite;
 
-        Debug.Log("Selected Option :: "+optionText.text);
-        QAPanelView.ResultAction?.Invoke(optionText.text);
+        if (flag)
+        {
+            Debug.Log("Selected Option :: " + optionText.text);
+            QAPanelView.ResultAction?.Invoke(optionText.text);
+        }
     }
 }

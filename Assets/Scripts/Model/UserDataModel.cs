@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class UserDataModel
 {
-    public string UserId {  get;  set; }
-    public string UserName {  get; set; }
+    public string UserId { get; set; }
+    public string UserName { get; set; }
 
     public GameSettings UserGameSettings { get; set; }
 
@@ -22,9 +22,9 @@ public class GameSettings
 public class SummaryData
 {
     public int TotalCorrectAns { get; set; }
-    public int TotalWrongAns { get; set;}
+    public int TotalWrongAns { get; set; }
 
-    public int TotalSkipedAns { get; set;}
+    public int TotalSkipedAns { get; set; }
 
     public float TotalDurations { get; set; }
 
@@ -52,13 +52,12 @@ public class SummaryData
 public class QuestionAttempted
 {
     public int QusetionNo { get; set; }
-    public bool IsSkipped { get; set; }
-    public bool IsCorrectAnswer { get; set; }
+    public ResultType resultType { get; set; }
 
-    public QuestionAttempted(int QuestionNo , bool IsSkipped , bool IsCorrectAnswer) { 
+    public QuestionAttempted(int QuestionNo, ResultType resultType)
+    {
         this.QusetionNo = QuestionNo;
-        this.IsSkipped = IsSkipped;
-        this.IsCorrectAnswer = IsCorrectAnswer;
+        this.resultType = resultType; 
     }
-    
+
 }

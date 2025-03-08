@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public int MinPointsToPass;
 
     private UserDataModel userDataModel;
-    private SummaryData _userSummaryData = new SummaryData();
+    private SummaryData _userSummaryData = null;
 
 
     private string url = "https://res.cloudinary.com/prod/video/upload/e_preview:duration_12:max_seg_3/me/preview-coffee.mp4";
@@ -406,8 +406,13 @@ public class GameManager : MonoBehaviour
         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
 
-    public void UpdateUserSummaryData(int points ,ResultType resultType)
+    public void UpdateUserSummaryData( int QstnNo, int points ,ResultType resultType)
     {
+        if(_userSummaryData == null)
+        {
+            _userSummaryData = new SummaryData();
+            _userSummaryData.QuestionAttempedList = new List<QuestionAttempted>();
+        }
         if(resultType == ResultType.CORRECT)
         {
             _userSummaryData.PointsAchieved += points;
@@ -419,6 +424,8 @@ public class GameManager : MonoBehaviour
         {
             _userSummaryData.TotalSkipedAns += 1;
         }
+       
+        _userSummaryData.QuestionAttempedList.Add(new QuestionAttempted(QstnNo,resultType));
     }
 
     public void UpdateGameTimerInSummaryData(float totalGameTime)
@@ -431,6 +438,10 @@ public class GameManager : MonoBehaviour
         return _userSummaryData;    
     }
 
+    public void ResetSummaryData()
+    {
+        _userSummaryData = null;
+    }
     
 
     private void OnDisable()
