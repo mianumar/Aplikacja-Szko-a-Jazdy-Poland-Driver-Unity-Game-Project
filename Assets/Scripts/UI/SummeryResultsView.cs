@@ -74,6 +74,7 @@ public class SummeryResultsView : MonoBehaviour
 
     private void OnStartButtonClicked()
     {
+        GameManager.Instance.ShuffleRandomQuestions();
         GameManager.Instance.ResetSummaryData();
         UIHandler.Instance.qaPanelView.RenderView();
         this.Disable();
@@ -81,6 +82,7 @@ public class SummeryResultsView : MonoBehaviour
 
     private void OnCloseButtonClicked()
     {
+        GameManager.Instance.ShuffleRandomQuestions();
         GameManager.Instance.ResetSummaryData();
         UIHandler.Instance.activitySelectionView.RenderView();
         this.Disable();

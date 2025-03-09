@@ -6,12 +6,10 @@ using Random = UnityEngine.Random;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;
-using static Unity.VisualScripting.Member;
 using Firebase.Extensions;
 using System.Linq;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
-using UnityEditor;
+using System.Threading.Tasks;
 
 public enum ScreenType
 {
@@ -187,33 +185,55 @@ public class GameManager : MonoBehaviour
         IsAllMediaDownloaded = false;
         randomSimpleQstnList.Clear();
         randomSpecialQstnList.Clear();
-        await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
+        await Task.WhenAll(ServerHandler.instance.GetSpecilizedQuestionsCount(), ServerHandler.instance.GetSimpleQuestionsCount()).ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
-
-                totalSpecialQuestionCount = task.Result;
-                randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
-                if (randomSpecialIndexces.Count > 0)
-                {
-                    GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
-                }
-
+                var result = task.Result;
+                totalSpecialQuestionCount = result[0];
+                totalSimpleQuestionCount = result[1];
             }
         });
-        await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWithOnMainThread(task =>
+
+        randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
+        if (randomSpecialIndexces.Count > 0)
         {
-            if (task.IsCompleted)
-            {
-                totalSimpleQuestionCount = task.Result;
+            GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
+        }
 
-                randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
-                if (randomSimpleIndexces.Count > 0)
-                {
-                    GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
-                }
-            }
-        });
+        randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
+        if (randomSimpleIndexces.Count > 0)
+        {
+            GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
+        }
+
+        //await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
+        //{
+        //    if (task.IsCompleted)
+        //    {
+
+        //        totalSpecialQuestionCount = task.Result;
+        //        randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
+        //        if (randomSpecialIndexces.Count > 0)
+        //        {
+        //            GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
+        //        }
+
+        //    }
+        //});
+        //await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWithOnMainThread(task =>
+        //{
+        //    if (task.IsCompleted)
+        //    {
+        //        totalSimpleQuestionCount = task.Result;
+
+        //        randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
+        //        if (randomSimpleIndexces.Count > 0)
+        //        {
+        //            GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
+        //        }
+        //    }
+        //});
 
     }
 
@@ -442,7 +462,25 @@ public class GameManager : MonoBehaviour
     {
         _userSummaryData = null;
     }
-    
+
+
+    /// <summary>
+    /// Shuflle Questions list after exam done or exit or restart
+    /// </summary>
+    public void ShuffleRandomQuestions()
+    {
+        Shuffle(randomSimpleQstnList);
+        Shuffle(randomSpecialQstnList);
+    }
+    private void Shuffle<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]); // Swap elements
+        }
+    }
+
 
     private void OnDisable()
     {
