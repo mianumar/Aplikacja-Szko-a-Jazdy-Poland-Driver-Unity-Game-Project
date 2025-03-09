@@ -478,7 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122119158217357932}
   m_Layer: 5
-  m_Name: RightBar
+  m_Name: RightBarRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1308,7 +1308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1370916657179358917}
   m_Layer: 5
-  m_Name: LeftBar
+  m_Name: LeftBarSkipped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1869,7 +1869,7 @@ GameObject:
   - component: {fileID: 7103640380608091440}
   - component: {fileID: 5683949523528814548}
   m_Layer: 5
-  m_Name: RightBar
+  m_Name: BarRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2484,15 +2484,9 @@ MonoBehaviour:
   repeatButton: {fileID: 8209903835356873644}
   resultText: {fileID: 1021820692823887528}
   timerText: {fileID: 1491126131219920662}
-  middleBarImage: {fileID: 7786415733557487300}
-  middleBarIcon: {fileID: 858128102000158703}
-  middleBartext: {fileID: 7345287791710576698}
-  leftBarImage: {fileID: 1330894225510756284}
-  leftBarIcon: {fileID: 3618393283991352965}
-  leftBartext: {fileID: 6743511370297869152}
-  rigthBarImage: {fileID: 5683949523528814548}
-  rightBarIcon: {fileID: 5215563519074537817}
-  rightBartext: {fileID: 1297702378619094009}
+  imageBarWrong: {fileID: 7786415733557487300}
+  imageBarSkipped: {fileID: 1330894225510756284}
+  imageBarRight: {fileID: 5683949523528814548}
   correctAnsCountText: {fileID: 5747393758657456239}
   correctAnsCountPercentText: {fileID: 3997931902400165580}
   totalPointText: {fileID: 8773759971255511822}
@@ -3230,7 +3224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6284821237107520683}
   m_Layer: 5
-  m_Name: MiddleBar
+  m_Name: MiddleBarWrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3344,7 +3338,7 @@ GameObject:
   - component: {fileID: 8007921091797322280}
   - component: {fileID: 7786415733557487300}
   m_Layer: 5
-  m_Name: MiddleBar
+  m_Name: BarWrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3420,7 +3414,7 @@ GameObject:
   - component: {fileID: 6651877975657777247}
   - component: {fileID: 1330894225510756284}
   m_Layer: 5
-  m_Name: LeftBar
+  m_Name: BarSkipped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3479,7 +3473,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.6
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

@@ -9,17 +9,11 @@ public class SummeryResultsView : MonoBehaviour
     [SerializeField] private TMP_Text resultText;
     [SerializeField] private TMP_Text timerText;
 
-    [SerializeField] private Image middleBarImage;
-    [SerializeField] private Image middleBarIcon;
-    [SerializeField] private TMP_Text middleBartext;
+    [SerializeField] private Image imageBarWrong;
 
-    [SerializeField] private Image leftBarImage;
-    [SerializeField] private Image leftBarIcon;
-    [SerializeField] private TMP_Text leftBartext;
+    [SerializeField] private Image imageBarSkipped;
 
-    [SerializeField] private Image rigthBarImage;
-    [SerializeField] private Image rightBarIcon;
-    [SerializeField] private TMP_Text rightBartext;
+    [SerializeField] private Image imageBarRight;
 
     [SerializeField] private TMP_Text correctAnsCountText;
     [SerializeField] private TMP_Text correctAnsCountPercentText;
@@ -61,6 +55,10 @@ public class SummeryResultsView : MonoBehaviour
 
         totalPointText.text = summaryData.PointsAchieved.ToString();
         totalPointsPercentText.text = ((int)((summaryData.PointsAchieved/GameConstants.MAX_GAME_POINT)*100)).ToString();
+
+        imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / 20 * 1.0f);
+        imageBarRight.fillAmount = (summaryData.TotalCorrectAns / GameConstants.MAX_QUESTION_COUNT * 1.0f);
+        imageBarWrong.fillAmount = (summaryData.TotalWrongAns / GameConstants.MAX_QUESTION_COUNT * 1.0f);
     }
 
     private void AddListeners()

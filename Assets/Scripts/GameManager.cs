@@ -192,20 +192,22 @@ public class GameManager : MonoBehaviour
                 var result = task.Result;
                 totalSpecialQuestionCount = result[0];
                 totalSimpleQuestionCount = result[1];
+
+                randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
+                if (randomSpecialIndexces.Count > 0)
+                {
+                    GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
+                }
+
+                randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
+                if (randomSimpleIndexces.Count > 0)
+                {
+                    GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
+                }
             }
         });
 
-        randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
-        if (randomSpecialIndexces.Count > 0)
-        {
-            GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
-        }
-
-        randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
-        if (randomSimpleIndexces.Count > 0)
-        {
-            GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
-        }
+       
 
         //await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
         //{
