@@ -2212,6 +2212,10 @@ PrefabInstance:
       value: ThemeSwitcher
       objectReference: {fileID: 0}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1833916636}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: mainMenuTitletext
       value: 
       objectReference: {fileID: 158936158}
