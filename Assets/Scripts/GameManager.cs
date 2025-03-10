@@ -185,49 +185,19 @@ public class GameManager : MonoBehaviour
         IsAllMediaDownloaded = false;
         randomSimpleQstnList.Clear();
         randomSpecialQstnList.Clear();
-        await Task.WhenAll(ServerHandler.instance.GetSpecilizedQuestionsCount(), ServerHandler.instance.GetSimpleQuestionsCount()).ContinueWith(task =>
-        {
-            if (task.IsCompleted)
-            {
-                var result = task.Result;
-                totalSpecialQuestionCount = result[0];
-                totalSimpleQuestionCount = result[1];
-
-                randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
-                if (randomSpecialIndexces.Count > 0)
-                {
-                    GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
-                }
-
-                randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
-                if (randomSimpleIndexces.Count > 0)
-                {
-                    GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
-                }
-            }
-        });
-
-       
-
-        //await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
+        //await Task.WhenAll(ServerHandler.instance.GetSpecilizedQuestionsCount(), ServerHandler.instance.GetSimpleQuestionsCount()).ContinueWith(task =>
         //{
         //    if (task.IsCompleted)
         //    {
+        //        var result = task.Result;
+        //        totalSpecialQuestionCount = result[0];
+        //        totalSimpleQuestionCount = result[1];
 
-        //        totalSpecialQuestionCount = task.Result;
         //        randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
         //        if (randomSpecialIndexces.Count > 0)
         //        {
         //            GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
         //        }
-
-        //    }
-        //});
-        //await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWithOnMainThread(task =>
-        //{
-        //    if (task.IsCompleted)
-        //    {
-        //        totalSimpleQuestionCount = task.Result;
 
         //        randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
         //        if (randomSimpleIndexces.Count > 0)
@@ -237,11 +207,41 @@ public class GameManager : MonoBehaviour
         //    }
         //});
 
+
+
+        await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+
+                totalSpecialQuestionCount = task.Result;
+                randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
+                if (randomSpecialIndexces.Count > 0)
+                {
+                    GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
+                }
+
+            }
+        });
+        await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                totalSimpleQuestionCount = task.Result;
+
+                randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
+                if (randomSimpleIndexces.Count > 0)
+                {
+                    GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
+                }
+            }
+        });
+
     }
 
-    private void GetSimpleQuestionsData(int index)
+    private async void GetSimpleQuestionsData(int index)
     {
-        ServerHandler.instance.GetRandomSimpleQuestion(index).ContinueWithOnMainThread(task =>
+        await ServerHandler.instance.GetRandomSimpleQuestion(index).ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
@@ -260,9 +260,9 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    private void GetSpecialQuestionsData(int index)
+    private async void GetSpecialQuestionsData(int index)
     {
-        ServerHandler.instance.GetRandomSpecilizedQuestion(index).ContinueWithOnMainThread(task =>
+        await ServerHandler.instance.GetRandomSpecilizedQuestion(index).ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
