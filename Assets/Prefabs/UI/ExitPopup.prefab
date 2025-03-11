@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 119076536165820656}
   - component: {fileID: 3165413447534297445}
   - component: {fileID: 5927840693519086052}
+  - component: {fileID: 2230891402188846303}
   m_Layer: 5
   m_Name: Button Anuluj
   m_TagString: Untagged
@@ -290,6 +291,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2230891402188846303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2411936699987275211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1decde0d4514144864a41014dae485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalSprite: {fileID: 21300000, guid: 93f31995d0c6c0b4f82e0a5bcd21ed6b, type: 3}
+  pressedSprite: {fileID: 1821326653029919466, guid: 4c81dd4f1b8616f41bcb2b5511ff8ccb, type: 3}
+  pressAmount: 0.05
+  shrinkFactor: 0.9
 --- !u!1 &2428035604058610760
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +394,7 @@ GameObject:
   - component: {fileID: 1137158785493972127}
   - component: {fileID: 5530494767761050750}
   - component: {fileID: 3460175648669825080}
+  - component: {fileID: 8654878716892020628}
   m_Layer: 5
   m_Name: "ButtonZako\u0144cz egzamin"
   m_TagString: Untagged
@@ -485,6 +503,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8654878716892020628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308717673209420149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1decde0d4514144864a41014dae485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalSprite: {fileID: 21300000, guid: a46bd6d48f34b564bb8ebcc47f9da302, type: 3}
+  pressedSprite: {fileID: 21300000, guid: 51c44261ba70773409cc68383991a082, type: 3}
+  pressAmount: 0.05
+  shrinkFactor: 0.9
 --- !u!1 &8788965578429362891
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,8 +587,8 @@ MonoBehaviour:
   m_text: "Wychodz\u0105c teraz, stracisz swoje post\u0119py. Czy na pewno chcesz
     kontynuowa\u0107?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
-  m_sharedMaterial: {fileID: 6857529492854027109, guid: aaa22ba6381487b4ba13a92742c4b58a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

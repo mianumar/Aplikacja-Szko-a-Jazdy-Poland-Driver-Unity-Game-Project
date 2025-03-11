@@ -28,6 +28,17 @@ public class ThemeSwitcher : MonoBehaviour
     public TMP_Text[] texts;
     public TMP_Text mainMenuTitletext;
     public Button[] buttons;
+    public Image[] CrossImage;
+
+    [Header("Cross Image References")]
+    public Sprite CrossImageLight;
+    public Sprite CrossImageDark;
+
+    [Header("Exit Popup Image References")]
+    public Sprite ExitPopupImageLight;
+    public Sprite ExitPopupImageDark;
+    public Image ExitPopupImage;
+
 
     [SerializeField] private bool isDarkMode = false;
 
@@ -89,11 +100,23 @@ public class ThemeSwitcher : MonoBehaviour
         }
         mainMenuTitletext.color = darkMode ? darkMainMenuTitleTextColor : lightMainMenuTitleTextColor;
 
+
         // Apply text color changes with a fade
         foreach (var text in texts)
         {
             StartCoroutine(FadeTextColor(text, darkMode));
         }
+
+        foreach (var cross in CrossImage)
+        {
+            //cross.sprite = darkMode ? CrossImageDark : CrossImageLight;
+            if (cross != null)
+            {
+                cross.sprite = darkMode ? CrossImageDark : CrossImageLight;
+            }
+        }
+
+        ExitPopupImage.sprite = darkMode ? ExitPopupImageDark : ExitPopupImageLight;
 
         // Apply button color and sprite changes with a fade
         foreach (var button in buttons)
