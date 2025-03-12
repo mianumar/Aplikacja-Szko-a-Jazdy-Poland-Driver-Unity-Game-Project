@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bc2b0929f471f73488a07cda7d276b88
+guid: 17163dc3e7c2efc46be608dbdfab2041
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5783496399743456312
-    second: Sign Image_0
+      213: 3167830550253866910
+    second: IconSignBGDark_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -110,19 +110,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sign Image_0
+      name: IconSignBGDark_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 222
-        height: 192
+        width: 392
+        height: 280
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8349572555b134050800000000000000
-      internalID: 5783496399743456312
+      spriteID: e9f03800a1566fb20800000000000000
+      internalID: 3167830550253866910
       vertices: []
       indices: 
       edges: []
@@ -174,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sign Image_0: 5783496399743456312
+      IconSignBGDark_0: 3167830550253866910
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

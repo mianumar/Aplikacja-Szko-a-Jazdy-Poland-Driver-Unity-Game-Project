@@ -39,8 +39,13 @@ public class ThemeSwitcher : MonoBehaviour
     public Sprite ExitPopupImageDark;
     public Image ExitPopupImage;
 
+    [Header("SummaryScreen Image References")]
+    public Sprite IconSignBGLight;
+    public Sprite IconSignBGDark;
+    public Image IconSignBG;
 
-    [SerializeField] private bool isDarkMode = false;
+    //
+    public bool isDarkMode = false;
 
     private bool isPanelHidden = false;
 
