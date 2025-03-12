@@ -13,6 +13,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] public QAPanelView qaPanelView;
     [SerializeField] public SummeryResultsView summaryScreenView;
     [SerializeField] public ExitPopup exitPopup;
+    [SerializeField] public AfterExamAnswersView afterExamAnswersView;
 
     private Image splashScreenImage; // Reference to the child splash image
 

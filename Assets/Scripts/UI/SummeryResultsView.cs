@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 public class SummeryResultsView : MonoBehaviour
 {
     [SerializeField] private Button buttonClose;
@@ -51,14 +52,14 @@ public class SummeryResultsView : MonoBehaviour
         timerText.text = mint + ":" + sec.ToString("00");
 
         correctAnsCountText.text = summaryData.TotalCorrectAns.ToString();
-        correctAnsCountPercentText.text = ((int)((summaryData.TotalCorrectAns / GameConstants.MAX_QUESTION_COUNT) * 100)).ToString();
+        correctAnsCountPercentText.text = ((int)((summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT*1.0f)) * 100)).ToString();
 
         totalPointText.text = summaryData.PointsAchieved.ToString();
-        totalPointsPercentText.text = ((int)((summaryData.PointsAchieved/GameConstants.MAX_GAME_POINT)*100)).ToString();
+        totalPointsPercentText.text = ((int)((summaryData.PointsAchieved/(GameConstants.MAX_GAME_POINT*1.0f))*100)).ToString();
 
-        imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / 20 * 1.0f);
-        imageBarRight.fillAmount = (summaryData.TotalCorrectAns / GameConstants.MAX_QUESTION_COUNT * 1.0f);
-        imageBarWrong.fillAmount = (summaryData.TotalWrongAns / GameConstants.MAX_QUESTION_COUNT * 1.0f);
+        imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+        imageBarRight.fillAmount = (summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+        imageBarWrong.fillAmount = (summaryData.TotalWrongAns /( GameConstants.MAX_QUESTION_COUNT * 1.0f));
     }
 
     private void AddListeners()
@@ -68,7 +69,12 @@ public class SummeryResultsView : MonoBehaviour
 
         repeatButton.onClick.RemoveAllListeners();
         repeatButton.onClick.AddListener(OnStartButtonClicked);
+
+        viewAnswerButton.onClick.RemoveAllListeners();
+        viewAnswerButton.onClick.AddListener(OnViewAnsButtonClicked);
     }
+
+  
 
     private void OnStartButtonClicked()
     {
@@ -84,6 +90,11 @@ public class SummeryResultsView : MonoBehaviour
         GameManager.Instance.ResetSummaryData();
         UIHandler.Instance.activitySelectionView.RenderView();
         this.Disable();
+    }
+
+    private void OnViewAnsButtonClicked()
+    {
+
     }
 
     public void Disable()

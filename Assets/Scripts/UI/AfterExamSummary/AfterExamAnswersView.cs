@@ -2,11 +2,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class AfterExamAnswersView : MonoBehaviour
 {
     [SerializeField] private Button buttonClose;
-    
+    [SerializeField] private Button buttonFilter;
+
+
+
+    [SerializeField] private FilterView filterView;
 
 
     public void RenderView()
@@ -20,12 +25,14 @@ public class AfterExamAnswersView : MonoBehaviour
         buttonClose.onClick.RemoveAllListeners();
         buttonClose.onClick.AddListener(OnCloseButtonClicked);
 
+        buttonFilter.onClick.RemoveAllListeners();
+        buttonFilter.onClick.AddListener(OnFilterButtonClicked);
+
     }
 
-    private void OnStartButtonClicked()
+    private void OnFilterButtonClicked()
     {
-        UIHandler.Instance.qaPanelView.RenderView();
-        this.Disable();
+        filterView.RenderView();
     }
 
     private void OnCloseButtonClicked()
