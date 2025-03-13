@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Odpowied\u017A poprawna"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7329df7ab4c7cc148aa44db650624100, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 6857529492854027109, guid: 7329df7ab4c7cc148aa44db650624100, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -706,7 +706,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: TAK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c8b02b6eefc002741a48f064dec766ef, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4357626893823774847, guid: c8b02b6eefc002741a48f064dec766ef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1649,7 +1649,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Jaki znak jest pokazany na\_zdj\u0119ciu?t"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c8b02b6eefc002741a48f064dec766ef, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 4357626893823774847, guid: c8b02b6eefc002741a48f064dec766ef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1856,7 +1856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2576982517147227267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3786,10 +3786,10 @@ RectTransform:
   - {fileID: 8323739375029635721}
   m_Father: {fileID: 7510714945995019358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 540.02686, y: -50}
+  m_SizeDelta: {x: 900, y: 417}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6149322007268426030
 CanvasRenderer:

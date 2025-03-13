@@ -38,11 +38,11 @@ public class MainMenuView : MonoBehaviour
     private async void OnSettingsClicked()
     {
         GameSettings settings = null;
-        if (GameManager.Instance.UserDataModel != null)
-        {
-            settings = GameManager.Instance.UserDataModel.UserGameSettings;
-        }
-        else
+        //if (GameManager.Instance.UserDataModel != null)
+        //{
+        //    settings = GameManager.Instance.UserDataModel.UserGameSettings;
+        //}
+        //else
         {
             settings = await DatabaseHandler.Instance.GetUserGameSettings(GameManager.Instance.UserID);
         }

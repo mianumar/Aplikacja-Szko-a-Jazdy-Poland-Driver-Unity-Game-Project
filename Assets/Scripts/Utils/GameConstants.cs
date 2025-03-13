@@ -1,5 +1,6 @@
 
 using System.Linq;
+using UnityEngine;
 
 public class GameConstants
 {
@@ -36,4 +37,14 @@ public class GameConstants
         else
             return 1;
     }
+
+    public static Color GetColorFromHexCode(string hexCode)
+    {
+        Color color;
+
+        ColorUtility.TryParseHtmlString(hexCode, out color);
+
+        return color;
+    }
+
 }

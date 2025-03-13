@@ -65,15 +65,19 @@ public class ThemeSwitcher : MonoBehaviour
             instance = this;
         }
     }
-    void Start()
-    {
-        ApplyMode(isDarkMode, false); // Initialize with no animation on start
-    }
+    //async void Start()
+    //{
+    //    var settings = await DatabaseHandler.Instance.GetUserGameSettings(GameManager.Instance.UserID);
+    //    if (settings != null)
+    //    {
+    //        ToggleMode(!settings.IsLightMode); 
+    //    }
+    //}
 
-    public void ToggleMode()
+    public void ToggleMode(bool IsDarkMode)
     {
-        isDarkMode = !isDarkMode;
-        StartCoroutine(FadeToMode(isDarkMode));
+        isDarkMode = IsDarkMode;
+        StartCoroutine(FadeToMode(IsDarkMode));
     }
 
     // Coroutine to smoothly transition between light and dark mode

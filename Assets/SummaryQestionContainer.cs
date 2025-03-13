@@ -32,7 +32,7 @@ public class SummaryQestionContainer : MonoBehaviour
     {
         if (themeSwitcher != null)
         {
-            themeSwitcher.ToggleMode();  // Call the ThemeSwitcher's ToggleMode method
+           // themeSwitcher.ToggleMode();  // Call the ThemeSwitcher's ToggleMode method
 
             // Apply the updated mode to this container
             ApplyMode(themeSwitcher.isDarkMode);

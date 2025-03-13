@@ -174,6 +174,7 @@ public class GameManager : MonoBehaviour
 
         }
         // InitializedGame();
+        ThemeSwitcher.instance.ToggleMode(!userDataModel.UserGameSettings.IsLightMode);
     }
 
 

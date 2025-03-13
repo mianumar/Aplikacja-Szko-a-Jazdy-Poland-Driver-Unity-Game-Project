@@ -1,4 +1,7 @@
 using System;
+using System.Drawing.Printing;
+using Unity.VisualScripting;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +37,12 @@ public class SettingsPanelView : MonoBehaviour
         toggleLightMode.isOn = gameSettings.IsLightMode;
         toggleDarkMode.isOn = !gameSettings.IsLightMode;
         musicToggleImage.sprite = gameSettings.IsSoundOn ? checkedMusicSetting : defaultMusicSetting;
+        ThemeSwitcher.instance.ToggleMode(!gameSettings.IsLightMode);
+        toggleLightMode.GetComponent<Image>().color = gameSettings.IsLightMode ? GameConstants.GetColorFromHexCode("#FFF4CC") : Color.white;
+        toggleDarkMode.GetComponent<Image>().color = !gameSettings.IsLightMode ? GameConstants.GetColorFromHexCode("#1BA7E2") : Color.white;
+        
         gameObject.SetActive(true);
+
     }
 
     private void AddListeners()
@@ -60,6 +68,12 @@ public class SettingsPanelView : MonoBehaviour
     { 
         Debug.Log("OnGameModeUpdate :: "+!mode);
         isLightMode = !mode;
+
+        toggleLightMode.GetComponent<Image>().color = isLightMode ? GameConstants.GetColorFromHexCode("#FFF4CC") : Color.white;
+        toggleDarkMode.GetComponent<Image>().color = !isLightMode ? GameConstants.GetColorFromHexCode("#1BA7E2") : Color.white;
+
+        ThemeSwitcher.instance.ToggleMode(mode);
+
     }
 
     private void OnVolumeUpdate(float volume)
@@ -87,6 +101,7 @@ public class SettingsPanelView : MonoBehaviour
         DatabaseHandler.Instance.SaveUserGameSettings(GameManager.Instance.UserID, gameSettings);
     }
 
+ 
     private void OnBackButtonClicked()
     {
         UIHandler.Instance.mainMenuView.RenderView();

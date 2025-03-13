@@ -431,6 +431,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3482458579048188617, guid: 3b0850b761ecea743986c88c98cd0ff9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804520150672039301, guid: 3b0850b761ecea743986c88c98cd0ff9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405826378488437480, guid: 3b0850b761ecea743986c88c98cd0ff9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8853151279037051002, guid: 3b0850b761ecea743986c88c98cd0ff9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -897,17 +909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1228977327 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-  m_PrefabInstance: {fileID: 318270982839566503}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f98a902fba8e54d4082acbe2d920b83f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1238069156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1109,68 +1110,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 1833916637}
     m_Modifications:
     - target: {fileID: 1034394068835386584, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      propertyPath: m_Colors.m_SelectedColor.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1034394068835386584, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      propertyPath: m_Colors.m_SelectedColor.g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1034394068835386584, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1228977327}
-    - target: {fileID: 1034394068835386584, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034394068835386584, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleMode
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034394068835386584, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ThemeSwitcher, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034394068835386584, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1605766700630638328, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1605766700630638328, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      propertyPath: m_Colors.m_SelectedColor.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1605766700630638328, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1228977327}
-    - target: {fileID: 1605766700630638328, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1605766700630638328, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ToggleMode
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1605766700630638328, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ThemeSwitcher, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1605766700630638328, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169168367681752169, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.7558594
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169168367681752169, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3356299866956138829, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1191,14 +1152,6 @@ PrefabInstance:
     - target: {fileID: 3661286585862819467, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4271971724848922565, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 5.0012207
-      objectReference: {fileID: 0}
-    - target: {fileID: 4271971724848922565, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 5313564742835756681, guid: ba22a3a5ddf39614388c99483520acd6, type: 3}
       propertyPath: m_Name
