@@ -35,11 +35,11 @@ public class SummaryQestionContainer : MonoBehaviour
 
     private SimpleQuestionDataModel simpleQuestionData;
     private SpecializedQuestionModel specializedQuestionData;
-    public void RenderView(QuestionAttempted question)
+    public void RenderView(QuestionAttempted question , int index)
     {
         int resultIndex = (int)question.resultType;
         ansStatusIcon.sprite = statusIcon[resultIndex];
-        texts[1].text = "PYTANIE:"+(question.QusetionNo+1)+"/32";
+        texts[1].text = "PYTANIE:"+index+"/32";
         texts[4].text = headingText[resultIndex];
       //  texts[0].text = (int)question.questionType == 0 ? GameManager.Instance.GetSimpleQuestionFromList(question.QusetionNo).question : GameManager.Instance.GetSpecialQuestionFromList(question.QusetionNo).question;
         if ((int)question.questionType == 1)
