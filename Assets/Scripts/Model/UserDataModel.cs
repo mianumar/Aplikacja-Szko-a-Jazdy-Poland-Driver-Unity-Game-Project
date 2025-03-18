@@ -53,11 +53,13 @@ public class QuestionAttempted
 {
     public int QusetionNo { get; set; }
     public ResultType resultType { get; set; }
+    public QuestionType questionType { get; set; }
 
-    public QuestionAttempted(int QuestionNo, ResultType resultType)
+    public QuestionAttempted(int QuestionNo, ResultType resultType , QuestionType questionType)
     {
         this.QusetionNo = QuestionNo;
         this.resultType = resultType; 
+        this.questionType = questionType;
     }
 
 }

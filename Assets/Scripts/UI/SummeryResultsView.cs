@@ -32,7 +32,7 @@ public class SummeryResultsView : MonoBehaviour
     public string PASS_TEXT = "Pozytywny";
     public string FAILED_TEXT = "Negatywny";
 
-
+    SummaryData summaryData = null;
     public void RenderView()
     {
         SetData();
@@ -42,7 +42,7 @@ public class SummeryResultsView : MonoBehaviour
 
     private void SetData()
     {
-        SummaryData summaryData = GameManager.Instance.GetUserSummaryData();
+         summaryData = GameManager.Instance.GetUserSummaryData();
         bool IsPassed = (summaryData.PointsAchieved >= GameConstants.PASS_MARKS);
         resultText.text = IsPassed ? PASS_TEXT : FAILED_TEXT;
         winLossFrameImage.sprite = IsPassed ? imageWon : imageLoss;
@@ -94,7 +94,10 @@ public class SummeryResultsView : MonoBehaviour
 
     private void OnViewAnsButtonClicked()
     {
+        GameManager.Instance.ShuffleRandomQuestions();
 
+        UIHandler.Instance.afterExamAnswersView.RenderView(summaryData);
+        this.Disable();
     }
 
     public void Disable()

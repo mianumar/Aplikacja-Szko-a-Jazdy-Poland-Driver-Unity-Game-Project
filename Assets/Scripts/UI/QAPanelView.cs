@@ -72,7 +72,7 @@ public class QAPanelView : MonoBehaviour
     public bool IsMediaDone = false;
 
     public static Action<string> ResultAction;
-    public bool Skipped = true;
+    private bool Skipped = true;
     private float totalGameTime;
 
     public void RenderView()
@@ -264,11 +264,11 @@ public class QAPanelView : MonoBehaviour
         if (_dataModelSpecial.answer.Equals(selectedResult))
         {
             int points = GameConstants.GetSpecialQuestionsPoint((currentQesIndex -20));
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT , QuestionType.SPECIAL);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, QuestionType.SPECIAL);
         }
 
         //Render Summary If all questions done
@@ -281,6 +281,7 @@ public class QAPanelView : MonoBehaviour
         }
         else
         {
+            Skipped = false;
             OnNextButtonClicked();
         }
     }
@@ -311,17 +312,18 @@ public class QAPanelView : MonoBehaviour
     /// </summary>
     private void OnNextButtonClicked()
     {
-        currentQesIndex += 1;
         if (!Skipped)
         {
             Skipped = true;
         }
         else {
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.SKIPPED);
+            QuestionType questionType = currentQesIndex < 20 ?QuestionType.BASIC : QuestionType.SPECIAL;
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.SKIPPED,questionType);
           
         }
         videoPlayer.Stop();
-       
+        currentQesIndex += 1;
+
         if (currentQesIndex < 20)
         {
             _dataModel = GameManager.Instance.GetSimpleQuestionFromList(currentQesIndex);
@@ -382,11 +384,11 @@ public class QAPanelView : MonoBehaviour
         if(_dataModel.answer.Equals("0"))
         {
             int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT, QuestionType.BASIC);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,0, ResultType.WRONG);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,0, ResultType.WRONG, QuestionType.BASIC);
         }
         OnNextButtonClicked();
     }
@@ -397,11 +399,11 @@ public class QAPanelView : MonoBehaviour
         if (_dataModel.answer.Equals("1"))
         {
             int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT, QuestionType.BASIC);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, QuestionType.BASIC);
         }
         OnNextButtonClicked();
     }

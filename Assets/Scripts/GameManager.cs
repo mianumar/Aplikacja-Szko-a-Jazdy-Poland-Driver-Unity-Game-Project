@@ -10,6 +10,7 @@ using Firebase.Extensions;
 using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
+using System.Security.Permissions;
 
 public enum ScreenType
 {
@@ -405,7 +406,7 @@ public class GameManager : MonoBehaviour
 
     public SpecializedQuestionModel GetSpecialQuestionFromList(int index)
     {
-        if (index < 0 && index >= randomSimpleQstnList.Count)
+        if (index < 0 && index >= randomSpecialQstnList.Count)
             return null;
         return randomSpecialQstnList[index];
     }
@@ -429,7 +430,7 @@ public class GameManager : MonoBehaviour
         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
 
-    public void UpdateUserSummaryData( int QstnNo, int points ,ResultType resultType)
+    public void UpdateUserSummaryData( int QstnNo, int points ,ResultType resultType , QuestionType questionType)
     {
         if(_userSummaryData == null)
         {
@@ -448,7 +449,7 @@ public class GameManager : MonoBehaviour
             _userSummaryData.TotalSkipedAns += 1;
         }
        
-        _userSummaryData.QuestionAttempedList.Add(new QuestionAttempted(QstnNo,resultType));
+        _userSummaryData.QuestionAttempedList.Add(new QuestionAttempted(QstnNo,resultType , questionType));
     }
 
     public void UpdateGameTimerInSummaryData(float totalGameTime)
@@ -504,7 +505,13 @@ public class UserSummaryData
 
 public enum ResultType
 {
-    CORRECT = 1,
-    WRONG = 2,
-    SKIPPED = 3
+    CORRECT = 0,
+    WRONG = 1,
+    SKIPPED = 2
+}
+
+public enum QuestionType
+{
+    BASIC = 1,
+    SPECIAL = 2,
 }
