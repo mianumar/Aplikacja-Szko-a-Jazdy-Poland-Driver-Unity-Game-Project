@@ -256,6 +256,12 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     Debug.Log("All Simple Questions Downloaded successfully");
+                    var imageList = randomSimpleQstnList.Where(x => x.media.Contains(".jpg")).ToList();
+                    var videoList = randomSimpleQstnList.Where(x => x.media.Contains(".mp4")).ToList();
+                    var noimageList = randomSimpleQstnList.Where(x => x.media.Contains("")).ToList();
+                    imageList.AddRange(noimageList);
+                    imageList.AddRange(videoList);
+                    randomSimpleQstnList = imageList;
                     DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
                 }
             }
@@ -296,7 +302,10 @@ public class GameManager : MonoBehaviour
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
             {
                 Sprite sp = SaveImageFile(tex);
-                SimpleQuestionSprites.Add(data.id, sp);
+                if (!SimpleQuestionSprites.ContainsKey(data.id))
+                {
+                    SimpleQuestionSprites.Add(data.id, sp);
+                }
                 _simpleIndex++;
                 if (_simpleIndex < randomSimpleQstnList.Count)
                 {

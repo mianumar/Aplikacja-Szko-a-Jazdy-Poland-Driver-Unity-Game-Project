@@ -1770,7 +1770,7 @@ PrefabInstance:
       objectReference: {fileID: 981817120}
     - target: {fileID: 2971566665294604443, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4171619879503605271, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: m_TagString
@@ -1805,6 +1805,17 @@ MonoBehaviour:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3095196234699803992, guid: eef5ed1db74f171498e02f1c25b7c6ed, type: 3}
   m_PrefabInstance: {fileID: 2021035871}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1941830252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4701024198481872980, guid: d00e123abe6a6d1458fecca759405bb4, type: 3}
+  m_PrefabInstance: {fileID: 4845174263710063769}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -2395,6 +2406,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: f6482421a4bd9674b8a99c6e270d79a4, type: 3}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: resultSummaryBG
+      value: 
+      objectReference: {fileID: 1941830252}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: texts.Array.size
       value: 27
       objectReference: {fileID: 0}
@@ -2546,6 +2561,14 @@ PrefabInstance:
       propertyPath: commonBackgroundImage
       value: 
       objectReference: {fileID: 2075977793}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: resultSummaryDarkMode
+      value: 
+      objectReference: {fileID: -1955448553306655712, guid: 37e3925bbbfbe0f4f9b9036f09d0a2c3, type: 3}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: resultSummaryLightMode
+      value: 
+      objectReference: {fileID: -4936693802910280245, guid: 976f6c995440aea44b78ac7864744f30, type: 3}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'CrossImage.Array.data[0]'
       value: 
@@ -4361,10 +4384,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7619868130576321314, guid: d00e123abe6a6d1458fecca759405bb4, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4490,6 +4509,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7510714946045684060}
     m_Modifications:
+    - target: {fileID: 735832994319015566, guid: c42722ac598a0a4468378a9aa682562b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336604075995160173, guid: c42722ac598a0a4468378a9aa682562b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5908890687976381812, guid: c42722ac598a0a4468378a9aa682562b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

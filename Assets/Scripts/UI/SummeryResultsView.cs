@@ -52,10 +52,10 @@ public class SummeryResultsView : MonoBehaviour
         timerText.text = mint + ":" + sec.ToString("00");
 
         correctAnsCountText.text = summaryData.TotalCorrectAns.ToString();
-        correctAnsCountPercentText.text = ((int)((summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT*1.0f)) * 100)).ToString();
+        correctAnsCountPercentText.text = "/"+GameConstants.MAX_QUESTION_COUNT + " ("+((int)((summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT*1.0f)) * 100)).ToString()+"%)";
 
         totalPointText.text = summaryData.PointsAchieved.ToString();
-        totalPointsPercentText.text = ((int)((summaryData.PointsAchieved/(GameConstants.MAX_GAME_POINT*1.0f))*100)).ToString();
+        totalPointsPercentText.text = "/"+GameConstants.MAX_GAME_POINT +" ("+((int)((summaryData.PointsAchieved/(GameConstants.MAX_GAME_POINT*1.0f))*100)).ToString()+"%)";
 
         imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
         imageBarRight.fillAmount = (summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));

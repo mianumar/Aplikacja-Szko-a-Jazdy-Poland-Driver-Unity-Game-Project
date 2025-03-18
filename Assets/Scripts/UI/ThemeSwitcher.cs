@@ -39,10 +39,25 @@ public class ThemeSwitcher : MonoBehaviour
     public Sprite ExitPopupImageDark;
     public Image ExitPopupImage;
 
-    [Header("SummaryScreen Image References")]
+    [Header("After Exam SummaryScreen Image References")]
     public Sprite IconSignBGLight;
     public Sprite IconSignBGDark;
     public Image IconSignBG;
+
+    [Header("Summary Screen")]
+    public Image resultSummaryBG;
+    public Sprite resultSummaryLightMode;
+    public Sprite resultSummaryDarkMode;
+
+    [Header("Activity Screen ")]
+    public Image ContainerBG1;
+    public Image ContainerBG2;
+    public Color containerDarkColor;
+
+    public Image InnerContainerBG1;
+    public Image InnerContainerBG2;
+    public Color InnerContainerDarkColor;
+
 
     //
     public bool isDarkMode = false;
@@ -126,6 +141,13 @@ public class ThemeSwitcher : MonoBehaviour
         }
 
         ExitPopupImage.sprite = darkMode ? ExitPopupImageDark : ExitPopupImageLight;
+        resultSummaryBG.sprite = darkMode ? resultSummaryDarkMode : resultSummaryLightMode;
+
+        ContainerBG1.color = darkMode ? containerDarkColor : lightBackgroundColor;
+        ContainerBG2.color = darkMode ? containerDarkColor : lightBackgroundColor;
+
+        InnerContainerBG1.color = darkMode ? InnerContainerDarkColor : lightBackgroundColor;
+        InnerContainerBG2.color = darkMode ? InnerContainerDarkColor : lightBackgroundColor;
 
         // Apply button color and sprite changes with a fade
         foreach (var button in buttons)
