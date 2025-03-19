@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System.Collections.Generic;
-using Unity.Android.Gradle;
 
 public class AfterExamAnswersView : MonoBehaviour
 {
