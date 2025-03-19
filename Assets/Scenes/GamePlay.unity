@@ -840,6 +840,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a86aecfc8f3db4a8949f698d110c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1238069159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3917148320515218260, guid: d581522960542564ab9d08b69351ac95, type: 3}
+  m_PrefabInstance: {fileID: 1238069156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1238069160 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6512034796079435449, guid: d581522960542564ab9d08b69351ac95, type: 3}
+  m_PrefabInstance: {fileID: 1238069156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1238069161 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1736529928889593722, guid: d581522960542564ab9d08b69351ac95, type: 3}
+  m_PrefabInstance: {fileID: 1238069156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1238069162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3269277573322270591, guid: d581522960542564ab9d08b69351ac95, type: 3}
+  m_PrefabInstance: {fileID: 1238069156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1251304453
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,10 +2417,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThemeSwitcher
       objectReference: {fileID: 0}
-    - target: {fileID: 1205008265921585728, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: canvas
       value: 
@@ -2386,53 +2426,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8693241999834351383}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: CrossImageDark
+      propertyPath: ContainerBG1
       value: 
-      objectReference: {fileID: 21300000, guid: fd57fae2f33fedb4783bdf5d23b13a12, type: 3}
+      objectReference: {fileID: 1238069162}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: ContainerBG2
+      value: 
+      objectReference: {fileID: 1238069161}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: ExitPopupImage
       value: 
       objectReference: {fileID: 717780301}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: IconSignBGDark
-      value: 
-      objectReference: {fileID: 21300000, guid: 17163dc3e7c2efc46be608dbdfab2041, type: 3}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: CrossImageLight
-      value: 
-      objectReference: {fileID: 21300000, guid: e4ee65597f5d6e34ea10e1cfe5c9d0a5, type: 3}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: IconSignBGLight
-      value: 
-      objectReference: {fileID: 21300000, guid: f6482421a4bd9674b8a99c6e270d79a4, type: 3}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: resultSummaryBG
       value: 
       objectReference: {fileID: 1941830252}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: texts.Array.size
-      value: 27
-      objectReference: {fileID: 0}
+      propertyPath: InnerContainerBG1
+      value: 
+      objectReference: {fileID: 1238069160}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: InnerContainerBG2
+      value: 
+      objectReference: {fileID: 1238069159}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: mainMenuTitletext
       value: 
       objectReference: {fileID: 158936158}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: textSizeThreshold
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: ExitPopupImageDark
-      value: 
-      objectReference: {fileID: 21300000, guid: 5c9e7483e34dc2c49b452d275a010a3f, type: 3}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: buttons.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: ExitPopupImageLight
-      value: 
-      objectReference: {fileID: 21300000, guid: 4f04f9fd6ce32704ab4197cb707d5a06, type: 3}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'texts.Array.data[0]'
       value: 
@@ -2542,14 +2562,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 504545728997969110}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: 'texts.Array.data[27]'
-      value: 
-      objectReference: {fileID: 2042225125}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: CrossImage.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'buttons.Array.data[0]'
       value: 
       objectReference: {fileID: 452387672}
@@ -2561,14 +2573,6 @@ PrefabInstance:
       propertyPath: commonBackgroundImage
       value: 
       objectReference: {fileID: 2075977793}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: resultSummaryDarkMode
-      value: 
-      objectReference: {fileID: -1955448553306655712, guid: 37e3925bbbfbe0f4f9b9036f09d0a2c3, type: 3}
-    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
-      propertyPath: resultSummaryLightMode
-      value: 
-      objectReference: {fileID: -4936693802910280245, guid: 976f6c995440aea44b78ac7864744f30, type: 3}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'CrossImage.Array.data[0]'
       value: 
