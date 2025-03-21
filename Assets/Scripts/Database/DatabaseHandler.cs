@@ -112,9 +112,12 @@ public class DatabaseHandler : MonoBehaviour
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                string jsonData = snapshot.GetRawJsonValue();
-               
-                dataModel = JsonConvert.DeserializeObject<UserDataModel>(jsonData);
+                if (snapshot != null)
+                {
+                    string jsonData = snapshot.GetRawJsonValue();
+
+                    dataModel = JsonConvert.DeserializeObject<UserDataModel>(jsonData);
+                }
               
             }
         });
