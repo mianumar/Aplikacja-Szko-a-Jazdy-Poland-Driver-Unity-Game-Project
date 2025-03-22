@@ -105,20 +105,20 @@ public class DatabaseHandler : MonoBehaviour
                 string expMessage = task.Exception.InnerExceptions[0].Message;
                 Debug.LogError("GetUserData encountered an error: " + expMessage);
             }
-            if(task.IsCanceled)
+            if (task.IsCanceled)
             {
                 Debug.LogError("GetUserData request is cancled: ");
             }
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                if (snapshot != null)
-                {
-                    string jsonData = snapshot.GetRawJsonValue();
 
+                string jsonData = snapshot.GetRawJsonValue();
+                if (jsonData != null)
+                {
                     dataModel = JsonConvert.DeserializeObject<UserDataModel>(jsonData);
                 }
-              
+
             }
         });
 
@@ -241,7 +241,7 @@ public class DatabaseHandler : MonoBehaviour
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="gameSettings"></param>
-    public async void SaveUserGameSettings(string userId , GameSettings gameSettings)
+    public async void SaveUserGameSettings(string userId, GameSettings gameSettings)
     {
         string dataInJSON = JsonConvert.SerializeObject(gameSettings);
         Debug.Log("Save UserGameSettings :: JSON DATA :: " + dataInJSON);

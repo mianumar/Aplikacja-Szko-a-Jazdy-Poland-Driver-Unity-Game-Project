@@ -43,23 +43,26 @@ public class SummeryResultsView : MonoBehaviour
     private void SetData()
     {
          summaryData = GameManager.Instance.GetUserSummaryData();
-        bool IsPassed = (summaryData.PointsAchieved >= GameConstants.PASS_MARKS);
-        resultText.text = IsPassed ? PASS_TEXT : FAILED_TEXT;
-        winLossFrameImage.sprite = IsPassed ? imageWon : imageLoss;
-        
-        int sec = (int)summaryData.TotalDurations % 60;
-        int mint = (int)summaryData.TotalDurations / 60;
-        timerText.text = mint + ":" + sec.ToString("00");
+        if (summaryData != null)
+        {
+            bool IsPassed = (summaryData.PointsAchieved >= GameConstants.PASS_MARKS);
+            resultText.text = IsPassed ? PASS_TEXT : FAILED_TEXT;
+            winLossFrameImage.sprite = IsPassed ? imageWon : imageLoss;
 
-        correctAnsCountText.text = summaryData.TotalCorrectAns.ToString();
-        correctAnsCountPercentText.text = "/"+GameConstants.MAX_QUESTION_COUNT + " ("+((int)((summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT*1.0f)) * 100)).ToString()+"%)";
+            int sec = (int)summaryData.TotalDurations % 60;
+            int mint = (int)summaryData.TotalDurations / 60;
+            timerText.text = mint + ":" + sec.ToString("00");
 
-        totalPointText.text = summaryData.PointsAchieved.ToString();
-        totalPointsPercentText.text = "/"+GameConstants.MAX_GAME_POINT +" ("+((int)((summaryData.PointsAchieved/(GameConstants.MAX_GAME_POINT*1.0f))*100)).ToString()+"%)";
+            correctAnsCountText.text = summaryData.TotalCorrectAns.ToString();
+            correctAnsCountPercentText.text = "/" + GameConstants.MAX_QUESTION_COUNT + " (" + ((int)((summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f)) * 100)).ToString() + "%)";
 
-        imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
-        imageBarRight.fillAmount = (summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
-        imageBarWrong.fillAmount = (summaryData.TotalWrongAns /( GameConstants.MAX_QUESTION_COUNT * 1.0f));
+            totalPointText.text = summaryData.PointsAchieved.ToString();
+            totalPointsPercentText.text = "/" + GameConstants.MAX_GAME_POINT + " (" + ((int)((summaryData.PointsAchieved / (GameConstants.MAX_GAME_POINT * 1.0f)) * 100)).ToString() + "%)";
+
+            imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+            imageBarRight.fillAmount = (summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+            imageBarWrong.fillAmount = (summaryData.TotalWrongAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+        }
     }
 
     private void AddListeners()

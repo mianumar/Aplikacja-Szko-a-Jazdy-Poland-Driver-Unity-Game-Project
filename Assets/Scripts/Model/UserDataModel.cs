@@ -17,6 +17,13 @@ public class GameSettings
     public float VolumePercent { get; set; }
     public bool IsSoundOn { get; set; }
     public bool IsLightMode { get; set; }
+
+    public GameSettings(float VolumePercent,bool IsSoundOn , bool IsLightMode)
+    {
+        this.VolumePercent = VolumePercent;
+        this.IsSoundOn = IsSoundOn;
+        this.IsLightMode = IsLightMode;
+    }
 }
 
 public class SummaryData

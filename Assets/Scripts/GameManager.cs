@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
             userDataModel = new UserDataModel();
             userDataModel.UserId = loggedUser.UserId;
             userDataModel.UserName = string.IsNullOrEmpty(loggedUser.DisplayName) ? "Guest " + Random.Range(2000, 9999) : loggedUser.DisplayName;
-            userDataModel.UserGameSettings = new GameSettings();
+            userDataModel.UserGameSettings = new GameSettings(100f,true,true);
             userDataModel.UserSummaryData = new SummaryData();
 
             DatabaseHandler.Instance.SaveUser(userDataModel);

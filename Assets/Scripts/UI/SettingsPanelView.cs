@@ -8,7 +8,7 @@ public class SettingsPanelView : MonoBehaviour
     [SerializeField] private Toggle toggleLightMode;
     [SerializeField] private Toggle toggleDarkMode;
 
-    [SerializeField] private Slider sliderVoulme;
+    [SerializeField] private Slider sliderVolume;
     [SerializeField] private Toggle toggleMusic;
 
     [SerializeField] private Button buttonSave;
@@ -28,16 +28,29 @@ public class SettingsPanelView : MonoBehaviour
         AddListeners();
 
         musicToggleImage = toggleMusic.GetComponent<Image>();
+        if (gameSettings != null)
+        {
+            sliderVolume.value = gameSettings.VolumePercent;
+            toggleMusic.isOn = gameSettings.IsSoundOn;
+            toggleLightMode.isOn = gameSettings.IsLightMode;
+            toggleDarkMode.isOn = !gameSettings.IsLightMode;
+            musicToggleImage.sprite = gameSettings.IsSoundOn ? checkedMusicSetting : defaultMusicSetting;
+            ThemeSwitcher.instance.ToggleMode(!gameSettings.IsLightMode);
+            toggleLightMode.GetComponent<Image>().color = gameSettings.IsLightMode ? GameConstants.GetColorFromHexCode("#FFF4CC") : Color.white;
+            toggleDarkMode.GetComponent<Image>().color = !gameSettings.IsLightMode ? GameConstants.GetColorFromHexCode("#1BA7E2") : Color.white;
+        }
+        else
+        {
+            sliderVolume.value = 100f;
+            toggleMusic.isOn = true;
+            toggleLightMode.isOn= true;
+            toggleDarkMode.isOn= false;
+            musicToggleImage.sprite = checkedMusicSetting;
+            ThemeSwitcher.instance.ToggleMode(false);
+            toggleLightMode.GetComponent<Image>().color = Color.white;
+            toggleDarkMode.GetComponent<Image>().color = GameConstants.GetColorFromHexCode("#1BA7E2");
 
-        sliderVoulme.value = gameSettings.VolumePercent;
-        toggleMusic.isOn = gameSettings.IsSoundOn;
-        toggleLightMode.isOn = gameSettings.IsLightMode;
-        toggleDarkMode.isOn = !gameSettings.IsLightMode;
-        musicToggleImage.sprite = gameSettings.IsSoundOn ? checkedMusicSetting : defaultMusicSetting;
-        ThemeSwitcher.instance.ToggleMode(!gameSettings.IsLightMode);
-        toggleLightMode.GetComponent<Image>().color = gameSettings.IsLightMode ? GameConstants.GetColorFromHexCode("#FFF4CC") : Color.white;
-        toggleDarkMode.GetComponent<Image>().color = !gameSettings.IsLightMode ? GameConstants.GetColorFromHexCode("#1BA7E2") : Color.white;
-        
+        }
         gameObject.SetActive(true);
 
     }
@@ -50,13 +63,13 @@ public class SettingsPanelView : MonoBehaviour
         buttonSave.onClick.RemoveAllListeners();
 
         toggleMusic.onValueChanged.RemoveAllListeners();
-        sliderVoulme.onValueChanged.RemoveAllListeners();
+        sliderVolume.onValueChanged.RemoveAllListeners();
 
         buttonBack.onClick.AddListener(OnBackButtonClicked);
         buttonSave.onClick.AddListener(OnSaveButtonClicked);
 
         toggleMusic.onValueChanged.AddListener(OnMusicToggleUpdated);
-        sliderVoulme.onValueChanged.AddListener(OnVolumeUpdate);
+        sliderVolume.onValueChanged.AddListener(OnVolumeUpdate);
         
         toggleDarkMode.onValueChanged.AddListener(OnGameModeUpdate);
     }
@@ -89,12 +102,8 @@ public class SettingsPanelView : MonoBehaviour
     /// </summary>
     private void OnSaveButtonClicked()
     {
-        GameSettings gameSettings = new GameSettings()
-        {
-            IsLightMode = isLightMode,
-            IsSoundOn  = isMusicOn,
-            VolumePercent = volumePercent,
-        };
+        GameSettings gameSettings = new GameSettings(volumePercent, isMusicOn, isLightMode);
+        
         DatabaseHandler.Instance.SaveUserGameSettings(GameManager.Instance.UserID, gameSettings);
     }
 
