@@ -31,13 +31,13 @@ public class LoginManager : MonoBehaviour
         Debug.Log("Sender :: "+sender.ToString());
         Debug.Log("Event Args :: "+e.ToString());
 
-        //if (auth.CurrentUser != null)
-        //{
-        //    // User is signed In 
-        //    loggedUser = auth.CurrentUser;
-        //    GameManager.OnLoginDoneAction?.Invoke(loggedUser);
-        //}
-        //else
+        if (auth.CurrentUser != null)
+        {
+            // User is signed In 
+            loggedUser = auth.CurrentUser;
+            GameManager.OnLoginDoneAction?.Invoke(loggedUser);
+        }
+        else
         {
             LoginAsGuest();
         }
