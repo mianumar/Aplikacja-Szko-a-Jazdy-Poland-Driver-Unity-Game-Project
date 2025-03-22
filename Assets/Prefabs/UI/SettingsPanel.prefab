@@ -737,7 +737,7 @@ MonoBehaviour:
   buttonBack: {fileID: 8062054231677042349}
   toggleLightMode: {fileID: 1034394068835386584}
   toggleDarkMode: {fileID: 1605766700630638328}
-  sliderVoulme: {fileID: 5724016299315740759}
+  sliderVolume: {fileID: 5724016299315740759}
   toggleMusic: {fileID: 3848888172101880939}
   buttonSave: {fileID: 265955350276011703}
   defaultMusicSetting: {fileID: 6705915592072747237, guid: 9f3a82b04775a514b81ffdbf190183e3, type: 3}
