@@ -6705,6 +6705,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2075977793}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: quizButtons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'CrossImage.Array.data[0]'
       value: 
       objectReference: {fileID: 1910186100}
@@ -6720,6 +6724,14 @@ PrefabInstance:
       propertyPath: 'CrossImage.Array.data[3]'
       value: 
       objectReference: {fileID: 4899056285137808630}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'quizButtons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 452387672}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'quizButtons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1339661014}
     - target: {fileID: 8709770508441978661, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -27,7 +27,7 @@ public class ThemeSwitcher : MonoBehaviour
     [Header("UI References")]
     public TMP_Text[] texts;
     public TMP_Text mainMenuTitletext;
-    public Button[] buttons;
+    public Button[] quizButtons;
     public Image[] CrossImage;
 
     [Header("Cross Image References")]
@@ -111,7 +111,7 @@ public class ThemeSwitcher : MonoBehaviour
         }
         commonBackgroundImage.color = targetBackgroundColor; // Ensure it reaches the target color
 
-        // Start fading text and buttons
+        // Start fading text and quizButtons
         ApplyMode(darkMode, true); // Apply text/button changes during the transition
     }
 
@@ -150,9 +150,13 @@ public class ThemeSwitcher : MonoBehaviour
         InnerContainerBG2.color = darkMode ? InnerContainerDarkColor : lightBackgroundColor;
 
         // Apply button color and sprite changes with a fade
-        foreach (var button in buttons)
+        foreach (var button in quizButtons)
         {
-            StartCoroutine(FadeButton(button, darkMode));
+            //StartCoroutine(FadeButton(button, darkMode));
+            var buttonImage = button.GetComponent<Image>();
+            Sprite targetSprite = darkMode ? darkButtonSprite : lightButtonSprite;
+            Color targetButtonTextColor = darkMode ? darkTextColor : lightTextColor;
+
         }
     }
 
