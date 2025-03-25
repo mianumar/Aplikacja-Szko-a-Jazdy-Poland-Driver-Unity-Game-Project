@@ -39,6 +39,16 @@ public class ThemeSwitcher : MonoBehaviour
     public Sprite ExitPopupImageDark;
     public Image ExitPopupImage;
 
+    [Header("Filter Popup Image References")]
+    public Sprite FilterPopupImageLight;
+    public Sprite FilterPopupImageDark;
+    public Image FilterPopupImage;
+
+    [Header("ActivityScreen QuestionImage References")]
+    public Sprite ActivityQuestionImageLight;
+    public Sprite ActivityQuestionImageDark;
+    public Image ActivityQuestionImage;
+
     [Header("After Exam SummaryScreen Image References")]
     public Sprite IconSignBGLight;
     public Sprite IconSignBGDark;
@@ -141,6 +151,8 @@ public class ThemeSwitcher : MonoBehaviour
         }
 
         ExitPopupImage.sprite = darkMode ? ExitPopupImageDark : ExitPopupImageLight;
+        FilterPopupImage.sprite = darkMode ? FilterPopupImageDark : FilterPopupImageLight;
+        ActivityQuestionImage.sprite = darkMode ? ActivityQuestionImageDark : ActivityQuestionImageLight;
         resultSummaryBG.sprite = darkMode ? resultSummaryDarkMode : resultSummaryLightMode;
 
         ContainerBG1.color = darkMode ? containerDarkColor : lightBackgroundColor;

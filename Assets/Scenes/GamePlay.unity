@@ -2938,6 +2938,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1246658640 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7399470687818127402, guid: d581522960542564ab9d08b69351ac95, type: 3}
+  m_PrefabInstance: {fileID: 1238069156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1251304453
 GameObject:
   m_ObjectHideFlags: 0
@@ -6573,6 +6584,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1941830252}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: FilterPopupImage
+      value: 
+      objectReference: {fileID: 5236816272489665610}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: texts.Array.size
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: InnerContainerBG1
       value: 
       objectReference: {fileID: 1238069160}
@@ -6624,6 +6643,10 @@ PrefabInstance:
       propertyPath: 'texts.Array.data[9]'
       value: 
       objectReference: {fileID: 660141612}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: FilterPopupImageDark
+      value: 
+      objectReference: {fileID: 21300000, guid: ccdabb8082edba542be9ae0bed9fd7f6, type: 3}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'texts.Array.data[10]'
       value: 
@@ -6693,6 +6716,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 504545728997969110}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'texts.Array.data[27]'
+      value: 
+      objectReference: {fileID: 7412901383035833930}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'texts.Array.data[28]'
+      value: 
+      objectReference: {fileID: 8173492150229830921}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'texts.Array.data[29]'
+      value: 
+      objectReference: {fileID: 4658875305226070736}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'texts.Array.data[30]'
+      value: 
+      objectReference: {fileID: 6408991705794652810}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: ActivityQuestionImage
+      value: 
+      objectReference: {fileID: 1246658640}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: FilterPopupImageLight
+      value: 
+      objectReference: {fileID: 21300000, guid: 116e5b08367d0634db0b4ddf29e63482, type: 3}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'buttons.Array.data[0]'
       value: 
       objectReference: {fileID: 452387672}
@@ -6725,6 +6772,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4899056285137808630}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: ActivityQuestionImageDark
+      value: 
+      objectReference: {fileID: 21300000, guid: 41f0a42282369694e8a208a8596d8b7d, type: 3}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'quizButtons.Array.data[0]'
       value: 
       objectReference: {fileID: 452387672}
@@ -6732,6 +6783,10 @@ PrefabInstance:
       propertyPath: 'quizButtons.Array.data[1]'
       value: 
       objectReference: {fileID: 1339661014}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: ActivityQuestionImageLight
+      value: 
+      objectReference: {fileID: 21300000, guid: 14f83f7934c7aee4ca715657b0ea221a, type: 3}
     - target: {fileID: 8709770508441978661, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8778,7 +8833,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 116e5b08367d0634db0b4ddf29e63482, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
