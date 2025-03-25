@@ -54,8 +54,8 @@ public class GameManager : MonoBehaviour
     public const int MAX_BASIC_QUESTION_COUNT = 20;
     public const int MAX_SPECIAL_QUESTION_COUNT = 12;
 
-    private int totalSimpleQuestionCount;
-    private int totalSpecialQuestionCount;
+    public int totalSimpleQuestionCount;
+    public int totalSpecialQuestionCount;
 
     private List<SimpleQuestionDataModel> randomSimpleQstnList = new List<SimpleQuestionDataModel>();
     private List<SpecializedQuestionModel> randomSpecialQstnList = new List<SpecializedQuestionModel>();
@@ -301,7 +301,7 @@ public class GameManager : MonoBehaviour
         {
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
             {
-                Sprite sp = SaveImageFile(tex);
+                Sprite sp = TextureToSprite(tex);
                 if (!SimpleQuestionSprites.ContainsKey(data.id))
                 {
                     SimpleQuestionSprites.Add(data.id, sp);
@@ -358,7 +358,7 @@ public class GameManager : MonoBehaviour
         {
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
             {
-                Sprite sp = SaveImageFile(tex);
+                Sprite sp = TextureToSprite(tex);
                 SpecialQuestionSprites.Add(data.id, sp);
                 _specialIndex++;
                 if (_specialIndex < randomSpecialQstnList.Count)
@@ -434,7 +434,7 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    private Sprite SaveImageFile(Texture2D texture)
+    public Sprite TextureToSprite(Texture2D texture)
     {
         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }

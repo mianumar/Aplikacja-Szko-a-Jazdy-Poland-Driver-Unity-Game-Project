@@ -29,7 +29,7 @@ public class ActivitySelectionView : MonoBehaviour
     /// </summary>
     private void OnSummaryButtonClicked()
     {
-       // UIHandler.Instance.summaryScreenView.RenderView();
+        UIHandler.Instance.allQuestionsView.RenderView();
         Disable();
     }
 

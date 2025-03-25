@@ -90,22 +90,21 @@ public class ServerHandler : MonoBehaviour
         else
         {
             // Parse JSON response
-            string jsonResponse = request.downloadHandler.text;
+            string jsonResponse = request.downloadHandler.text.ToString();
             Debug.Log("Response: " + jsonResponse);
-
             // Deserialize JSON into C# object
             simpleQuestionListDataModel = JsonConvert.DeserializeObject<SimpleQuestionListDataModel>(jsonResponse);
 
             if (simpleQuestionListDataModel.status == "success")
             {
-                foreach (SimpleQuestionDataModel question in simpleQuestionListDataModel.data)
-                {
-                    Debug.Log($"ID: {question.id}, Question: {question.question}, Answer: {question.answer}, Categories: {question.categories}");
-                }
+                //foreach (SimpleQuestionDataModel question in simpleQuestionListDataModel.dataList)
+                //{
+                //    Debug.Log($"ID: {question.id}, Question: {question.question}, Answer: {question.answer}, Categories: {question.categories}");
+                //}
             }
             else
             {
-                Debug.LogError("API Error: " + simpleQuestionListDataModel.message);
+               // Debug.LogError("API Error: " + simpleQuestionListDataModel.message);
             }
 
         }
@@ -282,12 +281,12 @@ public class ServerHandler : MonoBehaviour
 [System.Serializable]
 public class SimpleQuestionDataModel
 {
-    public int id;
-    public string question;
-    public string answer;
-    public string media;
-    public string media_link;
-    public string categories;
+    public int id {  get; set; }
+    public string question { get; set; }
+    public int answer { get; set; }
+    public string media { get; set; }
+    public string media_link { get; set; }
+    public string categories { get; set; }
 }
 
 /// <summary>
@@ -296,9 +295,9 @@ public class SimpleQuestionDataModel
 [System.Serializable]
 public class SimpleQuestionListDataModel
 {
-    public string status;
-    public List<SimpleQuestionDataModel> data;
-    public string message; // Only used if an error occurs
+    public string status {get; set;}
+    public List<SimpleQuestionDataModel> data { get; set;}
+   // public string message; // Only used if an error occurs
 }
 
 /// <summary>
@@ -358,3 +357,5 @@ public class SpecializedQuestionListDataModel
     public string status { get; set; }
     public List<SpecializedQuestionModel> data { get; set; }
 }
+
+

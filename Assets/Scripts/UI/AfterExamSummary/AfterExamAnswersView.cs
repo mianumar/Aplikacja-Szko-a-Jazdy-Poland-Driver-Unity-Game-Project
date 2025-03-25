@@ -92,7 +92,7 @@ public class AfterExamAnswersView : MonoBehaviour
 
     private void OnCloseButtonClicked()
     {
-        UIHandler.Instance.activitySelectionView.RenderView();
+        UIHandler.Instance.summaryScreenView.RenderView();
         this.Disable();
     }
 

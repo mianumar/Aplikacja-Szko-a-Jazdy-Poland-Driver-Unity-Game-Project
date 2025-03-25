@@ -14,6 +14,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] public SummeryResultsView summaryScreenView;
     [SerializeField] public ExitPopup exitPopup;
     [SerializeField] public AfterExamAnswersView afterExamAnswersView;
+    [SerializeField] public AllQuestionsPanelView allQuestionsView;
 
     private Image splashScreenImage; // Reference to the child splash image
 
