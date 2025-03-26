@@ -3971,6 +3971,7 @@ MonoBehaviour:
   buttonClose: {fileID: 1446442827}
   summaryItemContentParent: {fileID: 1290583712}
   summaryItemPrefab: {fileID: 6644736109043503373, guid: c42722ac598a0a4468378a9aa682562b, type: 3}
+  scrollRect: {fileID: 1154415495}
   generatedConainerList: []
   startIndex: 1
   limit: 20
