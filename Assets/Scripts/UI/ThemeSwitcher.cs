@@ -166,8 +166,11 @@ public class ThemeSwitcher : MonoBehaviour
         {
             //StartCoroutine(FadeButton(button, darkMode));
             var buttonImage = button.GetComponent<Image>();
+            Debug.Log("buttonImage" + buttonImage.name);
             Sprite targetSprite = darkMode ? darkButtonSprite : lightButtonSprite;
+            buttonImage.sprite = targetSprite;
             Color targetButtonTextColor = darkMode ? darkTextColor : lightTextColor;
+            Debug.Log("darkMode" + darkMode);
 
         }
     }
