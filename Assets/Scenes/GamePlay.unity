@@ -5304,10 +5304,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuestionAnswerPanelView
       objectReference: {fileID: 0}
-    - target: {fileID: 271281285768299212, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 780728341872962474, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5389,25 +5385,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2683454127619041045, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: Skipped
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2683454127619041045, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
       propertyPath: videoPlayer
       value: 
       objectReference: {fileID: 981817120}
-    - target: {fileID: 2971566665294604443, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171619879503605271, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_TagString
-      value: Faded
-      objectReference: {fileID: 0}
-    - target: {fileID: 5511593978474373537, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
