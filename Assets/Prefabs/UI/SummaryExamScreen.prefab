@@ -647,7 +647,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Tw\xF3j Wynik"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: -7198460127543954989, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2806708545364371111
@@ -2405,7 +2405,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1489830761304821367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2493,7 +2493,7 @@ MonoBehaviour:
   totalPointsPercentText: {fileID: 4424314230630338886}
   viewAnswerButton: {fileID: 9112408391207037349}
   winLossFrameImage: {fileID: 6228670832912098728}
-  imageLoss: {fileID: 21300000, guid: 095010b27fd49f64f9daecec4f0cb8e9, type: 3}
+  imageLoss: {fileID: 21300000, guid: 1e732988454ac0a4a95ffb2e1afcd2bb, type: 3}
   imageWon: {fileID: 21300000, guid: b76ec43367b00404199687b69ce40bc0, type: 3}
   PASS_TEXT: Pozytywny
   FAILED_TEXT: Negatywny
@@ -3784,18 +3784,22 @@ PrefabInstance:
     - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 5e2353c6282c5f54a950b092b1d45296, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_fontColor.b
-      value: 0.8862745
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_fontColor.g
-      value: 0.654902
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_fontColor.r
-      value: 0.105882354
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_fontSizeBase
@@ -3813,6 +3817,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4293043995
       objectReference: {fileID: 0}
+    - target: {fileID: 2904204964834109741, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8083371122654121273, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_Name
       value: RepeatButtonPrefab
@@ -3824,7 +3832,7 @@ PrefabInstance:
     - target: {fileID: 8276661751353684222, guid: 03b48fc5a488867428220f08ae9c3515, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 649223268058989734, guid: 22dcea5f866eced46b0072b80d0b2804, type: 3}
+      objectReference: {fileID: 21300000, guid: 559007c578f81e44d932c9d538f1b102, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
