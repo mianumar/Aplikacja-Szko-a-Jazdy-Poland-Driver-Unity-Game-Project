@@ -44,6 +44,11 @@ public class QAPanelView : MonoBehaviour
     [SerializeField] private Image bgImageTimeToAns;
     [SerializeField] private GameObject videoPlayerPanel;
 
+    public string lightModeButtonDefaultColor = "#E1EDF0";
+    public string lightModeButtonSelectedColor = "#7193A0";
+    public string darkModeButtonSelectedColor = "#476B7A";
+    public string darkModeButtonDefaultColor = "#7193A0";
+
     [Header("Video Player Panel")]
     public VideoPlayer videoPlayer;
     public Slider videoDurationBar;
@@ -72,12 +77,16 @@ public class QAPanelView : MonoBehaviour
     public bool IsMediaDone = false;
 
     public static Action<string> ResultAction;
+    public static Action QuestionTimeEndAction;
     private bool Skipped = true;
     private float totalGameTime;
+
+    public ResultType currectSelectedResult;
 
     public void RenderView()
     {
         ResultAction += OnResultSelected;
+        QuestionTimeEndAction += OnQuestionTimeEnd;
         ResetData();
 
         AddListeners();
@@ -90,7 +99,11 @@ public class QAPanelView : MonoBehaviour
 
     }
 
-  
+    private void OnQuestionTimeEnd()
+    {
+        Skipped = true;
+        OnNextButtonClicked();
+    }
 
     IEnumerator CheckForMediaDownloaded()
     {
@@ -143,6 +156,9 @@ public class QAPanelView : MonoBehaviour
 
     private void RenderQuestionPanelView(SimpleQuestionDataModel simpleQuestionData)
     {
+        buttonNo.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
+        buttonYes.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
+
         if (simpleQuestionData != null)
         {
             timeToReadQuestionPanel.SetActive(true);
@@ -154,8 +170,8 @@ public class QAPanelView : MonoBehaviour
 
             optionSimpelObject.SetActive(true);
             optionSpecialObject.SetActive(false);
-            textCurrentQuestion.text = (currentQesIndex+1).ToString();
-            sliderRemainingQuestionsToAns.value = ((currentQesIndex+1) / (32*1.0f)) * 100;
+            textCurrentQuestion.text = (currentQesIndex + 1).ToString();
+            sliderRemainingQuestionsToAns.value = ((currentQesIndex + 1) / (32 * 1.0f)) * 100;
             textDescription.text = simpleQuestionData.question;
 
             GameUtils.GameTimer.CoutDownTimer(this, BASIC_READ_TIME, (timeRemain) =>
@@ -198,7 +214,7 @@ public class QAPanelView : MonoBehaviour
             Debug.Log("Clip length :: " + videoPlayer.clip.length);
             // UpdateVideoplayBar(videoPlayer.clip.length);
             videoPlayer.Play();
-           
+
         }
     }
 
@@ -247,15 +263,15 @@ public class QAPanelView : MonoBehaviour
     {
         buttonStart.gameObject.SetActive(false);
 
-        textCurrentQuestion.text = (currentQesIndex+1).ToString();
-        sliderRemainingQuestionsToAns.value = ((currentQesIndex+1) / (32 * 1.0f)) * 100;
+        textCurrentQuestion.text = (currentQesIndex + 1).ToString();
+        sliderRemainingQuestionsToAns.value = ((currentQesIndex + 1) / (32 * 1.0f)) * 100;
         optionSimpelObject.SetActive(false);
         optionSpecialObject.SetActive(true);
         timeToReadQuestionPanel.SetActive(false);
-        if (currentQesIndex == (GameConstants.MAX_QUESTION_COUNT-1))
-        {
-            buttonNext.gameObject.SetActive(false);
-        }
+        //if (currentQesIndex == (GameConstants.MAX_QUESTION_COUNT - 1))
+        //{
+        //   // buttonNext.gameObject.SetActive(false);
+        //}
         specialQuestionPanelView.RenderView(specializedQuestion);
     }
 
@@ -263,27 +279,19 @@ public class QAPanelView : MonoBehaviour
     {
         if (_dataModelSpecial.answer.Equals(selectedResult))
         {
-            int points = GameConstants.GetSpecialQuestionsPoint((currentQesIndex -20));
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT , QuestionType.SPECIAL);
+            currectSelectedResult = ResultType.CORRECT;
+            // int points = GameConstants.GetSpecialQuestionsPoint((currentQesIndex - 20));
+            // GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT, QuestionType.SPECIAL);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, QuestionType.SPECIAL);
+            currectSelectedResult = ResultType.WRONG;
+            //GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, QuestionType.SPECIAL);
         }
-
-        //Render Summary If all questions done
-        if (currentQesIndex == (GameConstants.MAX_QUESTION_COUNT-1))
-        {
-           GameUtils.GameTimer.StopClock(this);
-           GameManager.Instance.UpdateGameTimerInSummaryData(totalGameTime);
-            Disable();
-            UIHandler.Instance.summaryScreenView.RenderView();
-        }
-        else
-        {
-            Skipped = false;
-            OnNextButtonClicked();
-        }
+        Skipped = false;
+        ////Render Summary If all questions done
+       
+        
     }
 
 
@@ -312,14 +320,34 @@ public class QAPanelView : MonoBehaviour
     /// </summary>
     private void OnNextButtonClicked()
     {
+        int points = 0;
+        QuestionType questionType = currentQesIndex < 20 ? QuestionType.BASIC : QuestionType.SPECIAL;
         if (!Skipped)
         {
             Skipped = true;
+
+            if (currectSelectedResult == ResultType.CORRECT)
+            {
+                if (questionType == QuestionType.BASIC)
+                {
+                    points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
+                }
+                else
+                {
+                    points = GameConstants.GetSpecialQuestionsPoint((currentQesIndex - 20));
+                }
+                GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT, questionType);
+            }
+            else
+            {
+                GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, questionType);
+            }
         }
-        else {
-            QuestionType questionType = currentQesIndex < 20 ?QuestionType.BASIC : QuestionType.SPECIAL;
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.SKIPPED,questionType);
-          
+        else
+        {
+
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.SKIPPED, questionType);
+
         }
         videoPlayer.Stop();
         currentQesIndex += 1;
@@ -337,6 +365,13 @@ public class QAPanelView : MonoBehaviour
         else
         {
             buttonNext.gameObject.SetActive(false);
+           // if (currentQesIndex == (GameConstants.MAX_QUESTION_COUNT - 1))
+            {
+                GameUtils.GameTimer.StopClock(this);
+                GameManager.Instance.UpdateGameTimerInSummaryData(totalGameTime);
+                Disable();
+                UIHandler.Instance.summaryScreenView.RenderView();
+            }
         }
 
 
@@ -355,7 +390,7 @@ public class QAPanelView : MonoBehaviour
         string extention = GameConstants.GetFileExtensionFromUrl(_dataModel.media_link);
         if (extention.Equals(".mp4"))
         {
-            DisplayVideoFileForQuestion(_dataModel.id+extention);
+            DisplayVideoFileForQuestion(_dataModel.id + extention);
         }
         else if (extention.Equals(".jpg"))
         {
@@ -380,32 +415,39 @@ public class QAPanelView : MonoBehaviour
 
     private void OnNoButtonClicked()
     {
+        buttonNo.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonSelectedColor : lightModeButtonSelectedColor);
         Skipped = false;
-        if(_dataModel.answer.Equals("0"))
+        if (_dataModel.answer.Equals(0))
         {
-            int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT, QuestionType.BASIC);
+            currectSelectedResult = ResultType.CORRECT;
+            //  int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
+            // GameManager.Instance.UpdateUserSummaryData(currentQesIndex,points, ResultType.CORRECT, QuestionType.BASIC);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex,0, ResultType.WRONG, QuestionType.BASIC);
+            currectSelectedResult = ResultType.WRONG;
+            // GameManager.Instance.UpdateUserSummaryData(currentQesIndex,0, ResultType.WRONG, QuestionType.BASIC);
         }
-        OnNextButtonClicked();
+        // OnNextButtonClicked();
     }
 
     private void OnYesButtonClicked()
     {
+        buttonYes.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonSelectedColor : lightModeButtonSelectedColor);
+
         Skipped = false;
-        if (_dataModel.answer.Equals("1"))
+        if (_dataModel.answer.Equals(1))
         {
-            int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT, QuestionType.BASIC);
+            currectSelectedResult = ResultType.CORRECT;
+            // int points = GameConstants.GetSimpleQuestionsPoint(currentQesIndex);
+            // GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT, QuestionType.BASIC);
         }
         else
         {
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, QuestionType.BASIC);
+            currectSelectedResult = ResultType.WRONG;
+            // GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, QuestionType.BASIC);
         }
-        OnNextButtonClicked();
+        //OnNextButtonClicked();
     }
 
     private void OnCloseClicked()
@@ -416,6 +458,7 @@ public class QAPanelView : MonoBehaviour
 
     private void ResetData()
     {
+
         currentQesIndex = 0;
         textTimer.text = "0:00";
         remainTimetoReadQuestionSlider.fillAmount = 1;
@@ -434,6 +477,7 @@ public class QAPanelView : MonoBehaviour
     public void Disable()
     {
         ResultAction -= OnResultSelected;
+        QuestionTimeEndAction -= OnQuestionTimeEnd;
         gameObject.SetActive(false);
     }
 

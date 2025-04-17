@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using System;
 
 public class SpecialQuestionPanelView : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class SpecialQuestionPanelView : MonoBehaviour
 
     private int SPECIAL_ANSWER_TIME = 50;
 
+    public static Action<int,string> OptionSelectedAction;
+
 
     [Header("Timer COLOR")]
 
@@ -28,6 +31,7 @@ public class SpecialQuestionPanelView : MonoBehaviour
 
     public void RenderView(SpecializedQuestionModel _data)
     {
+        OptionSelectedAction += OnOptionSelected;
         gameObject.SetActive(true);
         this._data = _data;
         questionText.text = _data.question;
@@ -43,11 +47,24 @@ public class SpecialQuestionPanelView : MonoBehaviour
             remainTimeToAnsSlider.color = timeRemain < (SPECIAL_ANSWER_TIME * 0.25f) ? timeEndColor : timeStartColor;
             if (timeRemain <= 0)
             {
+                QAPanelView.QuestionTimeEndAction?.Invoke();
                 Debug.LogError("Reading Timer End :: NEXT QUESTION");
                
             }
         });
 
+    }
+
+    private void OnOptionSelected(int selectedIndex , string optionText)
+    {
+        for (int i = 0; i < options.Count; i++)
+        {
+            if(selectedIndex - 1 == i)
+                continue;
+            options[i].OnOptionDeselected();
+        }
+        // options[selectedIndex-1].OnOptionSelected();
+        QAPanelView.ResultAction?.Invoke(optionText);
     }
 
     private void RenderQuestionImage(SpecializedQuestionModel _data)
@@ -84,6 +101,7 @@ public class SpecialQuestionPanelView : MonoBehaviour
 
     private void OnDisable()
     {
+        OptionSelectedAction -= OnOptionSelected;
         GameUtils.GameTimer.StopCoundownTimer(this);
     }
 

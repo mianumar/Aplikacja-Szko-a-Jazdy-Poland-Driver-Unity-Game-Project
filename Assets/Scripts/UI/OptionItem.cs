@@ -8,8 +8,9 @@ public class OptionItem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI optionText;
     [SerializeField] private TextMeshProUGUI contextText;
-    [SerializeField] private Toggle optionToggle;
+    [SerializeField] private Button optionButton;
     [SerializeField] private Image checkBox;
+    public int index;
 
     public Sprite defaultSprite;
     public Sprite selectedSprite;
@@ -18,22 +19,28 @@ public class OptionItem : MonoBehaviour
     {
         optionText.text = option;
         contextText.text = context;
-        optionToggle.isOn = false;
+       
         checkBox.sprite =  defaultSprite;
         gameObject.SetActive(true);
 
-        optionToggle.onValueChanged.RemoveAllListeners();
-        optionToggle.onValueChanged.AddListener(OnOptionSelected);
+        optionButton.onClick.RemoveAllListeners();
+        optionButton.onClick.AddListener(OnOptionSelected);
     }
 
-    private void OnOptionSelected(bool flag)
+    public void OnOptionSelected()
     {
-        checkBox.sprite = flag ? selectedSprite : defaultSprite;
+        checkBox.sprite = selectedSprite;
 
-        if (flag)
+        //if (flag)
         {
             Debug.Log("Selected Option :: " + optionText.text);
-            QAPanelView.ResultAction?.Invoke(optionText.text);
+            // 
+            SpecialQuestionPanelView.OptionSelectedAction?.Invoke(index, optionText.text);
         }
+    }
+
+    public void OnOptionDeselected()
+    {
+        checkBox.sprite = defaultSprite;
     }
 }

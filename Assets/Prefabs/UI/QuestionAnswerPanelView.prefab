@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &780728341872962474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -121,6 +121,10 @@ MonoBehaviour:
   textTimeToAns: {fileID: 5847668382701355262}
   bgImageTimeToAns: {fileID: 8007253032389483390}
   videoPlayerPanel: {fileID: 7848487122256956738}
+  lightModeButtonDefaultColor: '#E1EDF0'
+  lightModeButtonSelectedColor: '#7193A0'
+  darkModeButtonSelectedColor: '#476B7A'
+  darkModeButtonDefaultColor: '#7193A0'
   videoPlayer: {fileID: 0}
   videoDurationBar: {fileID: 1066406185809341623}
   optionSimpelObject: {fileID: 559757887490927351}
@@ -142,6 +146,7 @@ MonoBehaviour:
     media_link: 
     categories: 
   IsMediaDone: 0
+  currectSelectedResult: 0
 --- !u!1 &300504089183108120
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +180,7 @@ RectTransform:
   m_Father: {fileID: 7739565995232555095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2191,8 +2196,8 @@ GameObject:
   - component: {fileID: 8080656600964755059}
   - component: {fileID: 6922990915225149601}
   - component: {fileID: 2280200193803225231}
-  - component: {fileID: 3728744216674960037}
   - component: {fileID: 5010118144358401191}
+  - component: {fileID: 3067152190558544759}
   m_Layer: 5
   m_Name: GreyQuestionButtonPrefab (1)
   m_TagString: Untagged
@@ -2219,8 +2224,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540.05, y: -290}
-  m_SizeDelta: {x: 820, y: 180}
+  m_AnchoredPosition: {x: 495, y: -309.98}
+  m_SizeDelta: {x: 820, y: 200.6821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8080656600964755059
 CanvasRenderer:
@@ -2276,7 +2281,7 @@ MonoBehaviour:
   pressedSprite: {fileID: -9006837595976158770, guid: 06a91b18d42813841ad4beb65de89fe9, type: 3}
   pressAmount: 0.05
   shrinkFactor: 0.96
---- !u!114 &3728744216674960037
+--- !u!114 &5010118144358401191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2285,7 +2290,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3404284630427916587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: d81e0e762168bae4fa4a6b9065467a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionText: {fileID: 8461466510572557779}
+  contextText: {fileID: 7704711324903619097}
+  optionButton: {fileID: 3067152190558544759}
+  checkBox: {fileID: 1542744203493159240}
+  index: 2
+  defaultSprite: {fileID: 2965393602981919169, guid: 085a9db10e0060849af9348bff886a20, type: 3}
+  selectedSprite: {fileID: -6193114499779827319, guid: 653fcb86205b7824698a6ac5d9dbe26c, type: 3}
+--- !u!114 &3067152190558544759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404284630427916587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2317,31 +2341,9 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 6922990915225149601}
-  toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
-  onValueChanged:
+  m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
---- !u!114 &5010118144358401191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3404284630427916587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81e0e762168bae4fa4a6b9065467a57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  optionText: {fileID: 8461466510572557779}
-  contextText: {fileID: 7704711324903619097}
-  optionToggle: {fileID: 3728744216674960037}
-  checkBox: {fileID: 1542744203493159240}
-  defaultSprite: {fileID: 2965393602981919169, guid: 085a9db10e0060849af9348bff886a20, type: 3}
-  selectedSprite: {fileID: -6193114499779827319, guid: 653fcb86205b7824698a6ac5d9dbe26c, type: 3}
 --- !u!1 &3495863828784270677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,10 +2377,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 780728341872962474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 110}
-  m_SizeDelta: {x: 419, y: 122}
+  m_AnchorMin: {x: 0.51946837, y: 0.057294518}
+  m_AnchorMax: {x: 0.907412, y: 0.12083935}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3039651182757858000
 CanvasRenderer:
@@ -2474,8 +2476,8 @@ GameObject:
   - component: {fileID: 4145529233453713365}
   - component: {fileID: 6318520886887154808}
   - component: {fileID: 1030229917084224917}
-  - component: {fileID: 2045851960503495732}
   - component: {fileID: 2747038153205769302}
+  - component: {fileID: 3082606724540502809}
   m_Layer: 5
   m_Name: GreyQuestionButtonPrefab (2)
   m_TagString: Untagged
@@ -2502,8 +2504,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540.05, y: -500}
-  m_SizeDelta: {x: 820, y: 180}
+  m_AnchoredPosition: {x: 495, y: -522.13916}
+  m_SizeDelta: {x: 820, y: 195.6517}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4145529233453713365
 CanvasRenderer:
@@ -2559,7 +2561,7 @@ MonoBehaviour:
   pressedSprite: {fileID: -9006837595976158770, guid: 06a91b18d42813841ad4beb65de89fe9, type: 3}
   pressAmount: 0.05
   shrinkFactor: 0.96
---- !u!114 &2045851960503495732
+--- !u!114 &2747038153205769302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2568,7 +2570,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3536863883727991123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: d81e0e762168bae4fa4a6b9065467a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionText: {fileID: 4911505424842593097}
+  contextText: {fileID: 6908613089512802030}
+  optionButton: {fileID: 3082606724540502809}
+  checkBox: {fileID: 5003279464908376831}
+  index: 3
+  defaultSprite: {fileID: 2965393602981919169, guid: 085a9db10e0060849af9348bff886a20, type: 3}
+  selectedSprite: {fileID: -6193114499779827319, guid: 653fcb86205b7824698a6ac5d9dbe26c, type: 3}
+--- !u!114 &3082606724540502809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536863883727991123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2600,31 +2621,9 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 6318520886887154808}
-  toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
-  onValueChanged:
+  m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
---- !u!114 &2747038153205769302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3536863883727991123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81e0e762168bae4fa4a6b9065467a57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  optionText: {fileID: 4911505424842593097}
-  contextText: {fileID: 6908613089512802030}
-  optionToggle: {fileID: 2045851960503495732}
-  checkBox: {fileID: 5003279464908376831}
-  defaultSprite: {fileID: 2965393602981919169, guid: 085a9db10e0060849af9348bff886a20, type: 3}
-  selectedSprite: {fileID: -6193114499779827319, guid: 653fcb86205b7824698a6ac5d9dbe26c, type: 3}
 --- !u!1 &3740256542005427396
 GameObject:
   m_ObjectHideFlags: 0
@@ -4276,10 +4275,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 780728341872962474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.063140415, y: 0.4357869}
-  m_AnchorMax: {x: 0.9372689, y: 0.5364596}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.000009536743, y: 0.000002861023}
+  m_AnchorMin: {x: 0.06314041, y: 0.44200024}
+  m_AnchorMax: {x: 0.9372689, y: 0.542673}
+  m_AnchoredPosition: {x: 6.317108, y: 0}
+  m_SizeDelta: {x: -12.6351, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &601619784698552834
 CanvasRenderer:
@@ -4338,19 +4337,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 32
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 17
+  m_lineSpacing: 5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -5176,10 +5175,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 780728341872962474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 110}
-  m_SizeDelta: {x: 419, y: 122}
+  m_AnchorMin: {x: 0.092587985, y: 0.057269625}
+  m_AnchorMax: {x: 0.48053166, y: 0.12081446}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4290813766101621024
 CanvasRenderer:
@@ -6200,8 +6199,8 @@ GameObject:
   - component: {fileID: 5163487353428547266}
   - component: {fileID: 2374030685165838662}
   - component: {fileID: 9196378185184932492}
-  - component: {fileID: 1647023042397376759}
   - component: {fileID: 7920708514002931790}
+  - component: {fileID: 8610176021233368310}
   m_Layer: 5
   m_Name: GreyQuestionButtonPrefab
   m_TagString: Untagged
@@ -6228,8 +6227,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540.05, y: -90}
-  m_SizeDelta: {x: 820, y: 180}
+  m_AnchoredPosition: {x: 495, y: -97.15916}
+  m_SizeDelta: {x: 820, y: 194.3183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5163487353428547266
 CanvasRenderer:
@@ -6285,7 +6284,7 @@ MonoBehaviour:
   pressedSprite: {fileID: -9006837595976158770, guid: 06a91b18d42813841ad4beb65de89fe9, type: 3}
   pressAmount: 0.05
   shrinkFactor: 0.96
---- !u!114 &1647023042397376759
+--- !u!114 &7920708514002931790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6294,7 +6293,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 8153470726023933674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: d81e0e762168bae4fa4a6b9065467a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionText: {fileID: 7751193175724288113}
+  contextText: {fileID: 5357224576350864894}
+  optionButton: {fileID: 8610176021233368310}
+  checkBox: {fileID: 6942071193461786485}
+  index: 1
+  defaultSprite: {fileID: 2965393602981919169, guid: 085a9db10e0060849af9348bff886a20, type: 3}
+  selectedSprite: {fileID: -6193114499779827319, guid: 653fcb86205b7824698a6ac5d9dbe26c, type: 3}
+--- !u!114 &8610176021233368310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8153470726023933674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -6326,31 +6344,9 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 2374030685165838662}
-  toggleTransition: 1
-  graphic: {fileID: 0}
-  m_Group: {fileID: 0}
-  onValueChanged:
+  m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
---- !u!114 &7920708514002931790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8153470726023933674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81e0e762168bae4fa4a6b9065467a57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  optionText: {fileID: 7751193175724288113}
-  contextText: {fileID: 5357224576350864894}
-  optionToggle: {fileID: 1647023042397376759}
-  checkBox: {fileID: 6942071193461786485}
-  defaultSprite: {fileID: 2965393602981919169, guid: 085a9db10e0060849af9348bff886a20, type: 3}
-  selectedSprite: {fileID: -6193114499779827319, guid: 653fcb86205b7824698a6ac5d9dbe26c, type: 3}
 --- !u!1 &8918974750207244764
 GameObject:
   m_ObjectHideFlags: 0
