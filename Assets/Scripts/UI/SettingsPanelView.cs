@@ -22,9 +22,13 @@ public class SettingsPanelView : MonoBehaviour
     private float volumePercent;
     private bool isLightMode;
     private bool isMusicOn;
+
+    private bool isDataSaved = false;
+    private GameSettings gameSettings;
     public void RenderView(GameSettings gameSettings)
     {
-
+        this.gameSettings = gameSettings;
+        isDataSaved = false;
         AddListeners();
 
         musicToggleImage = toggleMusic.GetComponent<Image>();
@@ -102,6 +106,7 @@ public class SettingsPanelView : MonoBehaviour
     /// </summary>
     private void OnSaveButtonClicked()
     {
+        isDataSaved = true;
         GameSettings gameSettings = new GameSettings(volumePercent, isMusicOn, isLightMode);
         
         DatabaseHandler.Instance.SaveUserGameSettings(GameManager.Instance.UserID, gameSettings);
@@ -110,6 +115,10 @@ public class SettingsPanelView : MonoBehaviour
  
     private void OnBackButtonClicked()
     {
+        if (!isDataSaved)
+        {
+            RenderView(this.gameSettings);
+        }
         UIHandler.Instance.mainMenuView.RenderView();
         Disable();
     }
