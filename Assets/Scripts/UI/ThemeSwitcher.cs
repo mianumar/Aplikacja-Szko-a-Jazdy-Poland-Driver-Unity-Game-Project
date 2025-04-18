@@ -53,6 +53,11 @@ public class ThemeSwitcher : MonoBehaviour
     public Sprite IconSignBGLight;
     public Sprite IconSignBGDark;
     public Image IconSignBG;
+    
+    [Header("Checkbox BG Image References")]
+    public Sprite CheckboxBGLight;
+    public Sprite CheckboxBGDark;
+    public Image CheckboxBG;
 
     [Header("Summary Screen")]
     public Image resultSummaryBG;
@@ -154,12 +159,15 @@ public class ThemeSwitcher : MonoBehaviour
         FilterPopupImage.sprite = darkMode ? FilterPopupImageDark : FilterPopupImageLight;
         ActivityQuestionImage.sprite = darkMode ? ActivityQuestionImageDark : ActivityQuestionImageLight;
         resultSummaryBG.sprite = darkMode ? resultSummaryDarkMode : resultSummaryLightMode;
+        CheckboxBG.sprite = darkMode ? CheckboxBGDark : CheckboxBGLight;
 
         ContainerBG1.color = darkMode ? containerDarkColor : lightBackgroundColor;
         ContainerBG2.color = darkMode ? containerDarkColor : lightBackgroundColor;
 
         InnerContainerBG1.color = darkMode ? InnerContainerDarkColor : lightBackgroundColor;
         InnerContainerBG2.color = darkMode ? InnerContainerDarkColor : lightBackgroundColor;
+
+
 
         // Apply button color and sprite changes with a fade
         foreach (var button in quizButtons)
