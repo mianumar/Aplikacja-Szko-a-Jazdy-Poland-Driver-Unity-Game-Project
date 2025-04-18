@@ -36,6 +36,14 @@ public class ThemeSwitcher : MonoBehaviour
     [Header("Cross Image References")]
     public Sprite CrossImageLight;
     public Sprite CrossImageDark;
+    
+    [Header("DarkLightMode Checkbox References")]
+    public Sprite LightModeSun;
+    public Sprite LightModeMoon;
+    public Sprite DarkModeSun;
+    public Sprite DarkModeMoon;
+    public Image SunCheckbox;
+    public Image MoonCheckbox;
 
     [Header("Exit Popup Image References")]
     public Sprite ExitPopupImageLight;
@@ -111,6 +119,7 @@ public class ThemeSwitcher : MonoBehaviour
     {
         isDarkMode = IsDarkMode;
         StartCoroutine(FadeToMode(IsDarkMode));
+        StartCoroutine(TransitionImages(IsDarkMode));
     }
 
     // Coroutine to smoothly transition between light and dark mode
@@ -195,6 +204,46 @@ public class ThemeSwitcher : MonoBehaviour
         }
     }
 
+    public IEnumerator TransitionImages(bool isDarktMode)
+    {
+        float timeElapsed = 0f;
+
+        // Store the initial sprites
+        Sprite initialSunSprite = SunCheckbox.sprite;
+        Sprite initialMoonSprite = MoonCheckbox.sprite;
+        Sprite initialCheckboxSprite = CheckboxBG.sprite;
+
+        // Determine the target sprites based on the mode
+        Sprite targetSunSprite = isDarktMode ? DarkModeSun : LightModeSun;
+        Sprite targetMoonSprite = isDarktMode ? DarkModeMoon : LightModeMoon;
+        Sprite targetCheckboxSprite = isDarkMode ? CheckboxBGDark : CheckboxBGLight;
+
+        while (timeElapsed < transitionDuration)
+        {
+            // Lerp the images
+            SunCheckbox.sprite = LerpSprite(initialSunSprite, targetSunSprite, timeElapsed / transitionDuration);
+            MoonCheckbox.sprite = LerpSprite(initialMoonSprite, targetMoonSprite, timeElapsed / transitionDuration);
+            CheckboxBG.sprite = LerpSprite(initialCheckboxSprite, targetCheckboxSprite, timeElapsed / transitionDuration);
+
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the final target sprites are set
+        SunCheckbox.sprite = targetSunSprite;
+        MoonCheckbox.sprite = targetMoonSprite;
+    }
+
+    // Lerp method for sprites
+    private Sprite LerpSprite(Sprite start, Sprite end, float t)
+    {
+        // The lerping between sprites would typically be handled using a fading or blending method,
+        // but Unity doesn't directly support lerping between sprites. Instead, you can implement
+        // sprite switching with fading using CanvasGroup or a similar component.
+        // Here's a simple example using a fade-in-out effect for the sprites.
+
+        return t < 0.5f ? start : end;
+    }
     // Coroutine to fade the text color smoothly
     IEnumerator FadeTextColor(TMP_Text text, bool darkMode)
     {

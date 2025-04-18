@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f4611ad94e9ae5f4a9f0a5d4c281e38c
+guid: 75dfafd3d893fdd48a46e149322bc0b3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5453408320482324801
-    second: Group 367_0
+      213: -5519724819605822052
+    second: CheckboxDarkMode_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -110,19 +110,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Group 367_0
+      name: CheckboxDarkMode_0
       rect:
         serializedVersion: 2
         x: 8
@@ -154,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 141328d59f56eab40800000000000000
-      internalID: 5453408320482324801
+      spriteID: c95ec75758ff563b0800000000000000
+      internalID: -5519724819605822052
       vertices: []
       indices: 
       edges: []
@@ -174,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Group 367_0: 5453408320482324801
+      CheckboxDarkMode_0: -5519724819605822052
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
