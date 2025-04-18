@@ -24,6 +24,8 @@ public class ThemeSwitcher : MonoBehaviour
     public Sprite darkButtonSprite;
     public Sprite lightSpecialButtonSprite;
     public Sprite darkSpecialButtonSprite;
+    public Sprite lightSpecialtoggleSprite;
+    public Sprite darkSpecialtoggleSprite;
 
     [Header("Background Reference")]
     public Image commonBackgroundImage;
@@ -34,6 +36,7 @@ public class ThemeSwitcher : MonoBehaviour
     public Button[] quizButtons;
     public Button[] SpecialQuestionsButtons;
     public Image[] CrossImage;
+    public Image[] SpecialQuestionToggleImages;
     public Image[] TopBarBGImage;
 
     [Header("Cross Image References")]
@@ -88,7 +91,6 @@ public class ThemeSwitcher : MonoBehaviour
     public Color InnerContainerDarkColor;
 
 
-    //
     public bool isDarkMode = false;
 
     private bool isPanelHidden = false;
@@ -179,6 +181,7 @@ public class ThemeSwitcher : MonoBehaviour
             }
         }
 
+
         ExitPopupImage.sprite = darkMode ? ExitPopupImageDark : ExitPopupImageLight;
         FilterPopupImage.sprite = darkMode ? FilterPopupImageDark : FilterPopupImageLight;
         ActivityQuestionImage.sprite = darkMode ? ActivityQuestionImageDark : ActivityQuestionImageLight;
@@ -217,6 +220,15 @@ public class ThemeSwitcher : MonoBehaviour
             Color targetButtonTextColor = darkMode ? darkTextColor : lightTextColor;
             Debug.Log("darkMode" + darkMode);
 
+        }
+
+        foreach (var sptoggleimage in SpecialQuestionToggleImages)
+        {
+            //cross.sprite = darkMode ? CrossImageDark : CrossImageLight;
+            if (sptoggleimage != null)
+            {
+                sptoggleimage.sprite = darkMode ? darkSpecialtoggleSprite : lightSpecialtoggleSprite;
+            }
         }
     }
 

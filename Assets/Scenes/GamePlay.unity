@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &32975791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6942071193461786485, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
+  m_PrefabInstance: {fileID: 1906075959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &49735535 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7751193175724288113, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
@@ -1631,6 +1642,17 @@ MonoBehaviour:
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7073244996461868441, guid: 14687570ba65a8c4ab0d33a2c3062bf7, type: 3}
   m_PrefabInstance: {fileID: 289722055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &736011742 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5003279464908376831, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
+  m_PrefabInstance: {fileID: 1906075959}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -5403,6 +5425,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866741361}
   m_CullTransparentMesh: 1
+--- !u!114 &1885282787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1542744203493159240, guid: 6915382ae456af748bd4d32696c5800d, type: 3}
+  m_PrefabInstance: {fileID: 1906075959}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1906075959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6858,6 +6891,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fcf17bbb8f6ba7d428848392ce150954, type: 3}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: darkSpecialtoggleSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0debdcc7ced0e564287e03029c1e5017, type: 3}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: 'CrossImage.Array.data[0]'
       value: 
       objectReference: {fileID: 1910186100}
@@ -6881,6 +6918,10 @@ PrefabInstance:
       propertyPath: lightSpecialButtonSprite
       value: 
       objectReference: {fileID: -8319356071924080726, guid: 295a1f3485f97ae4eb1c55d146656fb8, type: 3}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: lightSpecialtoggleSprite
+      value: 
+      objectReference: {fileID: 2965393602981919169, guid: 085a9db10e0060849af9348bff886a20, type: 3}
     - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: ActivityQuestionImageDark
       value: 
@@ -6929,6 +6970,22 @@ PrefabInstance:
       propertyPath: 'SpecialQuestionsButtons.Array.data[2]'
       value: 
       objectReference: {fileID: 787579304}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: SpecialQuestionToggleImages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'SpecialQuestionToggleImages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 736011742}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'SpecialQuestionToggleImages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1885282787}
+    - target: {fileID: 6259816840686307001, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
+      propertyPath: 'SpecialQuestionToggleImages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 32975791}
     - target: {fileID: 8709770508441978661, guid: 7c4a7b5119bba234f81d85e767f6b423, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
