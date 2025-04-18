@@ -22,6 +22,8 @@ public class ThemeSwitcher : MonoBehaviour
     [Header("Button Sprites Reference")]
     public Sprite lightButtonSprite;
     public Sprite darkButtonSprite;
+    public Sprite lightSpecialButtonSprite;
+    public Sprite darkSpecialButtonSprite;
 
     [Header("Background Reference")]
     public Image commonBackgroundImage;
@@ -30,6 +32,7 @@ public class ThemeSwitcher : MonoBehaviour
     public TMP_Text[] texts;
     public TMP_Text mainMenuTitletext;
     public Button[] quizButtons;
+    public Button[] SpecialQuestionsButtons;
     public Image[] CrossImage;
     public Image[] TopBarBGImage;
 
@@ -197,6 +200,19 @@ public class ThemeSwitcher : MonoBehaviour
             var buttonImage = button.GetComponent<Image>();
             Debug.Log("buttonImage" + buttonImage.name);
             Sprite targetSprite = darkMode ? darkButtonSprite : lightButtonSprite;
+            buttonImage.sprite = targetSprite;
+            Color targetButtonTextColor = darkMode ? darkTextColor : lightTextColor;
+            Debug.Log("darkMode" + darkMode);
+
+        }
+
+        // Apply button color and sprite changes with a fade
+        foreach (var spbutton in SpecialQuestionsButtons)
+        {
+            //StartCoroutine(FadeButton(button, darkMode));
+            var buttonImage = spbutton.GetComponent<Image>();
+            Debug.Log("buttonImage" + buttonImage.name);
+            Sprite targetSprite = darkMode ? darkSpecialButtonSprite : lightSpecialButtonSprite;
             buttonImage.sprite = targetSprite;
             Color targetButtonTextColor = darkMode ? darkTextColor : lightTextColor;
             Debug.Log("darkMode" + darkMode);
