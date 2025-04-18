@@ -12,6 +12,8 @@ public class ThemeSwitcher : MonoBehaviour
     public Color lightTextColor = Color.black;
     public Color darkTextColor = Color.white;
     public Color darkFaddedTextColor = Color.gray;
+    public Color topBarLightBGColor;
+    public Color topBarDarkBGColor;
 
     [Header("MainMenu Title Colors References")]
     public Color darkMainMenuTitleTextColor = Color.gray;
@@ -29,6 +31,7 @@ public class ThemeSwitcher : MonoBehaviour
     public TMP_Text mainMenuTitletext;
     public Button[] quizButtons;
     public Image[] CrossImage;
+    public Image[] TopBarBGImage;
 
     [Header("Cross Image References")]
     public Sprite CrossImageLight;
@@ -152,6 +155,15 @@ public class ThemeSwitcher : MonoBehaviour
             if (cross != null)
             {
                 cross.sprite = darkMode ? CrossImageDark : CrossImageLight;
+            }
+        }
+
+        foreach (var image in TopBarBGImage)
+        {
+            //cross.sprite = darkMode ? CrossImageDark : CrossImageLight;
+            if (image != null)
+            {
+                image.color = darkMode ? topBarDarkBGColor : topBarLightBGColor;
             }
         }
 
