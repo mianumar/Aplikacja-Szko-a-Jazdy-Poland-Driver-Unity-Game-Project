@@ -9,6 +9,10 @@ public class MainMenuView : MonoBehaviour
 
     [SerializeField] private Button buttonSettings;
     [SerializeField] private Button buttonStart;
+    [SerializeField] private Image BGImage;
+
+    public Sprite lightModeBG;
+    public Sprite darkModeBG;
 
     private void Awake()
     {
@@ -18,6 +22,7 @@ public class MainMenuView : MonoBehaviour
     {
         animator.Play("MM_Open");
         Debug.Log("MainMenuView Splash");
+        BGImage.sprite = ThemeSwitcher.instance.isDarkMode ? darkModeBG : lightModeBG;
         AddListeners();
         gameObject.SetActive(true);
     }
