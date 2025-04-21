@@ -29,12 +29,20 @@ public class SummeryResultsView : MonoBehaviour
     [SerializeField] private Sprite imageLoss;
     [SerializeField] private Sprite imageWon;
 
+    public Image ansButtonBarImage;
+
     public string PASS_TEXT = "Pozytywny";
     public string FAILED_TEXT = "Negatywny";
+
+    public const string darkModeColor = "#E6F8FF";
+    public const string lightModeColor = "#2CBCF8";
 
     SummaryData summaryData = null;
     public void RenderView()
     {
+
+        viewAnswerButton.GetComponent<Text>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeColor : lightModeColor);
+        ansButtonBarImage.color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeColor : lightModeColor);
         SetData();
         AddListeners();
         gameObject.SetActive(true);

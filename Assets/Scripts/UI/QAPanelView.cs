@@ -18,6 +18,7 @@ public class QAPanelView : MonoBehaviour
     [SerializeField] private Button buttonNo;
     [SerializeField] private Button buttonStart;
     [SerializeField] private Button buttonNext;
+    [SerializeField] private Image questionBarSliderBG;
 
     [Header("Time To Read")]
     [SerializeField] private TextMeshProUGUI textTimer;
@@ -31,6 +32,7 @@ public class QAPanelView : MonoBehaviour
 
     [SerializeField] private GameObject timeToReadQuestionPanel;
     [SerializeField] private GameObject timeToReadTextObject;
+
 
 
     // Ans Panel referance
@@ -158,7 +160,8 @@ public class QAPanelView : MonoBehaviour
     {
         buttonNo.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
         buttonYes.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
-
+        questionBarSliderBG.color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
+        
         if (simpleQuestionData != null)
         {
             timeToReadQuestionPanel.SetActive(true);
