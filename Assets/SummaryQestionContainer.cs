@@ -15,11 +15,13 @@ public class SummaryQestionContainer : MonoBehaviour
     public Sprite ContainerBGDark;
     public Image ContainerBG;
 
+
     private ThemeSwitcher themeSwitcher;
 
     public Image ansStatusIcon;
     public TextMeshProUGUI correctAns;
     public TextMeshProUGUI answered;
+    public TextMeshProUGUI correctAnsIfSkipped;
 
 
     [Header("SummaryQestionContainer Text")]
@@ -35,13 +37,13 @@ public class SummaryQestionContainer : MonoBehaviour
 
     private SimpleQuestionDataModel simpleQuestionData;
     private SpecializedQuestionModel specializedQuestionData;
-    public void RenderView(QuestionAttempted question , int index)
+    public void RenderView(QuestionAttempted question, int index)
     {
         int resultIndex = (int)question.resultType;
         ansStatusIcon.sprite = statusIcon[resultIndex];
-        texts[1].text = "PYTANIE:"+index+"/32";
+        texts[1].text = "PYTANIE:" + index + "/32";
         texts[4].text = headingText[resultIndex];
-      //  texts[0].text = (int)question.questionType == 0 ? GameManager.Instance.GetSimpleQuestionFromList(question.QusetionNo).question : GameManager.Instance.GetSpecialQuestionFromList(question.QusetionNo).question;
+        //  texts[0].text = (int)question.questionType == 0 ? GameManager.Instance.GetSimpleQuestionFromList(question.QusetionNo).question : GameManager.Instance.GetSpecialQuestionFromList(question.QusetionNo).question;
         if ((int)question.questionType == 1)
         {
             simpleQuestionData = GameManager.Instance.GetSimpleQuestionFromList(question.QusetionNo);
@@ -52,7 +54,7 @@ public class SummaryQestionContainer : MonoBehaviour
         {
             specializedQuestionData = GameManager.Instance.GetSpecialQuestionFromList(question.QusetionNo - 20);
             texts[0].text = specializedQuestionData.question;
-            IconSignBG.sprite = GameManager.Instance.GetSpecializedQuestioSprite(question.QusetionNo-20);
+            IconSignBG.sprite = GameManager.Instance.GetSpecializedQuestioSprite(question.QusetionNo - 20);
 
         }
 
@@ -70,7 +72,7 @@ public class SummaryQestionContainer : MonoBehaviour
 
             correctAns.gameObject.SetActive(false);
         }
-        else if (resultIndex == 1) 
+        else if (resultIndex == 1)
         {
             if ((int)question.questionType == 1)
             {
@@ -87,21 +89,35 @@ public class SummaryQestionContainer : MonoBehaviour
 
             }
 
-        }else if (resultIndex == 2)
+        }
+        else if (resultIndex == 2)
         {
             correctAns.gameObject.SetActive(true);
             if ((int)question.questionType == 1)
             {
                 correctAns.text = simpleQuestionData.answer.Equals("0") ? "NIE" : "TAK";
+                correctAnsIfSkipped.text = "";
             }
             else
             {
                 correctAns.text = specializedQuestionData.answer;
+                if (specializedQuestionData.answer.Equals("A"))
+                {
+                    correctAnsIfSkipped.text = specializedQuestionData.option_a;
+                }else if(specializedQuestionData.answer.Equals ("B"))
+                {
+                    correctAnsIfSkipped.text= specializedQuestionData.option_b;
+                }else if(specializedQuestionData.answer.Equals("C"))
+                {
+                    correctAnsIfSkipped.text= specializedQuestionData.option_c;
+                }
+
             }
+            correctAnsIfSkipped.color = AnsColor[3];
             correctAns.color = AnsColor[3];
             answered.gameObject.SetActive(false);
         }
-          
+
         // Get the ThemeSwitcher instance
         themeSwitcher = ThemeSwitcher.instance;
         ApplyMode(themeSwitcher.isDarkMode);
@@ -114,7 +130,7 @@ public class SummaryQestionContainer : MonoBehaviour
     {
         if (themeSwitcher != null)
         {
-           // themeSwitcher.ToggleMode();  // Call the ThemeSwitcher's ToggleMode method
+            // themeSwitcher.ToggleMode();  // Call the ThemeSwitcher's ToggleMode method
 
             // Apply the updated mode to this container
             ApplyMode(themeSwitcher.isDarkMode);
@@ -148,5 +164,5 @@ public class SummaryQestionContainer : MonoBehaviour
         }
     }
 
-   
+
 }

@@ -41,7 +41,7 @@ public class SummeryResultsView : MonoBehaviour
     public void RenderView()
     {
 
-        viewAnswerButton.GetComponent<Text>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeColor : lightModeColor);
+        viewAnswerButton.GetComponent<TextMeshProUGUI>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeColor : lightModeColor);
         ansButtonBarImage.color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeColor : lightModeColor);
         SetData();
         AddListeners();
@@ -67,9 +67,13 @@ public class SummeryResultsView : MonoBehaviour
             totalPointText.text = summaryData.PointsAchieved.ToString();
             totalPointsPercentText.text = "/" + GameConstants.MAX_GAME_POINT + " (" + ((int)((summaryData.PointsAchieved / (GameConstants.MAX_GAME_POINT * 1.0f)) * 100)).ToString() + "%)";
 
-            imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
-            imageBarRight.fillAmount = (summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
-            imageBarWrong.fillAmount = (summaryData.TotalWrongAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+          //  imageBarSkipped.fillAmount = (summaryData.TotalSkipedAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+          //  imageBarRight.fillAmount = (summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+          //  imageBarWrong.fillAmount = (summaryData.TotalWrongAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f));
+          
+            imageBarRight.GetComponent<RectTransform>().sizeDelta = new Vector2(imageBarRight.GetComponent<RectTransform>().sizeDelta.x,(summaryData.TotalCorrectAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f))* 260.0f);
+            imageBarWrong.GetComponent<RectTransform>().sizeDelta = new Vector2(imageBarWrong.GetComponent<RectTransform>().sizeDelta.x,(summaryData.TotalWrongAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f))* 260.0f);
+            imageBarSkipped.GetComponent<RectTransform>().sizeDelta = new Vector2(imageBarSkipped.GetComponent<RectTransform>().sizeDelta.x,(summaryData.TotalSkipedAns / (GameConstants.MAX_QUESTION_COUNT * 1.0f))* 260.0f);
         }
     }
 
