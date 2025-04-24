@@ -6,8 +6,11 @@ public class GameRulesPage : MonoBehaviour
 {
     [SerializeField] private Button buttonClose;
     [SerializeField] private Button buttonStart;
+
+    public Sprite defaultButtonSprite;
     public void RenderView()
     {
+        buttonStart.GetComponent<Image>().sprite = defaultButtonSprite;
         AddListeners();
         gameObject.SetActive(true);
     }

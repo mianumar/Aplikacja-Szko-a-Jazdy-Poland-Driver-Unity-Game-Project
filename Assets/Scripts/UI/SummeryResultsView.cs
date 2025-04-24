@@ -28,6 +28,7 @@ public class SummeryResultsView : MonoBehaviour
 
     [SerializeField] private Sprite imageLoss;
     [SerializeField] private Sprite imageWon;
+    public Sprite defaultButtonSprite;
 
     public Image ansButtonBarImage;
 
@@ -40,7 +41,7 @@ public class SummeryResultsView : MonoBehaviour
     SummaryData summaryData = null;
     public void RenderView()
     {
-
+        repeatButton.GetComponent<Image>().sprite = defaultButtonSprite;
         viewAnswerButton.GetComponent<TextMeshProUGUI>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeColor : lightModeColor);
         ansButtonBarImage.color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeColor : lightModeColor);
         SetData();

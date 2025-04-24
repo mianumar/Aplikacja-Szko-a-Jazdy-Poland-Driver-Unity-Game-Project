@@ -7,8 +7,12 @@ public class ActivitySelectionView : MonoBehaviour
     [SerializeField] private Button buttonBack;
     [SerializeField] private Button buttonRulesPages;
     [SerializeField] private Button buttonAllSummary;
+
+    public Sprite defaultImageSprite;
     public void RenderView()
     {
+        buttonAllSummary.GetComponent<Image>().sprite = defaultImageSprite;
+        buttonRulesPages.GetComponent<Image>().sprite = defaultImageSprite;
         AddListeners();
         gameObject.SetActive(true);
     }
@@ -16,7 +20,7 @@ public class ActivitySelectionView : MonoBehaviour
     private void AddListeners()
     {
         buttonAllSummary.onClick.RemoveAllListeners();
-        buttonBack.onClick.RemoveAllListeners();    
+        buttonBack.onClick.RemoveAllListeners();
         buttonRulesPages.onClick.RemoveAllListeners();
 
         buttonBack.onClick.AddListener(OnBackButtonClicked);
