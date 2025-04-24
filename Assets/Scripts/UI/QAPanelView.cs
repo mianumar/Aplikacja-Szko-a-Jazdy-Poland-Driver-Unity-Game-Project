@@ -419,6 +419,8 @@ public class QAPanelView : MonoBehaviour
     private void OnNoButtonClicked()
     {
         buttonNo.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonSelectedColor : lightModeButtonSelectedColor);
+        buttonYes.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
+
         Skipped = false;
         if (_dataModel.answer.Equals(0))
         {
@@ -437,6 +439,7 @@ public class QAPanelView : MonoBehaviour
     private void OnYesButtonClicked()
     {
         buttonYes.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonSelectedColor : lightModeButtonSelectedColor);
+        buttonNo.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
 
         Skipped = false;
         if (_dataModel.answer.Equals(1))
