@@ -9,6 +9,8 @@ public class GameConstants
     public const int MAX_GAME_POINT = 74;
     public static string GetFileExtensionFromUrl(string url)
     {
+        if (string.IsNullOrEmpty(url))
+            return "";
         url = url.Split('?')[0];
         url = url.Split('/').Last();
         return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";

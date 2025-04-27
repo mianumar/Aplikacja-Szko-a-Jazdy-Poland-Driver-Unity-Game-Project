@@ -9,6 +9,8 @@ public class SummaryItem : MonoBehaviour
     public Sprite IconSignBGLight;
     public Sprite IconSignBGDark;
     public Image IconSignBG;
+    public Image IconNoImage;
+    public Image IconFrameImage;
     public Sprite ContainerBGLight;
     public Sprite ContainerBGDark;
     public Image ContainerBG;
@@ -23,16 +25,30 @@ public class SummaryItem : MonoBehaviour
         texts[1].text = "PYTANIE:" + index + "/" + (GameManager.Instance.totalSimpleQuestionCount + GameManager.Instance.totalSpecialQuestionCount);
         if (simpleData != null)
         {
+            IconNoImage.gameObject.SetActive(true);
+            IconFrameImage.gameObject.SetActive(false);
             texts[0].text = simpleData.question;
             texts[2].text = simpleData.answer.Equals("0") ? "NIE" : "TAK";
             string extention = GameConstants.GetFileExtensionFromUrl(simpleData.media_link);
+            string frameImageExt = GameConstants.GetFileExtensionFromUrl(simpleData.frame_image);
             if (string.IsNullOrEmpty(extention))
                 return;
             if (extention.Equals(".jpg"))
             {
                 GameUtils.ImageDownloader.RequestDownload(this, simpleData.media_link, (tex) =>
                 {
-                    IconSignBG.sprite = GameManager.Instance.TextureToSprite(tex);
+                    IconNoImage.gameObject.SetActive(false);
+                    IconFrameImage.sprite = GameManager.Instance.TextureToSprite(tex);
+                    IconFrameImage.gameObject.SetActive(true);
+                });
+            }else if(frameImageExt.Equals(".jpg"))
+            {
+                GameUtils.ImageDownloader.RequestDownload(this, simpleData.frame_image, (tex) =>
+                {
+                    IconNoImage.gameObject.SetActive(false);
+
+                    IconFrameImage.sprite = GameManager.Instance.TextureToSprite(tex);
+                    IconFrameImage.gameObject.SetActive(true);
                 });
             }
         }
@@ -59,7 +75,9 @@ public class SummaryItem : MonoBehaviour
             {
                 GameUtils.ImageDownloader.RequestDownload(this, specialData.media_link, (tex) =>
                 {
-                    IconSignBG.sprite = GameManager.Instance.TextureToSprite(tex);
+                    IconNoImage.gameObject.SetActive(false);
+                    IconFrameImage.sprite = GameManager.Instance.TextureToSprite(tex);
+                    IconFrameImage.gameObject.SetActive(true);
                 });
             }
 

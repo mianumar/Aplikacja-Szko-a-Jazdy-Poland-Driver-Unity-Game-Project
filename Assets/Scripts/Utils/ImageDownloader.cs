@@ -11,8 +11,8 @@ namespace GameUtils
         static Coroutine imageDownloaderRoutine = null; 
         public static void RequestDownload(MonoBehaviour currentBehaviour ,string url, Action<Texture2D> onComplete)
         {
-            if(imageDownloaderRoutine != null)
-                currentBehaviour.StopCoroutine(imageDownloaderRoutine);
+            //if(imageDownloaderRoutine != null)
+            //    currentBehaviour.StopCoroutine(imageDownloaderRoutine);
 
             imageDownloaderRoutine = currentBehaviour.StartCoroutine(DownloadProfileImg(url, onComplete));
         }

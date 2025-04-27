@@ -287,6 +287,7 @@ public class SimpleQuestionDataModel
     public string media { get; set; }
     public string media_link { get; set; }
     public string categories { get; set; }
+    public string frame_image { get; set; }
 }
 
 /// <summary>
