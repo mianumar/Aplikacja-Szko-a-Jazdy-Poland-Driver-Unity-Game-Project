@@ -14,7 +14,7 @@ public class AllQuestionsPanelView : MonoBehaviour
     [SerializeField] private GameObject summaryItemPrefab;
 
     public ScrollRect scrollRect;
-
+    public LoadingPanel loadingPanel;
 
     public List<GameObject> generatedConainerList = new List<GameObject>();
 
@@ -45,6 +45,7 @@ public class AllQuestionsPanelView : MonoBehaviour
 
     public async void GetDataListFromServer()
     {
+        loadingPanel.ActiveLoading();
         if (startIndex < GameManager.Instance.totalSimpleQuestionCount)
         {
             await ServerHandler.instance.GetSimpleQusetionsInRange(startIndex, limit).ContinueWithOnMainThread(task =>
@@ -80,14 +81,25 @@ public class AllQuestionsPanelView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private int dataLength;
     public void GenerateItem(List<SimpleQuestionDataModel> dataList)
     {
-        for (int i = 0; i < dataList.Count; i++)
+        dataLength = dataList.Count;
+        for (int i = 0; i < dataLength; i++)
         {
             GameObject temp = CreateOrGeneratePrefab(i + 1);
-            temp.GetComponent<SummaryItem>().RenderView(dataList[i], null, (startIndex + i));
+            temp.GetComponent<SummaryItem>().RenderView(dataList[i], null, (startIndex + i) , i , OnItemDoneCallback);
         }
         isLoading = false;
+    }
+
+    private void OnItemDoneCallback(int index)
+    {
+        Debug.Log("OnItemDoneCallback :: index :: "+index);
+        if(index == dataLength - 1)
+        {
+            loadingPanel.DeactiveLoading();
+        }
     }
 
     private GameObject CreateOrGeneratePrefab(int index)

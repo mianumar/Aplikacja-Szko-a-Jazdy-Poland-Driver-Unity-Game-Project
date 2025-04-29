@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +21,7 @@ public class SummaryItem : MonoBehaviour
 
     public string[] options;
 
-    public void RenderView(SimpleQuestionDataModel simpleData, SpecializedQuestionModel specialData, int index)
+    public void RenderView(SimpleQuestionDataModel simpleData, SpecializedQuestionModel specialData, int index , int itemCount , Action<int> callback)
     {
         texts[1].text = "PYTANIE:" + index + "/" + (GameManager.Instance.totalSimpleQuestionCount + GameManager.Instance.totalSpecialQuestionCount);
         if (simpleData != null)
@@ -40,6 +41,7 @@ public class SummaryItem : MonoBehaviour
                     IconNoImage.gameObject.SetActive(false);
                     IconFrameImage.sprite = GameManager.Instance.TextureToSprite(tex);
                     IconFrameImage.gameObject.SetActive(true);
+                    callback(itemCount);
                 });
             }else if(frameImageExt.Equals(".jpg"))
             {
@@ -49,6 +51,7 @@ public class SummaryItem : MonoBehaviour
 
                     IconFrameImage.sprite = GameManager.Instance.TextureToSprite(tex);
                     IconFrameImage.gameObject.SetActive(true);
+                    callback(itemCount);
                 });
             }
         }
@@ -78,6 +81,7 @@ public class SummaryItem : MonoBehaviour
                     IconNoImage.gameObject.SetActive(false);
                     IconFrameImage.sprite = GameManager.Instance.TextureToSprite(tex);
                     IconFrameImage.gameObject.SetActive(true);
+                    callback(itemCount);
                 });
             }
 
