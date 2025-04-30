@@ -13,6 +13,7 @@ public class AfterExamAnswersView : MonoBehaviour
     [SerializeField] private GameObject summaryItemPrefab;
 
     [SerializeField] private FilterView filterView;
+    public LoadingPanel loadingPanel;
 
     public List<GameObject> generatedConainerList = new List<GameObject>();
 
@@ -37,11 +38,22 @@ public class AfterExamAnswersView : MonoBehaviour
 
     private void GenerateItems(List<QuestionAttempted> qstnList)
     {
+        dataLength = qstnList.Count;
         //List<QuestionAttempted> qstnList = summaryData.QuestionAttempedList;
         for (int i = 0; i < qstnList.Count; i++)
         {
             GameObject temp = CreateOrGeneratePrefab(i+1);
             temp.GetComponent<SummaryQestionContainer>().RenderView(qstnList[i] , i+1);
+        }
+    }
+
+
+    private void OnItemDoneCallback(int index)
+    {
+        Debug.Log("OnItemDoneCallback :: index :: " + index);
+        if (index == dataLength - 1)
+        {
+            loadingPanel.DeactiveLoading();
         }
     }
 
@@ -60,7 +72,7 @@ public class AfterExamAnswersView : MonoBehaviour
             return temp;
         }
     }
-
+    private int dataLength;
     public void UpdateItemByFilter(FilterItem item)
     {
         List<QuestionAttempted> qstnList = null;

@@ -11,6 +11,8 @@ public class SummaryQestionContainer : MonoBehaviour
     public Sprite IconSignBGLight;
     public Sprite IconSignBGDark;
     public Image IconSignBG;
+    public Image IconNoImage;
+    public Image IconFrameImage;
     public Sprite ContainerBGLight;
     public Sprite ContainerBGDark;
     public Image ContainerBG;
@@ -39,6 +41,8 @@ public class SummaryQestionContainer : MonoBehaviour
     private SpecializedQuestionModel specializedQuestionData;
     public void RenderView(QuestionAttempted question, int index)
     {
+        IconNoImage.gameObject.SetActive(true);
+        IconFrameImage.gameObject.SetActive(false);
         int resultIndex = (int)question.resultType;
         ansStatusIcon.sprite = statusIcon[resultIndex];
         texts[1].text = "PYTANIE:" + index + "/32";
@@ -48,13 +52,25 @@ public class SummaryQestionContainer : MonoBehaviour
         {
             simpleQuestionData = GameManager.Instance.GetSimpleQuestionFromList(question.QusetionNo);
             texts[0].text = simpleQuestionData.question;
-            IconSignBG.sprite = GameManager.Instance.GetQuestionSprite(question.QusetionNo);
+            Sprite sp = GameManager.Instance.GetQuestionSprite(question.QuestionID);
+            if (sp != null)
+            {
+                IconNoImage.gameObject.SetActive(false);
+                IconFrameImage.sprite = sp;
+                IconFrameImage.gameObject.SetActive(true);
+            }
         }
         else
         {
             specializedQuestionData = GameManager.Instance.GetSpecialQuestionFromList(question.QusetionNo - 20);
             texts[0].text = specializedQuestionData.question;
-            IconSignBG.sprite = GameManager.Instance.GetSpecializedQuestioSprite(question.QusetionNo - 20);
+            Sprite sp = GameManager.Instance.GetSpecializedQuestioSprite(question.QuestionID);
+            if (sp != null)
+            {
+                IconNoImage.gameObject.SetActive(false);
+                IconFrameImage.sprite = sp ;
+                IconFrameImage.gameObject.SetActive(false);
+            }
 
         }
 
@@ -80,13 +96,32 @@ public class SummaryQestionContainer : MonoBehaviour
                 correctAns.gameObject.SetActive(true);
                 correctAns.text = simpleQuestionData.answer.Equals("0") ? "NIE" : "TAK";
                 correctAns.color = AnsColor[2];
-                answered.text = simpleQuestionData.answer.Equals("1") ? "NIE" : "TAK";
+                answered.text = question.selectedAns;
                 answered.fontStyle = FontStyles.Strikethrough;
                 answered.color = AnsColor[1];
             }
             else
             {
+                correctAns.gameObject.SetActive(true);
+                correctAns.text = specializedQuestionData.answer;
+                if (specializedQuestionData.answer.Equals("A"))
+                {
+                    correctAnsIfSkipped.text = specializedQuestionData.option_a;
+                }
+                else if (specializedQuestionData.answer.Equals("B"))
+                {
+                    correctAnsIfSkipped.text = specializedQuestionData.option_b;
+                }
+                else if (specializedQuestionData.answer.Equals("C"))
+                {
+                    correctAnsIfSkipped.text = specializedQuestionData.option_c;
+                }
+                correctAnsIfSkipped.color = AnsColor[3];
+                correctAns.color = AnsColor[3];
 
+                answered.text = question.selectedAns;
+                answered.fontStyle = FontStyles.Strikethrough;
+                answered.color = AnsColor[1];
             }
 
         }
@@ -104,12 +139,14 @@ public class SummaryQestionContainer : MonoBehaviour
                 if (specializedQuestionData.answer.Equals("A"))
                 {
                     correctAnsIfSkipped.text = specializedQuestionData.option_a;
-                }else if(specializedQuestionData.answer.Equals ("B"))
+                }
+                else if (specializedQuestionData.answer.Equals("B"))
                 {
-                    correctAnsIfSkipped.text= specializedQuestionData.option_b;
-                }else if(specializedQuestionData.answer.Equals("C"))
+                    correctAnsIfSkipped.text = specializedQuestionData.option_b;
+                }
+                else if (specializedQuestionData.answer.Equals("C"))
                 {
-                    correctAnsIfSkipped.text= specializedQuestionData.option_c;
+                    correctAnsIfSkipped.text = specializedQuestionData.option_c;
                 }
 
             }

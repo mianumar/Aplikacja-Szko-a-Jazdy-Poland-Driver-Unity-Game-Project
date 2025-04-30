@@ -1,4 +1,4 @@
-using Firebase.Auth;
+﻿using Firebase.Auth;
 using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
@@ -295,8 +295,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("DownloadingMediaForSimpleQstn");
         string extention = GameConstants.GetFileExtensionFromUrl(data.media_link);
-        if (string.IsNullOrEmpty(extention))
-            return;
+        //if (string.IsNullOrEmpty(extention))
+        //    return;
         if (extention.Equals(".jpg"))
         {
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
@@ -322,6 +322,19 @@ public class GameManager : MonoBehaviour
         {
             count += 1;
             Debug.LogError("Total Video File " + count);
+
+            string frameImageExt = GameConstants.GetFileExtensionFromUrl(data.frame_image);
+            if (frameImageExt.Equals(".jpg"))
+            {
+                GameUtils.ImageDownloader.RequestDownload(this, data.frame_image, (tex) =>
+                {
+                    Sprite sp = TextureToSprite(tex);
+                    if (!SimpleQuestionSprites.ContainsKey(data.id))
+                    {
+                        SimpleQuestionSprites.Add(data.id, sp);
+                    }
+                });
+            }
             string filePath = string.Concat(VIDEO_FILE_DIR_SIMPLE, data.id, extention);
             GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
             {
@@ -339,6 +352,15 @@ public class GameManager : MonoBehaviour
                 }
             });
         }
+        else
+        {
+            _simpleIndex++;
+            if (_simpleIndex < randomSimpleQstnList.Count)
+            {
+                // AssetDatabase.Refresh();
+                DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
+            }
+        }
 
         if (_simpleIndex == randomSimpleQstnList.Count)
         {
@@ -352,12 +374,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("DownloadMediaForSpecialQuestions");
         string extention = GameConstants.GetFileExtensionFromUrl(data.media_link);
-        if (string.IsNullOrEmpty(extention))
-            return;
+        //if (string.IsNullOrEmpty(extention))
+        //    return;
         if (extention.Equals(".jpg"))
         {
             GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
             {
+                //"Nie, ze względu na możliwość uszkodzenia mechanizmu."
                 Sprite sp = TextureToSprite(tex);
                 SpecialQuestionSprites.Add(data.id, sp);
                 _specialIndex++;
@@ -391,12 +414,22 @@ public class GameManager : MonoBehaviour
                 }
             });
         }
+        else
+        {
+            _specialIndex++;
+            if (_specialIndex < randomSpecialQstnList.Count)
+            {
+                // AssetDatabase.Refresh();
+                DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
+            }
+        }
 
         if (_simpleIndex == randomSpecialQstnList.Count)
         {
             Debug.Log("ALL MEDIA DOWNLOADED SUCCESSFULLY..");
-           
+
         }
+        
     }
 
     private List<int> GetRandomIndex(int min, int max, int count)
@@ -439,7 +472,7 @@ public class GameManager : MonoBehaviour
         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
 
-    public void UpdateUserSummaryData( int QstnNo, int points ,ResultType resultType , QuestionType questionType)
+    public void UpdateUserSummaryData( int QstnNo, int qstnId, int points ,ResultType resultType , QuestionType questionType , string selectedAns = "")
     {
         if(_userSummaryData == null)
         {
@@ -458,7 +491,7 @@ public class GameManager : MonoBehaviour
             _userSummaryData.TotalSkipedAns += 1;
         }
        
-        _userSummaryData.QuestionAttempedList.Add(new QuestionAttempted(QstnNo,resultType , questionType));
+        _userSummaryData.QuestionAttempedList.Add(new QuestionAttempted(QstnNo,qstnId ,resultType , questionType , selectedAns));
     }
 
     public void UpdateGameTimerInSummaryData(float totalGameTime)

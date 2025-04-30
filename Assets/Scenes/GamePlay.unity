@@ -7462,6 +7462,7 @@ MonoBehaviour:
   summaryItemContentParent: {fileID: 7510714946045684060}
   summaryItemPrefab: {fileID: 1796898191120920454, guid: a4b6dd341b5ba714baf5f04a2ea1f30b, type: 3}
   filterView: {fileID: 6219182005733525511}
+  loadingPanel: {fileID: 215045029}
   generatedConainerList: []
 --- !u!114 &504545728997969110
 MonoBehaviour:

@@ -84,6 +84,7 @@ public class QAPanelView : MonoBehaviour
     private float totalGameTime;
 
     public ResultType currectSelectedResult;
+    public string selectedAnswer;
 
     public void RenderView()
     {
@@ -280,6 +281,7 @@ public class QAPanelView : MonoBehaviour
 
     private void OnResultSelected(string selectedResult)
     {
+        selectedAnswer = selectedResult;
         if (_dataModelSpecial.answer.Equals(selectedResult))
         {
             currectSelectedResult = ResultType.CORRECT;
@@ -324,7 +326,9 @@ public class QAPanelView : MonoBehaviour
     private void OnNextButtonClicked()
     {
         int points = 0;
+        int qstnID = 0;
         QuestionType questionType = currentQesIndex < 20 ? QuestionType.BASIC : QuestionType.SPECIAL;
+        qstnID = currentQesIndex < 20 ? _dataModel.id : _dataModelSpecial.id;
         if (!Skipped)
         {
             Skipped = true;
@@ -339,17 +343,17 @@ public class QAPanelView : MonoBehaviour
                 {
                     points = GameConstants.GetSpecialQuestionsPoint((currentQesIndex - 20));
                 }
-                GameManager.Instance.UpdateUserSummaryData(currentQesIndex, points, ResultType.CORRECT, questionType);
+                GameManager.Instance.UpdateUserSummaryData(currentQesIndex, qstnID, points, ResultType.CORRECT, questionType , selectedAnswer);
             }
             else
             {
-                GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.WRONG, questionType);
+                GameManager.Instance.UpdateUserSummaryData(currentQesIndex, qstnID, 0, ResultType.WRONG, questionType , selectedAnswer);
             }
         }
         else
         {
 
-            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, 0, ResultType.SKIPPED, questionType);
+            GameManager.Instance.UpdateUserSummaryData(currentQesIndex, qstnID, 0, ResultType.SKIPPED, questionType );
 
         }
         videoPlayer.Stop();
@@ -420,6 +424,7 @@ public class QAPanelView : MonoBehaviour
     {
         buttonNo.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonSelectedColor : lightModeButtonSelectedColor);
         buttonYes.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
+        selectedAnswer = "NIE";
 
         Skipped = false;
         if (_dataModel.answer.Equals(0))
@@ -440,7 +445,7 @@ public class QAPanelView : MonoBehaviour
     {
         buttonYes.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonSelectedColor : lightModeButtonSelectedColor);
         buttonNo.GetComponent<Image>().color = GameConstants.GetColorFromHexCode(ThemeSwitcher.instance.isDarkMode ? darkModeButtonDefaultColor : lightModeButtonDefaultColor);
-
+        selectedAnswer = "TAK";
         Skipped = false;
         if (_dataModel.answer.Equals(1))
         {

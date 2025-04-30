@@ -110,7 +110,7 @@ public class SummeryResultsView : MonoBehaviour
 
     private void OnViewAnsButtonClicked()
     {
-        GameManager.Instance.ShuffleRandomQuestions();
+       // GameManager.Instance.ShuffleRandomQuestions();
 
         UIHandler.Instance.afterExamAnswersView.RenderView(summaryData);
         this.Disable();

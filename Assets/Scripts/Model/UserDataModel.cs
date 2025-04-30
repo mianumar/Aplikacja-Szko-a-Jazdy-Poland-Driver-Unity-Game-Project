@@ -59,14 +59,19 @@ public class SummaryData
 public class QuestionAttempted
 {
     public int QusetionNo { get; set; }
+    public int QuestionID { get; set; }
     public ResultType resultType { get; set; }
     public QuestionType questionType { get; set; }
 
-    public QuestionAttempted(int QuestionNo, ResultType resultType , QuestionType questionType)
+    public string selectedAns { get; set; }
+
+    public QuestionAttempted(int QuestionNo, int QuestionID, ResultType resultType , QuestionType questionType , string selectedAns)
     {
         this.QusetionNo = QuestionNo;
+        this.QuestionID = QuestionID;
         this.resultType = resultType; 
         this.questionType = questionType;
+        this.selectedAns = selectedAns;
     }
 
 }

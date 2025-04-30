@@ -11,10 +11,10 @@ namespace GameUtils
         static Coroutine videoDownloaderRoutine = null;
         public static void RequestDownload(MonoBehaviour monoBehaviour, string url , string savePath , Action<bool> result)
         {
-            if (videoDownloaderRoutine != null)
-            {
-                monoBehaviour.StopCoroutine(videoDownloaderRoutine);
-            }
+            //if (videoDownloaderRoutine != null)
+            //{
+            //    monoBehaviour.StopCoroutine(videoDownloaderRoutine);
+            //}
             videoDownloaderRoutine = monoBehaviour.StartCoroutine(DownloadVideo(url,savePath , result));
         }
 
