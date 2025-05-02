@@ -69,13 +69,14 @@ public class SummaryQestionContainer : MonoBehaviour
             {
                 IconNoImage.gameObject.SetActive(false);
                 IconFrameImage.sprite = sp ;
-                IconFrameImage.gameObject.SetActive(false);
+                IconFrameImage.gameObject.SetActive(true);
             }
 
         }
 
         if (resultIndex == 0)
         {
+            correctAnsIfSkipped.text = "";
             if ((int)question.questionType == 1)
             {
                 answered.text = simpleQuestionData.answer.Equals("0") ? "NIE" : "TAK";
@@ -90,9 +91,9 @@ public class SummaryQestionContainer : MonoBehaviour
         }
         else if (resultIndex == 1)
         {
+            correctAnsIfSkipped.text = "";
             if ((int)question.questionType == 1)
             {
-
                 correctAns.gameObject.SetActive(true);
                 correctAns.text = simpleQuestionData.answer.Equals("0") ? "NIE" : "TAK";
                 correctAns.color = AnsColor[2];
@@ -127,11 +128,11 @@ public class SummaryQestionContainer : MonoBehaviour
         }
         else if (resultIndex == 2)
         {
+            correctAnsIfSkipped.text = "";
             correctAns.gameObject.SetActive(true);
             if ((int)question.questionType == 1)
             {
                 correctAns.text = simpleQuestionData.answer.Equals("0") ? "NIE" : "TAK";
-                correctAnsIfSkipped.text = "";
             }
             else
             {
