@@ -29,7 +29,8 @@ public class SummaryItem : MonoBehaviour
             IconNoImage.gameObject.SetActive(true);
             IconFrameImage.gameObject.SetActive(false);
             texts[0].text = simpleData.question;
-            texts[2].text = simpleData.answer.Equals("0") ? "NIE" : "TAK";
+         //   texts[2].text = simpleData.answer.Equals("0") ? "NIE" : "TAK";
+            texts[2].text = "TAK or NIE";
             string extention = GameConstants.GetFileExtensionFromUrl(simpleData.media_link);
             string frameImageExt = GameConstants.GetFileExtensionFromUrl(simpleData.frame_image);
             if (string.IsNullOrEmpty(extention))

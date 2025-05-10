@@ -48,7 +48,7 @@ public class SpecialQuestionPanelView : MonoBehaviour
             if (timeRemain <= 0)
             {
                 QAPanelView.QuestionTimeEndAction?.Invoke();
-                Debug.LogError("Reading Timer End :: NEXT QUESTION");
+                Debug.Log("Reading Timer End :: NEXT QUESTION");
                
             }
         });

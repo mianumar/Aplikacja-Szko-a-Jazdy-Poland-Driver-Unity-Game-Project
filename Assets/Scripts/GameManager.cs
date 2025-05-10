@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private List<QADataModel> questionList;
+    public LoadingPanel loadingPanel;
 
     //Properties
     public string UserID => userDataModel.UserId;
@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
 
     public int totalSimpleQuestionCount;
     public int totalSpecialQuestionCount;
+
+    private SimpleQuestionListDataModel simpleQuestionListDataModel;
+    private SpecializedQuestionListDataModel specializedQuestionListDataModel;
 
     private List<SimpleQuestionDataModel> randomSimpleQstnList = new List<SimpleQuestionDataModel>();
     private List<SpecializedQuestionModel> randomSpecialQstnList = new List<SpecializedQuestionModel>();
@@ -185,44 +188,12 @@ public class GameManager : MonoBehaviour
     public async void InitializedGame()
     {
         IsAllMediaDownloaded = false;
-        randomSimpleQstnList.Clear();
-        randomSpecialQstnList.Clear();
-        //await Task.WhenAll(ServerHandler.instance.GetSpecilizedQuestionsCount(), ServerHandler.instance.GetSimpleQuestionsCount()).ContinueWith(task =>
-        //{
-        //    if (task.IsCompleted)
-        //    {
-        //        var result = task.Result;
-        //        totalSpecialQuestionCount = result[0];
-        //        totalSimpleQuestionCount = result[1];
-
-        //        randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
-        //        if (randomSpecialIndexces.Count > 0)
-        //        {
-        //            GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
-        //        }
-
-        //        randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
-        //        if (randomSimpleIndexces.Count > 0)
-        //        {
-        //            GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
-        //        }
-        //    }
-        //});
-
-
-
+   
         await ServerHandler.instance.GetSpecilizedQuestionsCount().ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
-
                 totalSpecialQuestionCount = task.Result;
-                randomSpecialIndexces = GetRandomIndex(1, totalSpecialQuestionCount, MAX_SPECIAL_QUESTION_COUNT);
-                if (randomSpecialIndexces.Count > 0)
-                {
-                    GetSpecialQuestionsData(randomSpecialIndexces[currectSpecialIndex]);
-                }
-
             }
         });
         await ServerHandler.instance.GetSimpleQuestionsCount().ContinueWithOnMainThread(task =>
@@ -230,15 +201,66 @@ public class GameManager : MonoBehaviour
             if (task.IsCompleted)
             {
                 totalSimpleQuestionCount = task.Result;
+            }
+        });
+        loadingPanel.ActiveLoading();
+        await Task.Delay(new TimeSpan(0, 0, 4));
+        loadingPanel.DeactiveLoading();
+        FetchRandomQuestions();
+    }
 
-                randomSimpleIndexces = GetRandomIndex(1, totalSimpleQuestionCount, MAX_BASIC_QUESTION_COUNT);
-                if (randomSimpleIndexces.Count > 0)
+    public async void FetchRandomQuestions()
+    {
+        randomSimpleQstnList.Clear();
+        randomSpecialQstnList.Clear();
+        await ServerHandler.instance.GetAllRandomSimpleQusetions(20, "B").ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                simpleQuestionListDataModel = task.Result;
+                if (simpleQuestionListDataModel != null)
                 {
-                    GetSimpleQuestionsData(randomSimpleIndexces[currectSimpleIndex]);
+                    randomSimpleQstnList = simpleQuestionListDataModel.data;
+                    DownloadAssets();
+                }
+            }
+        });
+        await ServerHandler.instance.GetAllRandomSpecialQusetions(12, "B").ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                specializedQuestionListDataModel = task.Result;
+                if (specializedQuestionListDataModel != null)
+                {
+                    randomSpecialQstnList = specializedQuestionListDataModel.data;
+                    DownloadAssetsForSpecialQuestiosn();
                 }
             }
         });
 
+       
+
+    }
+
+    private void DownloadAssetsForSpecialQuestiosn()
+    {
+       _specialIndex = 0;
+        DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
+    }
+
+    int _simpleIndex = 0;
+    int count = 0;
+    private void DownloadAssets()
+    {
+        _simpleIndex = 0;
+        count = 0;
+        var imageList = randomSimpleQstnList.Where(x => x.media.Contains(".jpg")).ToList();
+        var videoList = randomSimpleQstnList.Where(x => x.media.Contains(".mp4")).ToList();
+        var noimageList = randomSimpleQstnList.Where(x => x.media.Contains("")).ToList();
+        imageList.AddRange(noimageList);
+        imageList.AddRange(videoList);
+        randomSimpleQstnList = imageList;
+        DownloadingMediaForSimpleQstn(randomSimpleQstnList[_simpleIndex]);
     }
 
     private async void GetSimpleQuestionsData(int index)
@@ -289,8 +311,7 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    int _simpleIndex = 0;
-    int count = 0;
+    
     private void DownloadingMediaForSimpleQstn(SimpleQuestionDataModel data)
     {
         Debug.Log("DownloadingMediaForSimpleQstn");
@@ -314,14 +335,14 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("All Media Downloaded :: Image");
+                    Debug.Log("All Media Downloaded :: Image");
                 }
             });
         }
         else if (extention.Equals(".mp4"))
         {
             count += 1;
-            Debug.LogError("Total Video File " + count);
+            Debug.Log("Total Video File " + count);
 
             string frameImageExt = GameConstants.GetFileExtensionFromUrl(data.frame_image);
             if (frameImageExt.Equals(".jpg"))
@@ -346,7 +367,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("All Media Downloaded :: Video");
+                    Debug.Log("All Media Downloaded :: Video");
 
 
                 }
@@ -372,33 +393,51 @@ public class GameManager : MonoBehaviour
     int _specialIndex = 0;
     private void DownloadMediaForSpecialQuestions(SpecializedQuestionModel data)
     {
-        Debug.Log("DownloadMediaForSpecialQuestions");
-        string extention = GameConstants.GetFileExtensionFromUrl(data.media_link);
-        //if (string.IsNullOrEmpty(extention))
-        //    return;
-        if (extention.Equals(".jpg"))
+        if (data != null)
         {
-            GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
+            Debug.Log("DownloadMediaForSpecialQuestions");
+            string extention = GameConstants.GetFileExtensionFromUrl(data.media_link);
+            //if (string.IsNullOrEmpty(extention))
+            //    return;
+            if (extention.Equals(".jpg"))
             {
-                //"Nie, ze względu na możliwość uszkodzenia mechanizmu."
-                Sprite sp = TextureToSprite(tex);
-                SpecialQuestionSprites.Add(data.id, sp);
-                _specialIndex++;
-                if (_specialIndex < randomSpecialQstnList.Count)
+                GameUtils.ImageDownloader.RequestDownload(this, data.media_link, (tex) =>
                 {
-                    //AssetDatabase.Refresh();
-                    DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
-                }
-                else
+                    //"Nie, ze względu na możliwość uszkodzenia mechanizmu."
+                    Sprite sp = TextureToSprite(tex);
+                    SpecialQuestionSprites.Add(data.id, sp);
+                    _specialIndex++;
+                    if (_specialIndex < randomSpecialQstnList.Count)
+                    {
+                        //AssetDatabase.Refresh();
+                        DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
+                    }
+                    else
+                    {
+                        Debug.Log("All Media Downloaded :: Image");
+                    }
+                });
+            }
+            else if (extention.Equals(".mp4"))
+            {
+                string filePath = string.Concat(VIDEO_FILE_DIR_SPECIAL, data.id, extention);
+                GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
                 {
-                    Debug.LogError("All Media Downloaded :: Image");
-                }
-            });
-        }
-        else if (extention.Equals(".mp4"))
-        {
-            string filePath = string.Concat(VIDEO_FILE_DIR_SPECIAL, data.id, extention);
-            GameUtils.VideoDownloader.RequestDownload(this, data.media_link, filePath, (result) =>
+                    _specialIndex++;
+                    if (_specialIndex < randomSpecialQstnList.Count)
+                    {
+                        // AssetDatabase.Refresh();
+                        DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
+                    }
+                    else
+                    {
+                        Debug.Log("All Media Downloaded :: Video");
+
+
+                    }
+                });
+            }
+            else
             {
                 _specialIndex++;
                 if (_specialIndex < randomSpecialQstnList.Count)
@@ -406,13 +445,7 @@ public class GameManager : MonoBehaviour
                     // AssetDatabase.Refresh();
                     DownloadMediaForSpecialQuestions(randomSpecialQstnList[_specialIndex]);
                 }
-                else
-                {
-                    Debug.LogError("All Media Downloaded :: Video");
-
-
-                }
-            });
+            }
         }
         else
         {

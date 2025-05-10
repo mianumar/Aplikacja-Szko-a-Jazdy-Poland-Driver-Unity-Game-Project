@@ -21,6 +21,9 @@ public class ServerHandler : MonoBehaviour
     [SerializeField] private string getSimpleCount = "getSimpleCount.php";
     [SerializeField] private string getSimpleQuestion = "getSimple.php";
 
+    private string getAllSimpleRandomQuestion = "getAllSimpleRandom.php";
+    private string getAllSpecialRandomQuestions = "getAllSpecializedRandom.php";
+
 
     //public Text userIDText;
 
@@ -112,6 +115,45 @@ public class ServerHandler : MonoBehaviour
 
     }
 
+    public async Task<SimpleQuestionListDataModel> GetAllRandomSimpleQusetions(int limit , string catregory)
+    {
+        SimpleQuestionListDataModel simpleQuestionListDataModel = null;
+        string url = Path.Combine(BASE_URL, getAllSimpleRandomQuestion);
+        url = url + API_TOKEN +  "&limit=" + limit + "&category=" + catregory;
+
+        Debug.Log("GetSimpleQusetionsInRange :: url :: == " + url);
+        using UnityWebRequest request = UnityWebRequest.Get(url);
+        await request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error: " + request.error);
+        }
+        else
+        {
+            // Parse JSON response
+            string jsonResponse = request.downloadHandler.text.ToString();
+            Debug.Log("Response: " + jsonResponse);
+            // Deserialize JSON into C# object
+            simpleQuestionListDataModel = JsonConvert.DeserializeObject<SimpleQuestionListDataModel>(jsonResponse);
+
+            if (simpleQuestionListDataModel.status == "success")
+            {
+                //foreach (SimpleQuestionDataModel question in simpleQuestionListDataModel.dataList)
+                //{
+                //    Debug.Log($"ID: {question.id}, Question: {question.question}, Answer: {question.answer}, Categories: {question.categories}");
+                //}
+            }
+            else
+            {
+                // Debug.LogError("API Error: " + simpleQuestionListDataModel.message);
+            }
+
+        }
+        return simpleQuestionListDataModel;
+
+    }
+
     /// <summary>
     /// Get Random Simple Question 
     /// </summary>
@@ -175,7 +217,7 @@ public class ServerHandler : MonoBehaviour
 
     public async Task<SpecializedQuestionListDataModel> GetSpecializedQusetionsInRange(int startIndex, int limit)
     {
-        SpecializedQuestionListDataModel simpleQuestionListDataModel = null;
+        SpecializedQuestionListDataModel specialQusetionsDataList = null;
         string url = Path.Combine(BASE_URL, getAllSpecializedQuestion);
         url = url + API_TOKEN + "&start=" + startIndex + "&limit=" + limit;
 
@@ -194,10 +236,45 @@ public class ServerHandler : MonoBehaviour
             Debug.Log("Response: " + jsonResponse);
 
             // Deserialize JSON into C# object
-            simpleQuestionListDataModel = JsonConvert.DeserializeObject<SpecializedQuestionListDataModel>(jsonResponse);
+            specialQusetionsDataList = JsonConvert.DeserializeObject<SpecializedQuestionListDataModel>(jsonResponse);
 
         }
-        return simpleQuestionListDataModel;
+        return specialQusetionsDataList;
+
+    }
+
+    /// <summary>
+    /// Get Random Special questions with limit
+    /// </summary>
+    /// <param name="limit"></param>
+    /// <param name="catregory"></param>
+    /// <returns></returns>
+    public async Task<SpecializedQuestionListDataModel> GetAllRandomSpecialQusetions(int limit, string catregory)
+    {
+        SpecializedQuestionListDataModel specialQusetionsDataList = null;
+        string url = Path.Combine(BASE_URL, getAllSpecialRandomQuestions);
+        url = url + API_TOKEN + "&limit=" + limit + "&category=" + catregory;
+
+        Debug.Log("GetSimpleQusetionsInRange :: url :: == " + url);
+        using UnityWebRequest request = UnityWebRequest.Get(url);
+        await request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error: " + request.error);
+        }
+        else
+        {
+            // Parse JSON response
+            string jsonResponse = request.downloadHandler.text.ToString();
+            Debug.Log("Response: " + jsonResponse);
+            // Deserialize JSON into C# object
+            specialQusetionsDataList = JsonConvert.DeserializeObject<SpecializedQuestionListDataModel>(jsonResponse);
+
+           
+
+        }
+        return specialQusetionsDataList;
 
     }
 

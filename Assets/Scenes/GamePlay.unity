@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18490559, g: 0.18490559, b: 0.18490559, a: 0.41960785}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.2509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4289,7 +4289,6 @@ MonoBehaviour:
   summaryItemContentParent: {fileID: 1290583712}
   summaryItemPrefab: {fileID: 6644736109043503373, guid: c42722ac598a0a4468378a9aa682562b, type: 3}
   scrollRect: {fileID: 1154415495}
-  loadingPanel: {fileID: 215045029}
   generatedConainerList: []
   startIndex: 1
   limit: 20
@@ -4886,6 +4885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4bb42f1a7e4cd649a97be468eaddefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingPanel: {fileID: 215045029}
   videoPlayer: {fileID: 981817120}
   currentScreen: 0
   MaxTotalPoints: 0
@@ -6517,7 +6517,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2100275496
 MonoBehaviour:
@@ -6532,7 +6532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7462,7 +7462,6 @@ MonoBehaviour:
   summaryItemContentParent: {fileID: 7510714946045684060}
   summaryItemPrefab: {fileID: 1796898191120920454, guid: a4b6dd341b5ba714baf5f04a2ea1f30b, type: 3}
   filterView: {fileID: 6219182005733525511}
-  loadingPanel: {fileID: 215045029}
   generatedConainerList: []
 --- !u!114 &504545728997969110
 MonoBehaviour:

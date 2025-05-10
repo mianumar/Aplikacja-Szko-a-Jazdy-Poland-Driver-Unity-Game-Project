@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Threading.Tasks;
 public class SummeryResultsView : MonoBehaviour
 {
     [SerializeField] private Button buttonClose;
@@ -92,17 +93,21 @@ public class SummeryResultsView : MonoBehaviour
 
   
 
-    private void OnStartButtonClicked()
+    private async void OnStartButtonClicked()
     {
-        GameManager.Instance.ShuffleRandomQuestions();
+        GameManager.Instance.FetchRandomQuestions();
         GameManager.Instance.ResetSummaryData();
+
+        GameManager.Instance.loadingPanel.ActiveLoading();
+        await Task.Delay(new TimeSpan(0, 0, 5));
+        GameManager.Instance.loadingPanel.DeactiveLoading();
         UIHandler.Instance.qaPanelView.RenderView();
         this.Disable();
     }
 
     private void OnCloseButtonClicked()
     {
-        GameManager.Instance.ShuffleRandomQuestions();
+        GameManager.Instance.FetchRandomQuestions();
         GameManager.Instance.ResetSummaryData();
         UIHandler.Instance.activitySelectionView.RenderView();
         this.Disable();

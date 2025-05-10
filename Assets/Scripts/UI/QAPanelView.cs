@@ -186,7 +186,7 @@ public class QAPanelView : MonoBehaviour
                 remainTimetoReadQuestionSlider.color = timeRemain < (BASIC_READ_TIME * 0.25f) ? timeEndColor : timeStartColor;
                 if (timeRemain <= 0)
                 {
-                    Debug.LogError("Reading Timer End :: START ANSWER ");
+                    Debug.Log("Reading Timer End :: START ANSWER ");
                     OnStartButtonClicked();
 
                 }
@@ -314,7 +314,7 @@ public class QAPanelView : MonoBehaviour
             remainTimeToAnsSlider.color = timeRemain < (BASIC_ANSWER_TIME * 0.25f) ? timeEndColor : timeStartColor;
             if (timeRemain <= 0)
             {
-                Debug.LogError("Reading Timer End :: NEXT QUESTION");
+                Debug.Log("Reading Timer End :: NEXT QUESTION");
                 OnNextButtonClicked();
             }
         });
@@ -367,7 +367,14 @@ public class QAPanelView : MonoBehaviour
         else if (currentQesIndex < 32)
         {
             _dataModelSpecial = GameManager.Instance.GetSpecialQuestionFromList(currentQesIndex - 20);
-            RenderSpecialQuestionPanelView(_dataModelSpecial);
+            if (_dataModelSpecial != null)
+            {
+                RenderSpecialQuestionPanelView(_dataModelSpecial);
+            }
+            else
+            {
+                OnNextButtonClicked();
+            }
         }
         else
         {
@@ -402,7 +409,7 @@ public class QAPanelView : MonoBehaviour
         else if (extention.Equals(".jpg"))
         {
             textTimeToAns.color = defaultTextColor;
-            Debug.LogError("Display Images for this Question");
+            Debug.Log("Display Images for this Question");
             bgImageTimeToAns.gameObject.SetActive(true);
             bgImageTimeToAns.sprite = GameManager.Instance.GetQuestionSprite(_dataModel.id);
 
@@ -469,7 +476,6 @@ public class QAPanelView : MonoBehaviour
 
     private void ResetData()
     {
-
         currentQesIndex = 0;
         textTimer.text = "0:00";
         remainTimetoReadQuestionSlider.fillAmount = 1;

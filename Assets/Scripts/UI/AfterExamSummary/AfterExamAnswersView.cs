@@ -13,7 +13,6 @@ public class AfterExamAnswersView : MonoBehaviour
     [SerializeField] private GameObject summaryItemPrefab;
 
     [SerializeField] private FilterView filterView;
-    public LoadingPanel loadingPanel;
 
     public List<GameObject> generatedConainerList = new List<GameObject>();
 
@@ -44,16 +43,6 @@ public class AfterExamAnswersView : MonoBehaviour
         {
             GameObject temp = CreateOrGeneratePrefab(i+1);
             temp.GetComponent<SummaryQestionContainer>().RenderView(qstnList[i] , i+1);
-        }
-    }
-
-
-    private void OnItemDoneCallback(int index)
-    {
-        Debug.Log("OnItemDoneCallback :: index :: " + index);
-        if (index == dataLength - 1)
-        {
-            loadingPanel.DeactiveLoading();
         }
     }
 
