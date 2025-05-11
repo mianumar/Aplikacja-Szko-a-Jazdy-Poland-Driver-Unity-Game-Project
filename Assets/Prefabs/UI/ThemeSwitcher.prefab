@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1205008265921585728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8709770508441978661}
+  - component: {fileID: 6259816840686307001}
+  m_Layer: 0
+  m_Name: ThemeSwitcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8709770508441978661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205008265921585728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6259816840686307001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205008265921585728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98a902fba8e54d4082acbe2d920b83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  lightBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  darkBackgroundColor: {r: 0.16862746, g: 0.27058825, b: 0.30980393, a: 1}
+  lightTextColor: {r: 0.16862746, g: 0.27058825, b: 0.30980393, a: 1}
+  darkTextColor: {r: 1, g: 1, b: 1, a: 1}
+  darkFaddedTextColor: {r: 0.9137255, g: 0.9647059, b: 0.9764706, a: 1}
+  darkMainMenuTitleTextColor: {r: 0.6666667, g: 0.78039217, b: 0.8235294, a: 1}
+  lightMainMenuTitleTextColor: {r: 0.105882354, g: 0.654902, b: 0.8862745, a: 1}
+  lightButtonSprite: {fileID: 1945269359277807493, guid: bb6d6fb973a7f664e8c4230fd14adc2a, type: 3}
+  darkButtonSprite: {fileID: -2341578153635873875, guid: b06a162b6a3f5c8438f1290ed669bfb1, type: 3}
+  commonBackgroundImage: {fileID: 0}
+  texts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  mainMenuTitletext: {fileID: 0}
+  buttons:
+  - {fileID: 0}
+  - {fileID: 0}
+  CrossImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CrossImageLight: {fileID: 21300000, guid: e4ee65597f5d6e34ea10e1cfe5c9d0a5, type: 3}
+  CrossImageDark: {fileID: 21300000, guid: fd57fae2f33fedb4783bdf5d23b13a12, type: 3}
+  ExitPopupImageLight: {fileID: 21300000, guid: 4f04f9fd6ce32704ab4197cb707d5a06, type: 3}
+  ExitPopupImageDark: {fileID: 21300000, guid: 5c9e7483e34dc2c49b452d275a010a3f, type: 3}
+  ExitPopupImage: {fileID: 0}
+  IconSignBGLight: {fileID: 21300000, guid: f6482421a4bd9674b8a99c6e270d79a4, type: 3}
+  IconSignBGDark: {fileID: 21300000, guid: 17163dc3e7c2efc46be608dbdfab2041, type: 3}
+  IconSignBG: {fileID: 0}
+  resultSummaryBG: {fileID: 0}
+  resultSummaryLightMode: {fileID: -4936693802910280245, guid: 976f6c995440aea44b78ac7864744f30, type: 3}
+  resultSummaryDarkMode: {fileID: -1955448553306655712, guid: 37e3925bbbfbe0f4f9b9036f09d0a2c3, type: 3}
+  ContainerBG1: {fileID: 0}
+  ContainerBG2: {fileID: 0}
+  containerDarkColor: {r: 0.23529412, g: 0.3647059, b: 0.41568628, a: 1}
+  InnerContainerBG1: {fileID: 0}
+  InnerContainerBG2: {fileID: 0}
+  InnerContainerDarkColor: {r: 0.2784314, g: 0.41960785, b: 0.47843137, a: 1}
+  isDarkMode: 0
+  textSizeThreshold: 32
+  transitionDuration: 0.5
